@@ -1,73 +1,51 @@
-# Welcome to your Lovable project
+#  📥  BallotGuide
 
-## Project info
+## Why This Matters
+Local elections have some of the lowest turnout, even though they shape the policies people feel every day.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+- In the 100 largest U.S. cities, average mayoral-election turnout was **20.2%**, and **73 of 100 cities were below 25%** turnout.[1]
+- Local governments control spending and policy areas tied to daily life, including schools, public safety, transportation, housing, and water infrastructure.[2]
+- Climate is local too: urban systems account for **67-72%** of global greenhouse gas emissions, and local land use + transportation choices are key mitigation levers.[3][4]
 
-## How can I edit this code?
+Our goal: make ballots understandable and personally relevant so more people vote with confidence.
 
-There are several ways of editing your application.
+## What We Built
+BallotGuide translates opaque ballot language into clear, source-grounded explanations about what each choice means for a voter's real life.
 
-**Use Lovable**
+- Personalized, plain-English ballot annotations with citations
+- Candidate and policy context grounded in real local legislation
+- A budget-impact experience that shows predicted spending shifts by category
+- A 3D city interface where policy markers are pinned to real places
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+[IMAGE PLACEHOLDER: Product hero screenshot or GIF]
 
-Changes made via Lovable will be committed automatically to this repo.
+## Technical Highlights
+- Built a Pinecone vector database with **30,000+ scraped embeddings** from real local legislation and legal code.
+- Added a **Dedalus agent pipeline** that queries the vector database first, then returns grounded explanations with reliable source links.
+- Trained a **regression model on budget data** to predict category deltas that drive the interactive pie chart experience.
+- Integrated real **3D city models** and used our agent + geo metadata to drop location-based policy annotations directly on the map.
 
-**Use your preferred IDE**
+[IMAGE PLACEHOLDER: Architecture diagram]
+[IMAGE PLACEHOLDER: Budget prediction chart]
+[IMAGE PLACEHOLDER: 3D map with geo-annotations]
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Stack
+- React, TypeScript, Vite, Tailwind, shadcn/ui
+- Pinecone vector search
+- Dedalus agent orchestration
+- Three.js for 3D city visualization
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Local Setup
+```bash
+npm install
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Sources
+[1] Who Votes for Mayor? (Portland State University): https://pdxscholar.library.pdx.edu/cgi/viewcontent.cgi?referer=&httpsredir=1&article=1007&context=publicservice_pub
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+[2] U.S. Census Bureau, Government Finances (state and local functional spending): https://www.census.gov/programs-surveys/gov-finances.html
 
-**Use GitHub Codespaces**
+[3] IPCC AR6 WGIII, Chapter 8 (Urban Systems): https://www.ipcc.ch/report/ar6/wg3/chapter/chapter-8/
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+[4] U.S. EPA, Smart Growth and Transportation (local planning and emissions): https://www.epa.gov/smartgrowth/smart-growth-and-transportation

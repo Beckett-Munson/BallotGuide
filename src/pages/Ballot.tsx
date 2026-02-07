@@ -12,6 +12,7 @@ import RaceDesktopLayout from "@/components/RaceDesktopLayout";
 import RaceMobileList from "@/components/RaceMobileList";
 import { cn } from "@/lib/utils";
 import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
+import { useBallotItemPositions } from "@/hooks/useBallotItemPositions";
 
 export default function Ballot() {
   const navigate = useNavigate();
@@ -33,6 +34,11 @@ export default function Ballot() {
     setBallot(generatePersonalizedBallot(parsed));
   }, [navigate]);
 
+  const currentItems = ballot
+    ? (activeSection === "questions" ? ballot.ballotItems : ballot.raceItems)
+    : [];
+  const { containerRef, setItemRef, positions, measure } = useBallotItemPositions(currentItems.length);
+
   const handleSectionChange = (section: BallotSection) => {
     if (section === activeSection || animState !== "idle") return;
 
@@ -53,8 +59,6 @@ export default function Ballot() {
   };
 
   if (!ballot || !profile) return null;
-
-  const currentItems = activeSection === "questions" ? ballot.ballotItems : ballot.raceItems;
   const sectionTitle = activeSection === "questions"
     ? "Special Election Questions"
     : "Active Races";
@@ -144,6 +148,7 @@ export default function Ballot() {
         {/* Desktop: Centered ballot with annotations */}
         <section className="mb-16 hidden md:block">
           <div
+            ref={containerRef}
             className={cn(
               "relative max-w-[520px] mx-auto transition-all duration-300 ease-in-out",
               animState === "exit" && (animDirection === "up" ? "-translate-y-8 opacity-0" : "translate-y-8 opacity-0"),
@@ -153,6 +158,7 @@ export default function Ballot() {
             style={animState === "enter" ? {
               "--enter-from": animDirection === "up" ? "2rem" : "-2rem",
             } as React.CSSProperties : undefined}
+            onAnimationEnd={measure}
           >
             <BallotPaper
               items={currentItems}
@@ -161,6 +167,7 @@ export default function Ballot() {
               onItemHover={setHoveredIndex}
               sectionTitle={sectionTitle}
               sectionSubtitle={sectionSubtitle}
+              setItemRef={setItemRef}
             />
 
             {isRaces ? (
@@ -169,12 +176,14 @@ export default function Ballot() {
                 hoveredIndex={hoveredIndex}
                 onHoverIndex={setHoveredIndex}
                 userTopics={profile.topics}
+                positions={positions}
               />
             ) : (
               <BallotDesktopAnnotations
                 items={currentItems}
                 hoveredIndex={hoveredIndex}
                 onHoverIndex={setHoveredIndex}
+                positions={positions}
               />
             )}
           </div>

@@ -9,6 +9,7 @@ interface BallotPaperProps {
   onItemHover: (index: number | null) => void;
   sectionTitle?: string;
   sectionSubtitle?: string;
+  setItemRef?: (index: number) => (el: HTMLElement | null) => void;
 }
 
 export default function BallotPaper({
@@ -18,6 +19,7 @@ export default function BallotPaper({
   onItemHover,
   sectionTitle = "Official Sample Ballot",
   sectionSubtitle = "City of Pittsburgh • Primary Election — May 20, 2025",
+  setItemRef,
 }: BallotPaperProps) {
   const hasHover = activeIndex !== null;
 
@@ -66,6 +68,7 @@ export default function BallotPaper({
             return (
               <button
                 key={item.id}
+                ref={setItemRef ? setItemRef(index) as React.Ref<HTMLButtonElement> : undefined}
                 className={cn(
                   "w-full text-left px-6 py-4 md:px-10 md:py-5 transition-all duration-300 group cursor-pointer border-b border-foreground/8",
                   isActive

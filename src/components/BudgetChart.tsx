@@ -261,7 +261,6 @@ function renderActiveShape(props: any) {
 export default function BudgetChart() {
   const [selectedMayor, setSelectedMayor] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [pinnedIndex, setPinnedIndex] = useState<number | null>(null);
 
   const mayor = MAYORS.find((m) => m.id === selectedMayor) ?? null;
   const data = getChartData(mayor);
@@ -275,8 +274,7 @@ export default function BudgetChart() {
     setActiveIndex(index);
   }, []);
 
-  const displayIndex = pinnedIndex ?? activeIndex;
-  const activeSlice = displayIndex !== null ? data[displayIndex] : null;
+  const activeSlice = activeIndex !== null ? data[activeIndex] : null;
 
   return (
     <div className="rounded-xl border border-border bg-card overflow-hidden">
@@ -301,7 +299,7 @@ export default function BudgetChart() {
         <div className="flex-1 min-w-0 px-2 pb-2">
           <div style={{ width: "100%", height: 340 }}>
             <ResponsiveContainer>
-              <PieChart>
+              <PieChart className="outline-none" style={{ outline: "none" }}>
                 <Pie
                   data={data}
                   dataKey="value"
@@ -314,18 +312,8 @@ export default function BudgetChart() {
                   activeIndex={activeIndex ?? undefined}
                   activeShape={renderActiveShape}
                   onMouseEnter={onPieEnter}
-                  onMouseLeave={() => {
-                    if (pinnedIndex === null) {
-                      setActiveIndex(null);
-                    }
-                  }}
-                  onClick={(_, idx) =>
-                    setPinnedIndex((prev) => {
-                      const next = prev === idx ? null : idx;
-                      setActiveIndex(next);
-                      return next;
-                    })
-                  }
+                  onMouseDown={(event) => event.preventDefault()}
+                  onMouseLeave={() => setActiveIndex(null)}
                   isAnimationActive
                   animationDuration={600}
                   animationEasing="ease-in-out"
@@ -346,19 +334,14 @@ export default function BudgetChart() {
 
           {/* Compact legend */}
           <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 px-4 pb-3">
-            {data.map((entry, idx) => (
-              <button
+            {data.map((entry) => (
+              <span
                 key={entry.id}
-                onClick={() =>
-                  setPinnedIndex((prev) => {
-                    const next = prev === idx ? null : idx;
-                    setActiveIndex(next);
-                    return next;
-                  })
-                }
                 className={cn(
                   "flex items-center gap-1.5 text-[11px] transition-opacity",
-                  displayIndex !== null && displayIndex !== idx ? "opacity-40" : "opacity-100",
+                  activeIndex !== null && activeIndex !== data.indexOf(entry)
+                    ? "opacity-40"
+                    : "opacity-100",
                 )}
               >
                 <span
@@ -366,7 +349,7 @@ export default function BudgetChart() {
                   style={{ backgroundColor: entry.color }}
                 />
                 <span className="text-foreground/80">{entry.label}</span>
-              </button>
+              </span>
             ))}
           </div>
         </div>

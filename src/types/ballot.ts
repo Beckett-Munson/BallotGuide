@@ -11,6 +11,14 @@ export interface Policy {
   question: string;
 }
 
+export interface Annotations {
+  type: string;
+  question: string;
+  issues: string[];
+  annotation: string;
+  citations: Record<string, string> // {title, url}
+}
+
 export interface Candidate {
   name: string;
   party: "D" | "R" | "I" | "L";

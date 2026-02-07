@@ -546,14 +546,14 @@ interface RawBallotItem {
     citations: { title: string; url: string; source: string }[];
   };
 }
-
 function buildItems(
   items: RawBallotItem[],
   profile: UserProfile,
+  topics: string[],
   topicNames: string
 ) {
   return items.map((item) => {
-    const relatedTopics = profile.topics.filter((topic) => {
+    const relatedTopics = topics.filter((topic) => {
       const key = topic.toLowerCase().replace(/\s+/g, "_");
       return key === item.category || key in item.annotations;
     });
@@ -562,23 +562,23 @@ function buildItems(
       id: item.id,
       title: item.title,
       officialText: item.officialText,
-      annotation: getAnnotation(item, profile.topics),
+      annotation: getAnnotation(item, topics),
       category: item.category,
       relatedTopics: relatedTopics.length > 0 ? relatedTopics : [item.category],
       candidates: item.candidates,
       expand: {
         newsSummary: item.expand.newsSummary,
         citations: item.expand.citations,
-        chatbotPrompt: `Explain how "${item.title}" affects someone interested in ${topicNames}${profile.aboutYou ? ` who describes themselves as: ${profile.aboutYou}` : ""}.`,
+        chatbotPrompt: `Explain how "${item.title}" affects someone interested in ${topicNames}${
+          profile.aboutYou ? ` who describes themselves as: ${profile.aboutYou}` : ""
+        }.`,
       },
     };
   });
-}
+}export function generatePersonalizedBallot(profile: UserProfile): PersonalizedBallot {
+  const topics = Object.keys(profile.issues ?? {});
 
-export function generatePersonalizedBallot(
-  profile: UserProfile
-): PersonalizedBallot {
-  const topicNames = profile.topics
+  const topicNames = topics
     .map((t) => t.charAt(0).toUpperCase() + t.slice(1).replace("_", " "))
     .join(", ");
 
@@ -586,10 +586,10 @@ export function generatePersonalizedBallot(
 
   const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot questions and ${ALL_RACE_ITEMS.length} active races facing voters on May 20, 2025. Each item includes a personalized explanation of how it may affect you, along with trusted sources.`;
 
-  const ballotItems = buildItems(ALL_BALLOT_ITEMS, profile, topicNames);
-  const raceItems = buildItems(ALL_RACE_ITEMS, profile, topicNames);
+  const ballotItems = buildItems(ALL_BALLOT_ITEMS, profile, topics, topicNames);
+  const raceItems = buildItems(ALL_RACE_ITEMS, profile, topics, topicNames);
 
-  const topicExplanations = profile.topics
+  const topicExplanations = topics
     .map((topic) => {
       const key = topic.toLowerCase().replace(/\s+/g, "_");
       return TOPIC_EXPLANATIONS[key];

@@ -5,6 +5,7 @@ interface BallotPaperProps {
   items: BallotItem[];
   activeIndex: number | null;
   onItemClick: (index: number) => void;
+  onItemHover: (index: number | null) => void;
 }
 
 const categoryColors: Record<string, string> = {
@@ -19,7 +20,10 @@ export default function BallotPaper({
   items,
   activeIndex,
   onItemClick,
+  onItemHover,
 }: BallotPaperProps) {
+  const hasHover = activeIndex !== null;
+
   return (
     <div className="relative">
       {/* Stacked paper effect */}
@@ -66,12 +70,16 @@ export default function BallotPaper({
               <button
                 key={item.id}
                 className={cn(
-                  "w-full text-left px-6 py-4 md:px-10 md:py-5 transition-all duration-200 group cursor-pointer border-b border-foreground/8",
+                  "w-full text-left px-6 py-4 md:px-10 md:py-5 transition-all duration-300 group cursor-pointer border-b border-foreground/8",
                   isActive
                     ? "bg-accent/8"
-                    : "hover:bg-muted/30"
+                    : hasHover
+                      ? "opacity-40"
+                      : "hover:bg-muted/30"
                 )}
                 onClick={() => onItemClick(index)}
+                onMouseEnter={() => onItemHover(index)}
+                onMouseLeave={() => onItemHover(null)}
               >
                 <div className="flex items-start gap-3">
                   {/* Ballot oval */}

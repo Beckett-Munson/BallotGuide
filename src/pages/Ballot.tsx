@@ -6,12 +6,13 @@ import { generatePersonalizedBallot } from "@/data/mockBallotData";
 import BallotPaper from "@/components/BallotPaper";
 import BallotAnnotation from "@/components/BallotAnnotation";
 import TopicExplanation from "@/components/TopicExplanation";
+import { cn } from "@/lib/utils";
 
 export default function Ballot() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [ballot, setBallot] = useState<PersonalizedBallot | null>(null);
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("voterProfile");
@@ -68,37 +69,48 @@ export default function Ballot() {
           </div>
         </header>
 
-        {/* Desktop: Centered ballot with alternating annotations */}
+        {/* Desktop: Centered ballot with all annotations always visible */}
         <section className="mb-16 hidden md:block">
           <div className="relative max-w-[520px] mx-auto">
             <BallotPaper
               items={ballot.ballotItems}
-              activeIndex={activeIndex}
-              onItemClick={setActiveIndex}
+              activeIndex={hoveredIndex}
+              onItemClick={setHoveredIndex}
+              onItemHover={setHoveredIndex}
             />
 
-            {/* Annotations positioned alternating left/right */}
+            {/* All annotations always visible, dimmed when not hovered */}
             {ballot.ballotItems.map((item, index) => {
-              const isActive = activeIndex === index;
               const isLeft = index % 2 === 0;
-
-              if (!isActive) return null;
+              const isHighlighted = hoveredIndex === index;
+              const hasSomeHover = hoveredIndex !== null;
 
               return (
                 <div
                   key={`annotation-${index}`}
-                  className="absolute animate-fade-in"
+                  className={cn(
+                    "absolute transition-all duration-300",
+                    hasSomeHover && !isHighlighted
+                      ? "opacity-20 scale-[0.97]"
+                      : "opacity-100 scale-100",
+                    isHighlighted && "z-10"
+                  )}
                   style={{
                     top: `${((index + 0.5) / ballot.ballotItems.length) * 100}%`,
                     ...(isLeft
-                      ? { right: "calc(100% + 24px)", transform: "translateY(-50%)" }
-                      : { left: "calc(100% + 24px)", transform: "translateY(-50%)" }),
+                      ? { right: "calc(100% + 24px)", transform: `translateY(-50%) ${hasSomeHover && !isHighlighted ? "scale(0.97)" : "scale(1)"}` }
+                      : { left: "calc(100% + 24px)", transform: `translateY(-50%) ${hasSomeHover && !isHighlighted ? "scale(0.97)" : "scale(1)"}` }),
                     width: "280px",
                   }}
+                  onMouseEnter={() => setHoveredIndex(index)}
+                  onMouseLeave={() => setHoveredIndex(null)}
                 >
                   {/* Connector line */}
                   <div
-                    className="absolute top-1/2 -translate-y-1/2"
+                    className={cn(
+                      "absolute top-1/2 -translate-y-1/2 transition-opacity duration-300",
+                      hasSomeHover && !isHighlighted ? "opacity-20" : "opacity-100"
+                    )}
                     style={
                       isLeft
                         ? { left: "100%", width: "24px" }
@@ -112,7 +124,7 @@ export default function Ballot() {
                       }`}
                     />
                   </div>
-                  <BallotAnnotation item={item} isActive={true} />
+                  <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} />
                 </div>
               );
             })}
@@ -126,19 +138,19 @@ export default function Ballot() {
               <button
                 className="w-full text-left px-4 py-3 bg-card border border-border rounded-t-lg"
                 onClick={() =>
-                  setActiveIndex(activeIndex === index ? null : index)
+                  setHoveredIndex(hoveredIndex === index ? null : index)
                 }
               >
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 mt-0.5">
                     <div
                       className={`w-4 h-3 rounded-[50%] border-[1.5px] flex items-center justify-center transition-all ${
-                        activeIndex === index
+                        hoveredIndex === index
                           ? "border-foreground/70 bg-foreground/70"
                           : "border-foreground/25"
                       }`}
                     >
-                      {activeIndex === index && (
+                      {hoveredIndex === index && (
                         <svg className="w-2 h-1.5 text-card" viewBox="0 0 12 10" fill="none">
                           <path d="M1 5L4 8L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
@@ -155,7 +167,7 @@ export default function Ballot() {
                   </div>
                 </div>
               </button>
-              {activeIndex === index && (
+              {hoveredIndex === index && (
                 <div className="border border-t-0 border-border rounded-b-lg overflow-hidden animate-fade-in">
                   <BallotAnnotation item={item} isActive={true} />
                 </div>

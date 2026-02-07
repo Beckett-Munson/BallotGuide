@@ -204,6 +204,7 @@ export default function Ballot() {
                 hoveredIndex={hoveredIndex}
                 onHoverIndex={setHoveredIndex}
                 userTopics={userTopics}
+                itemPositions={itemPositions}
               />
             ) : (
               <BallotDesktopAnnotations

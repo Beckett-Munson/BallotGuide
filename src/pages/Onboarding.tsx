@@ -52,13 +52,17 @@ export default function Onboarding() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [bubbleRect, setBubbleRect] = useState<DOMRect | null>(null);
   const [bubbleCentered, setBubbleCentered] = useState(false);
+  const [bubblePulsing, setBubblePulsing] = useState(false);
 
   useEffect(() => {
     if (!isTransitioning || !bubbleRect) return;
+    // Start movement on next frame
     const id = requestAnimationFrame(() => {
       requestAnimationFrame(() => setBubbleCentered(true));
     });
-    return () => cancelAnimationFrame(id);
+    // Start pulsing after the 1.6s move completes so it matches the Ballot loading bubble
+    const pulseTimer = setTimeout(() => setBubblePulsing(true), 1650);
+    return () => { cancelAnimationFrame(id); clearTimeout(pulseTimer); };
   }, [isTransitioning, bubbleRect]);
 
   const toggleTopic = (id: string) => {
@@ -148,31 +152,28 @@ Fetch legislations related to the user.
         </div>
       )}
 
-      {/* Transition overlay: bubble slowly moves to center and grows (never shrinks) while page fades */}
+      {/* Transition overlay: bubble moves to center and grows while page fades */}
       {isTransitioning && bubbleRect && (() => {
-        const endSize = Math.max(96, bubbleRect.width, bubbleRect.height);
+        const endSize = 128;
         return (
-        <div
-          className="fixed inset-0 z-50 bg-background flex items-center justify-center"
-          aria-hidden
-        >
+        <div className="fixed inset-0 z-50 bg-background" aria-hidden>
           <div
-            className="flex items-center justify-center"
             style={{
               position: "fixed",
               left: bubbleCentered ? "50%" : bubbleRect.left,
-              top: bubbleCentered ? "50%" : bubbleRect.top,
+              top: bubbleCentered ? "calc(50% - 28px)" : bubbleRect.top,
               width: bubbleCentered ? endSize : bubbleRect.width,
               height: bubbleCentered ? endSize : bubbleRect.height,
               transform: bubbleCentered ? "translate(-50%, -50%)" : "none",
-              transition: "left 1.6s ease-out, top 1.6s ease-out, width 1.6s ease-out, height 1.6s ease-out, transform 1.6s ease-out",
+              transition: "left 1.6s cubic-bezier(0.25,0.1,0.25,1), top 1.6s cubic-bezier(0.25,0.1,0.25,1), width 1.6s cubic-bezier(0.25,0.1,0.25,1), height 1.6s cubic-bezier(0.25,0.1,0.25,1), transform 1.6s cubic-bezier(0.25,0.1,0.25,1)",
             }}
           >
             <TopicColorBubble
               topicIds={issueIds}
               hideLabel
               fillContainer
-              className="!m-0"
+              pulse={bubblePulsing}
+              className="!m-0 w-full h-full"
             />
           </div>
         </div>

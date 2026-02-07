@@ -39,6 +39,16 @@ export default function Ballot() {
   const [animDirection, setAnimDirection] = useState<"up" | "down">("up");
   const ballotContainerRef = useRef<HTMLDivElement>(null);
   const [itemPositions, setItemPositions] = useState<number[]>([]);
+  const [ballotRevealed, setBallotRevealed] = useState(false);
+
+  useEffect(() => {
+    if (ballot && profile) {
+      const t = setTimeout(() => setBallotRevealed(true), 150);
+      return () => clearTimeout(t);
+    } else {
+      setBallotRevealed(false);
+    }
+  }, [ballot, profile]);
 
   /** Measure the vertical center of each ballot item relative to the container. */
   const measureItemPositions = useCallback(() => {
@@ -108,7 +118,6 @@ export default function Ballot() {
           <TopicColorBubble
             topicIds={loadingTopicIds}
             hideLabel
-            pulse
             size="large"
           />
           <LoadingMessages />
@@ -116,7 +125,9 @@ export default function Ballot() {
       </div>
     );
   }
+
   const userTopics = Object.keys(profile.issues);
+  const loadingTopicIds = Object.keys(profile.issues);
 
   const currentItems = activeSection === "questions" ? ballot.ballotItems : ballot.raceItems;
   const sectionTitle = activeSection === "questions"
@@ -217,7 +228,31 @@ export default function Ballot() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <>
+      {/* Loading overlay: fades out when ballot is ready */}
+      <div
+        className={cn(
+          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-background transition-opacity duration-500 ease-out",
+          ballotRevealed ? "opacity-0 pointer-events-none" : "opacity-100"
+        )}
+      >
+        <div className="flex flex-col items-center gap-6">
+          <TopicColorBubble
+            topicIds={loadingTopicIds}
+            hideLabel
+            size="large"
+          />
+          <LoadingMessages />
+        </div>
+      </div>
+
+      {/* Ballot content: fades in as bubble fades out */}
+      <div
+        className={cn(
+          "min-h-screen bg-background transition-opacity duration-500 ease-out",
+          ballotRevealed ? "opacity-100" : "opacity-0"
+        )}
+      >
       {/* Floating Start over button */}
       <button
         onClick={() => navigate("/")}
@@ -403,6 +438,7 @@ export default function Ballot() {
           </p>
         </footer>
       </main>
-    </div>
+      </div>
+    </>
   );
 }

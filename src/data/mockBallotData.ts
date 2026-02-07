@@ -2,182 +2,115 @@ import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
 
 const ALL_BALLOT_ITEMS = [
   {
-    id: "measure-a",
-    title: "Allegheny County Healthcare Access Initiative",
-    category: "healthcare",
+    id: "question-1",
+    title: "Non-Discrimination in City Business & Foreign State Affiliations",
+    category: "civil_rights",
     officialText:
-      "Shall Allegheny County authorize an annual allocation of $12 million from the general fund to expand community health clinics in underserved areas, improve telehealth infrastructure, and subsidize prescription drug costs for low-income residents?",
+      'Shall the Pittsburgh Home Rule Charter, Article One, Home Rule Powers - Definitions, be supplemented by adding a new Section, "105. Local Governance", by prohibiting the discrimination on the basis of race, religion, ancestry, sex, sexual orientation, age, gender identity or expression, disability, place of birth, national origin or association or affiliation with any nation or foreign state in conducting business of the City?',
     annotations: {
       default:
-        "This measure would fund new community health clinics and telehealth services across the county. If passed, it could reduce wait times for primary care and lower out-of-pocket costs for prescriptions.",
-      healthcare:
-        "This directly affects healthcare access in your area. If passed, it would fund new community clinics and telehealth, potentially reducing your wait times for primary care and lowering prescription costs for eligible residents.",
-      taxes:
-        "This measure would allocate $12M annually from the county general fund. While it doesn't raise taxes directly, it redirects existing revenue toward healthcare, which could affect other county services.",
+        "This amendment would add anti-discrimination language to Pittsburgh's Home Rule Charter, specifically prohibiting the city from discriminating based on association or affiliation with any nation or foreign state when conducting business. It was passed unanimously by City Council.",
+      civil_rights:
+        "This directly addresses civil rights protections. The amendment would enshrine broad anti-discrimination language into the city's governing document, covering race, religion, sex, sexual orientation, gender identity, disability, national origin, and foreign state affiliation in all city business dealings.",
+      foreign_policy:
+        "This measure has a significant foreign policy dimension. It would prohibit the city from discriminating against businesses based on their affiliation with any foreign nation, reflecting Pittsburgh's role in the global economy and the practical difficulty of investigating all foreign business ties.",
+      jobs:
+        "This affects local business and employment. By prohibiting discrimination based on foreign state affiliation, the measure aims to keep Pittsburgh competitive in attracting multinational companies and maintaining a diverse business environment.",
+      government:
+        "This changes Pittsburgh's governing charter. City Council passed this unanimously in response to a citizen's initiative, adding permanent anti-discrimination protections to the Home Rule Charter's foundational principles.",
+      immigration:
+        "This measure protects against discrimination based on national origin and foreign state affiliation, directly affecting immigrant communities and businesses with international ties in Pittsburgh.",
     },
     expand: {
       newsSummary:
-        "Allegheny County has seen a 15% increase in uninsured residents since 2022. The initiative is modeled after successful programs in Cuyahoga County, Ohio, which reduced ER visits by 22% in its first two years. Local advocates say the measure addresses a critical gap, while fiscal conservatives have raised concerns about long-term funding sustainability.",
+        "City Council passed this measure unanimously in response to a citizens' initiative by the group 'Not on Our Dime,' which sought to prohibit Pittsburgh from doing business with companies affiliated with countries accused of genocide or apartheid. The citizen's initiative was withdrawn after failing to meet requirements, but Council added this broader anti-discrimination language to the charter instead.",
       citations: [
         {
-          title: "Allegheny County Health Department 2024 Annual Report",
-          url: "https://www.alleghenycounty.us/health-department",
-          source: "Allegheny County",
+          title: "City of Pittsburgh Ballot Question 1 — Full Text",
+          url: "https://pittsburghpa.gov/city-clerk/ballot-questions",
+          source: "City of Pittsburgh",
         },
         {
-          title: "Community Health Centers and Access to Care",
-          url: "https://www.kff.org/community-health-centers",
-          source: "Kaiser Family Foundation",
+          title: "2025 Ballot Questions for Allegheny County",
+          url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+          source: "League of Women Voters of Greater Pittsburgh",
         },
       ],
     },
   },
   {
-    id: "measure-b",
-    title: "Property Tax Assessment Reform Referendum",
-    category: "taxes",
+    id: "question-2",
+    title: "Public Ownership of Water & Sewer Systems",
+    category: "water",
     officialText:
-      "Shall Allegheny County implement a new property tax assessment system requiring reassessments every five years, with a 3% annual cap on assessment increases for primary residences, effective January 2027?",
+      'Shall the Pittsburgh Home Rule Charter be amended and supplemented by adding a new Article 11: RIGHT TO PUBLIC OWNERSHIP OF POTABLE WATER SYSTEMS, WASTEWATER SYSTEM, AND STORM SEWER SYSTEMS, which restricts the lease and/or sale of the City\'s water and sewer system to private entities?',
     annotations: {
       default:
-        "This referendum would change how property taxes are assessed in the county. Homeowners would see more predictable tax bills with a cap on annual increases, though this could shift more of the tax burden to commercial properties.",
-      taxes:
-        "This directly impacts your tax situation. The 3% annual cap on assessment increases would make your property tax bills more predictable. However, if your property value has been under-assessed, you may see a correction during the next reassessment cycle.",
-      healthcare:
-        "While primarily a tax measure, property tax revenue funds county services including public health programs. Changes to assessment methods could indirectly affect healthcare funding levels.",
-    },
-    expand: {
-      newsSummary:
-        "Allegheny County hasn't conducted a countywide reassessment since 2012, leading to significant disparities. A 2024 Pittsburgh Post-Gazette analysis found that properties in lower-income neighborhoods are often over-assessed relative to market value, while wealthier areas are under-assessed. The proposed reform aims to address these inequities while protecting homeowners from sudden tax spikes.",
-      citations: [
-        {
-          title: "Property Tax Inequities in Allegheny County",
-          url: "https://www.post-gazette.com/property-tax-assessment",
-          source: "Pittsburgh Post-Gazette",
-        },
-        {
-          title: "Property Tax Assessment Reform: Best Practices",
-          url: "https://www.lincolninst.edu/property-tax",
-          source: "Lincoln Institute of Land Policy",
-        },
-      ],
-    },
-  },
-  {
-    id: "measure-c",
-    title: "Green Infrastructure and Climate Resilience Bond",
-    category: "environment",
-    officialText:
-      "Shall Allegheny County issue $45 million in bonds to fund stormwater management improvements, urban tree canopy restoration, and energy efficiency upgrades to county buildings over the next ten years?",
-    annotations: {
-      default:
-        "This bond measure would fund environmental infrastructure projects across the county, including stormwater management, tree planting, and building efficiency upgrades. Bonds would be repaid through existing tax revenue.",
+        "This amendment would prohibit the sale of Pittsburgh's water, sewer, and stormwater utilities to private companies. Pittsburgh Water (formerly PWSA) is currently public, and this measure would ensure it stays that way permanently.",
+      water:
+        "This directly protects your water and sewer services. Pittsburgh Water could legally purchase the city's infrastructure for $1 in fall 2025, and could then sell it privately. This amendment would block any future privatization of these essential utilities.",
       environment:
-        "This measure directly addresses environmental concerns in Allegheny County. It would fund green infrastructure to reduce flooding, improve air quality through urban tree planting, and cut the county's carbon footprint through building upgrades.",
+        "Water and sewer infrastructure is critical for environmental health. Keeping these utilities public ensures that decisions about stormwater management, water quality, and environmental protections remain accountable to voters rather than private shareholders.",
       taxes:
-        "This $45M bond would be repaid over 10 years through existing tax revenue. While it doesn't create new taxes, it does commit future revenue to debt service, which could limit flexibility for other spending priorities.",
+        "Privatization of water utilities in Pennsylvania has historically led to rate increases for consumers. This measure would keep pricing decisions under public control, potentially affecting your water and sewer bills long-term.",
+      housing:
+        "Water and sewer costs are a significant part of housing expenses. Keeping these utilities public could help stabilize utility costs for homeowners and renters, as private utilities in PA have frequently raised rates after acquisition.",
+      government:
+        "This is a significant change to Pittsburgh's governance structure, permanently restricting the city's ability to sell public infrastructure. Both City Council (unanimously) and Pittsburgh Water's board support this amendment.",
+      public_safety:
+        "Clean drinking water and functioning sewer systems are fundamental public safety concerns. This measure ensures these critical systems remain under public oversight and accountability.",
     },
     expand: {
       newsSummary:
-        "Pittsburgh and surrounding communities have experienced increasing flooding events, with 2024 seeing three major flood events causing over $50M in damage. The bond measure is supported by environmental groups and has bipartisan backing on County Council. Critics argue the county should prioritize existing infrastructure repairs before taking on new debt.",
+        "Pittsburgh Water (PW), formerly PWSA, was formed in 1995 under a 'rent to own' arrangement allowing it to purchase the city's water infrastructure for $1 in fall 2025. A 2016 Pennsylvania law made it easier for private companies to purchase public utilities, leading to increased privatization across the state. While PW is committed to remaining public and no company is currently trying to buy it, this amendment would permanently prevent future privatization. The measure was passed unanimously by City Council and signed by the Mayor.",
       citations: [
         {
-          title: "Pittsburgh Region Flooding Impact Assessment",
-          url: "https://www.alleghenycounty.us/stormwater",
-          source: "Allegheny County Public Works",
+          title: "City of Pittsburgh Ballot Question 2 — Full Text",
+          url: "https://pittsburghpa.gov/city-clerk/ballot-questions",
+          source: "City of Pittsburgh",
         },
         {
-          title: "Green Infrastructure Reduces Flood Risk",
-          url: "https://www.epa.gov/green-infrastructure",
-          source: "U.S. Environmental Protection Agency",
+          title: "2025 Ballot Questions for Allegheny County",
+          url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+          source: "League of Women Voters of Greater Pittsburgh",
+        },
+        {
+          title: "Pennsylvania Fair Market Value Act (Act 12 of 2016)",
+          url: "https://www.legis.state.pa.us/cfdocs/legis/li/uconsCheck.cfm?yr=2016&sessInd=0&act=12",
+          source: "Pennsylvania General Assembly",
         },
       ],
     },
   },
   {
-    id: "race-1",
-    title: "Allegheny County Executive",
-    category: "office",
+    id: "question-3",
+    title: "Limits on Charter Amendment Process",
+    category: "government",
     officialText:
-      "Vote for one candidate for Allegheny County Executive to serve a four-year term beginning January 2027.",
+      'Shall the Pittsburgh Home Rule Charter, Article One, Home Rule Powers - Definitions, be supplemented by adding a new section, "104. Amendments to Charter", by prohibiting the use of the Home Rule Charter Amendment process to add duties or obligations beyond the lawful scope of the city\'s authority?',
     annotations: {
       default:
-        "The County Executive is the chief executive officer of Allegheny County, overseeing a $1 billion annual budget and county departments including Health, Human Services, and Public Works.",
-      healthcare:
-        "The County Executive oversees the Allegheny County Health Department, which manages public health programs, disease surveillance, and environmental health inspections. Your next executive's priorities will shape healthcare access across the county.",
-      taxes:
-        "The County Executive proposes the annual county budget and can influence property tax rates and fees. This role directly shapes how your tax dollars are spent across county services.",
+        "This amendment would restrict citizens' ability to place charter amendments on the ballot if those amendments add duties or obligations that go beyond the city's legal authority under the PA and US Constitutions. Two council members opposed it, arguing it limits citizens' initiative rights.",
+      government:
+        "This directly affects how Pittsburgh governs itself. It would limit the citizen initiative process by preventing ballot measures that conflict with state or federal constitutions, potentially shifting the burden of determining legality onto citizens before they can collect signatures.",
+      civil_rights:
+        "This measure has civil rights implications on both sides — it aims to prevent unconstitutional amendments, but critics argue it restricts the democratic right of citizens to use the ballot initiative process to advocate for change.",
+      foreign_policy:
+        "This measure was prompted by a citizen initiative that would have prohibited Pittsburgh from doing business with countries accused of genocide. The amendment would prevent similar foreign-policy-oriented charter changes in the future, as foreign policy is generally a federal responsibility.",
     },
     expand: {
       newsSummary:
-        "The race for County Executive features candidates with contrasting visions for the county's future. Key issues include property tax reform, public transit funding, and the county's role in addressing housing affordability. Early polling shows a competitive race with no clear frontrunner.",
+        "This measure was passed in response to the 'Not on Our Dime' citizen initiative, which sought to divest Pittsburgh from companies doing business with countries accused of genocide, specifically naming Israel. The initiative was withdrawn after failing to meet requirements. Unlike the other two questions, this measure did not pass unanimously — two council members opposed it because it restricts citizens' rights to use the ballot initiative process. Critics argue it shifts the burden of determining constitutional legality onto citizen groups before they can even begin collecting signatures.",
       citations: [
         {
-          title: "2026 Allegheny County Executive Race Overview",
-          url: "https://www.ballotpedia.org/allegheny-county",
-          source: "Ballotpedia",
+          title: "City of Pittsburgh Ballot Question 3 — Full Text",
+          url: "https://pittsburghpa.gov/city-clerk/ballot-questions",
+          source: "City of Pittsburgh",
         },
         {
-          title: "County Government Structure",
-          url: "https://www.alleghenycounty.us/government",
-          source: "Allegheny County",
-        },
-      ],
-    },
-  },
-  {
-    id: "race-2",
-    title: "County Council District 7",
-    category: "office",
-    officialText:
-      "Vote for one candidate for Allegheny County Council, District 7, to serve a four-year term.",
-    annotations: {
-      default:
-        "County Council is the legislative body of Allegheny County, responsible for approving budgets, setting tax rates, and enacting local ordinances. District 7 covers portions of Pittsburgh's East End and surrounding communities.",
-      healthcare:
-        "County Council approves funding for health programs and can pass ordinances affecting public health. Council members in your district will vote on healthcare-related budget items that affect your community directly.",
-      environment:
-        "County Council votes on environmental regulations, stormwater management, and green infrastructure funding. Your council representative can champion or block environmental initiatives in your district.",
-    },
-    expand: {
-      newsSummary:
-        "District 7 is one of several competitive council races this cycle. Candidates have focused on neighborhood development, public safety, and infrastructure investment. The district has seen significant demographic shifts in recent years, making it a bellwether for county politics.",
-      citations: [
-        {
-          title: "Allegheny County Council Districts",
-          url: "https://www.alleghenycounty.us/county-council",
-          source: "Allegheny County",
-        },
-      ],
-    },
-  },
-  {
-    id: "measure-d",
-    title: "Public Transit Funding Amendment",
-    category: "transit",
-    officialText:
-      "Shall Allegheny County dedicate an additional 0.25% of sales tax revenue to the Port Authority of Allegheny County for the purpose of expanding bus rapid transit routes and improving service frequency on existing routes?",
-    annotations: {
-      default:
-        "This measure would increase public transit funding through a small sales tax allocation. It aims to expand bus rapid transit and improve service frequency, benefiting commuters and reducing traffic congestion.",
-      taxes:
-        "This would slightly increase the effective sales tax rate in Allegheny County. For a household spending $30,000 annually on taxable goods, this would amount to approximately $75 more per year in sales tax.",
-      environment:
-        "Expanded public transit directly reduces carbon emissions from personal vehicles. Studies show that every dollar invested in public transit returns $4 in economic benefits and measurably improves air quality.",
-    },
-    expand: {
-      newsSummary:
-        "Port Authority ridership has recovered to 85% of pre-pandemic levels, but service cuts during the pandemic left many routes with reduced frequency. The proposed funding would restore pre-pandemic service levels and add new bus rapid transit corridors connecting underserved communities to major employment centers.",
-      citations: [
-        {
-          title: "Port Authority of Allegheny County Ridership Data",
-          url: "https://www.portauthority.org/ridership",
-          source: "Port Authority",
-        },
-        {
-          title: "Economic Impact of Public Transit Investment",
-          url: "https://www.apta.com/research-technical-resources",
-          source: "American Public Transportation Association",
+          title: "2025 Ballot Questions for Allegheny County",
+          url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+          source: "League of Women Voters of Greater Pittsburgh",
         },
       ],
     },
@@ -190,39 +123,65 @@ const TOPIC_EXPLANATIONS: Record<string, {
   explanation: string;
   citations: { title: string; url: string; source: string }[];
 }> = {
-  healthcare: {
-    topic: "healthcare",
-    title: "Healthcare on Your Ballot",
+  civil_rights: {
+    topic: "civil_rights",
+    title: "Civil Rights on Your Ballot",
     explanation:
-      "Several items on your Allegheny County ballot this cycle directly affect healthcare access and costs. The Healthcare Access Initiative (Measure A) would expand community clinics and telehealth, addressing a documented gap in primary care access. Additionally, the County Executive race matters for healthcare because the executive oversees the County Health Department, which manages public health programs, vaccination campaigns, and environmental health inspections. According to the Kaiser Family Foundation, counties that invest in community health infrastructure see measurable reductions in emergency room usage and overall healthcare costs.",
+      "Civil rights are central to this election's ballot questions. Question 1 would enshrine broad anti-discrimination protections into Pittsburgh's Home Rule Charter, covering race, religion, sex, sexual orientation, gender identity, disability, national origin, and foreign state affiliation. Question 3 raises a different civil rights concern: while it aims to prevent unconstitutional charter amendments, critics argue it restricts citizens' democratic right to use the ballot initiative process. Together, these questions ask voters to weigh protecting individual rights against preserving the tools citizens use to advocate for change.",
     citations: [
       {
-        title: "The Role of Local Government in Health Equity",
-        url: "https://www.rwjf.org/local-government-health",
-        source: "Robert Wood Johnson Foundation",
-      },
-      {
-        title: "Community Health Centers: A Primer",
-        url: "https://www.kff.org/community-health-centers",
-        source: "Kaiser Family Foundation",
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
       },
     ],
   },
-  taxes: {
-    topic: "taxes",
-    title: "Tax Policy on Your Ballot",
+  water: {
+    topic: "water",
+    title: "Water & Utilities on Your Ballot",
     explanation:
-      "Tax policy is woven throughout this ballot. The Property Tax Assessment Reform (Measure B) would change how your property is assessed, potentially affecting your annual tax bill. The Public Transit Funding Amendment (Measure D) would add a 0.25% sales tax allocation. Meanwhile, the Green Infrastructure Bond (Measure C) commits future tax revenue to debt repayment. Understanding how these interact is key: while no single measure dramatically raises taxes, together they reflect choices about how county revenue is collected and spent. The Lincoln Institute of Land Policy recommends regular reassessments as a best practice for tax fairness.",
+      "Question 2 directly addresses the future of Pittsburgh's water and sewer infrastructure. Pittsburgh Water (formerly PWSA) has operated under a 'rent to own' arrangement since 1995 and can purchase the city's infrastructure for $1 in fall 2025. A 2016 Pennsylvania law made utility privatization easier, and several PA communities have seen private companies acquire their water systems — often leading to rate increases. This amendment would permanently block privatization, keeping water and sewer decisions accountable to voters. Both City Council and Pittsburgh Water's board support the measure.",
     citations: [
       {
-        title: "Property Tax Policy in Pennsylvania",
-        url: "https://www.lincolninst.edu/property-tax",
-        source: "Lincoln Institute of Land Policy",
+        title: "Pennsylvania Water Utility Privatization Trends",
+        url: "https://www.foodandwaterwatch.org/insight/water-privatization",
+        source: "Food & Water Watch",
       },
       {
-        title: "Understanding Local Tax Measures",
-        url: "https://www.taxpolicycenter.org/local",
-        source: "Tax Policy Center",
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
+      },
+    ],
+  },
+  government: {
+    topic: "government",
+    title: "Government Reform on Your Ballot",
+    explanation:
+      "All three ballot questions involve changes to Pittsburgh's Home Rule Charter — the city's foundational governing document. Question 1 adds anti-discrimination protections to city business dealings. Question 2 permanently restricts the city's ability to sell public water infrastructure. Question 3 limits the citizen initiative process to prevent charter amendments that exceed the city's legal authority. Together, these questions shape how Pittsburgh governs, what protections are enshrined in its charter, and how citizens can propose future changes. Questions 1 and 2 passed City Council unanimously, while Question 3 faced opposition from two members concerned about restricting democratic participation.",
+    citations: [
+      {
+        title: "Pittsburgh Home Rule Charter",
+        url: "https://pittsburghpa.gov/city-clerk/home-rule-charter",
+        source: "City of Pittsburgh",
+      },
+      {
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
+      },
+    ],
+  },
+  foreign_policy: {
+    topic: "foreign_policy",
+    title: "Foreign Policy & Your Local Ballot",
+    explanation:
+      "Foreign policy is unusually prominent in this local election. All three ballot questions were prompted by the 'Not on Our Dime' citizen initiative, which sought to divest Pittsburgh from companies doing business with countries accused of genocide, specifically naming Israel. Though the initiative was withdrawn, City Council responded with these three charter amendments. Question 1 prohibits discrimination based on foreign state affiliation in city business. Question 3 would prevent similar foreign-policy-oriented charter changes in the future by limiting amendments to the city's lawful scope of authority.",
+    citations: [
+      {
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
       },
     ],
   },
@@ -230,56 +189,82 @@ const TOPIC_EXPLANATIONS: Record<string, {
     topic: "environment",
     title: "Environmental Issues on Your Ballot",
     explanation:
-      "Environmental policy features prominently on this ballot. The Green Infrastructure Bond (Measure C) would directly fund stormwater management and urban tree planting — both critical for a county that has experienced increased flooding events. The Public Transit Amendment (Measure D) would reduce carbon emissions by expanding bus service. According to the EPA, green infrastructure investments are among the most cost-effective ways to address both flooding and air quality concerns. Pittsburgh's air quality, while improved from its industrial past, still ranks among the worst in the nation for particulate pollution.",
+      "Question 2 has significant environmental implications. Pittsburgh's water, sewer, and stormwater systems are critical infrastructure for managing flooding, protecting water quality, and maintaining environmental health. Keeping these utilities public ensures that environmental considerations remain central to infrastructure decisions, rather than being driven by profit motives. Pittsburgh's aging stormwater infrastructure has contributed to combined sewer overflows that pollute local waterways — decisions about upgrading these systems will be shaped by whether they remain under public control.",
     citations: [
       {
-        title: "Green Infrastructure Benefits",
-        url: "https://www.epa.gov/green-infrastructure",
-        source: "U.S. Environmental Protection Agency",
+        title: "Pittsburgh Combined Sewer Overflow Program",
+        url: "https://www.alleghenycounty.us/sanitary-authority",
+        source: "ALCOSAN",
       },
       {
-        title: "Air Quality in the Pittsburgh Region",
-        url: "https://www.lung.org/research/sota/city-rankings",
-        source: "American Lung Association",
-      },
-    ],
-  },
-  foreign_policy: {
-    topic: "foreign_policy",
-    title: "Foreign Policy and Your Local Ballot",
-    explanation:
-      "While foreign policy is primarily a federal issue, local elections can reflect its impact. Allegheny County is home to significant defense contractors and military installations, and trade policy affects the region's manufacturing sector. Veterans' services are funded in part through county programs, and immigration policy impacts the growing immigrant communities in Pittsburgh's neighborhoods. Your County Executive and Council representatives can advocate for federal funding that supports these communities and pass local resolutions on issues of national importance.",
-    citations: [
-      {
-        title: "How Local Elections Connect to National Policy",
-        url: "https://www.brookings.edu/local-federal-nexus",
-        source: "Brookings Institution",
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
       },
     ],
   },
-  education: {
-    topic: "education",
-    title: "Education on Your Ballot",
+  taxes: {
+    topic: "taxes",
+    title: "Tax & Cost Implications on Your Ballot",
     explanation:
-      "While school board elections are separate, county-level decisions significantly impact education. Property tax revenue funds local schools, making the Property Tax Assessment Reform (Measure B) particularly relevant. The County Executive also oversees workforce development programs and community college partnerships. Allegheny County's investment in educational infrastructure affects everything from pre-K access to adult career training programs.",
+      "While none of the 2025 ballot questions directly raise taxes, Question 2 has real cost implications. Across Pennsylvania, communities where water utilities were privatized have seen significant rate increases — sometimes 30-50% within a few years. Keeping Pittsburgh's water and sewer systems public gives voters more control over rate-setting decisions. The other two questions, while primarily about governance, could have indirect fiscal impacts through legal costs if charter amendments conflict with state or federal law.",
     citations: [
       {
-        title: "Property Taxes and School Funding in Pennsylvania",
-        url: "https://www.education.pa.gov/funding",
-        source: "PA Department of Education",
+        title: "Impact of Water Utility Privatization on Consumer Rates",
+        url: "https://www.foodandwaterwatch.org/insight/water-privatization",
+        source: "Food & Water Watch",
       },
     ],
   },
   housing: {
     topic: "housing",
-    title: "Housing Policy on Your Ballot",
+    title: "Housing & Your Ballot",
     explanation:
-      "Housing affordability is increasingly central to Allegheny County politics. The Property Tax Assessment Reform (Measure B) directly affects homeowners' costs, while the County Executive candidates have staked out positions on affordable housing investment. The Green Infrastructure Bond (Measure C) includes provisions for neighborhood improvements that can affect property values. Understanding how these measures interact is key for anyone concerned about housing costs and availability.",
+      "Question 2 is most relevant to housing concerns. Water and sewer costs are a significant component of monthly housing expenses. In Pennsylvania communities where utilities were privatized, residents have seen substantial rate increases that directly affect housing affordability. Keeping Pittsburgh's water and sewer systems public helps stabilize one component of housing costs for both homeowners and renters.",
     citations: [
       {
-        title: "Housing Affordability in Allegheny County",
-        url: "https://www.alleghenycounty.us/economic-development/housing",
-        source: "Allegheny County",
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
+      },
+    ],
+  },
+  immigration: {
+    topic: "immigration",
+    title: "Immigration & Your Ballot",
+    explanation:
+      "Question 1 is particularly relevant to immigrant communities. The anti-discrimination amendment would protect against discrimination based on national origin, place of birth, and association with any foreign state in all city business dealings. This provides an additional layer of protection for Pittsburgh's growing immigrant communities and businesses with international ties.",
+    citations: [
+      {
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
+      },
+    ],
+  },
+  jobs: {
+    topic: "jobs",
+    title: "Jobs & Economy on Your Ballot",
+    explanation:
+      "Question 1 affects Pittsburgh's business environment by prohibiting discrimination based on foreign state affiliation when the city conducts business. This is designed to keep Pittsburgh competitive in attracting multinational companies and maintaining diverse business relationships. Question 2 also has economic implications — public utilities employ local workers and keep revenue within the community, while privatization can lead to workforce reductions and profits flowing to outside shareholders.",
+    citations: [
+      {
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
+      },
+    ],
+  },
+  public_safety: {
+    topic: "public_safety",
+    title: "Public Safety & Your Ballot",
+    explanation:
+      "Question 2 has direct public safety implications. Clean drinking water and functioning sewer and stormwater systems are fundamental to public health and safety. Keeping these systems under public ownership ensures they remain accountable to voters and subject to public oversight, rather than being managed by private entities whose primary obligation is to shareholders.",
+    citations: [
+      {
+        title: "2025 Ballot Questions for Allegheny County",
+        url: "https://www.lwvpgh.org/content.aspx?page_id=22&club_id=486105&module_id=703063",
+        source: "League of Women Voters of Greater Pittsburgh",
       },
     ],
   },
@@ -302,15 +287,14 @@ export function generatePersonalizedBallot(
   profile: UserProfile
 ): PersonalizedBallot {
   const topicNames = profile.topics
-    .map((t) => t.charAt(0).toUpperCase() + t.slice(1))
+    .map((t) => t.charAt(0).toUpperCase() + t.slice(1).replace("_", " "))
     .join(", ");
 
-  const greeting = `Welcome, Allegheny County voter! We've tailored this guide based on what matters most to you.`;
+  const greeting = `Your personalized guide to Pittsburgh's 2025 Primary Election ballot questions.`;
 
-  const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot items in Allegheny County. Each item includes a personalized explanation of how it may affect you, along with trusted sources for further reading.`;
+  const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot questions facing City of Pittsburgh voters on May 20, 2025. Each item includes a personalized explanation of how it may affect you, along with trusted sources.`;
 
   const ballotItems = ALL_BALLOT_ITEMS.map((item) => {
-    // Determine which of the user's selected topics this item relates to
     const relatedTopics = profile.topics.filter((topic) => {
       const key = topic.toLowerCase().replace(/\s+/g, "_");
       return key === item.category || key in item.annotations;

@@ -40,7 +40,7 @@ export default function BallotPaper({
             Official Sample Ballot
           </h2>
           <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground mt-1 font-medium">
-            Allegheny County • General Election 2026
+            City of Pittsburgh • Primary Election — May 20, 2025
           </p>
         </div>
 

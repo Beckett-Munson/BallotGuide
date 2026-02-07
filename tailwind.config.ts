@@ -97,6 +97,10 @@ export default {
           from: { opacity: "0", transform: "translateY(var(--enter-from, 2rem))" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "wave": {
+          "0%, 100%": { transform: "translateX(-5%) rotate(2deg)" },
+          "50%": { transform: "translateX(5%) rotate(-2deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

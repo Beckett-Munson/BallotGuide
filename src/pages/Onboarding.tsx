@@ -137,7 +137,7 @@ export default function Onboarding() {
           {/* Color-blending bubble */}
           <div className="flex items-center justify-center mt-8">
             <div
-              className="relative w-16 h-16 rounded-full border-2 transition-all duration-500 ease-out overflow-hidden"
+              className="relative w-16 h-16 rounded-full border-2 transition-all duration-700 ease-out overflow-hidden"
               style={{
                 borderColor: profile.topics.length > 0
                   ? topicBorderColor(profile.topics)
@@ -150,15 +150,30 @@ export default function Onboarding() {
                   : 'none',
               }}
             >
+              {/* Water fill rising from bottom */}
               <div
-                className="absolute inset-0 transition-all duration-500 ease-out"
+                className="absolute bottom-0 left-0 right-0 transition-all duration-700 ease-out"
                 style={{
+                  height: profile.topics.length > 0
+                    ? `${Math.min(100, (profile.topics.length / TOPICS.length) * 100 + 15)}%`
+                    : '0%',
                   background: profile.topics.length > 0
                     ? topicBackground(profile.topics, 0.6)
                     : 'transparent',
-                  transform: profile.topics.length > 0 ? 'scale(1)' : 'scale(0)',
                 }}
               />
+              {/* Wave surface */}
+              {profile.topics.length > 0 && (
+                <div
+                  className="absolute left-[-10%] right-[-10%] h-3 animate-[wave_2s_ease-in-out_infinite]"
+                  style={{
+                    bottom: `${Math.min(100, (profile.topics.length / TOPICS.length) * 100 + 15) - 4}%`,
+                    background: topicBackground(profile.topics, 0.4),
+                    borderRadius: '40%',
+                    transition: 'bottom 0.7s ease-out',
+                  }}
+                />
+              )}
             </div>
             <span className="ml-3 text-sm text-muted-foreground">
               {profile.topics.length === 0

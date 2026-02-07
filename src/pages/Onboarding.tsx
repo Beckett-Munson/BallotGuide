@@ -7,6 +7,10 @@ import {
   Globe,
   GraduationCap,
   Home,
+  Briefcase,
+  Users,
+  Medal,
+  BookOpen,
   ArrowRight,
   Vote,
   Shield,
@@ -24,20 +28,25 @@ const TOPICS = [
   { id: "housing", label: "Housing", icon: Home },
 ];
 
-const AGE_RANGES = ["18–24", "25–34", "35–44", "45–54", "55–64", "65+"];
 const EMPLOYMENT_TYPES = [
-  "Employed full-time",
-  "Employed part-time",
-  "Self-employed",
-  "Unemployed",
-  "Retired",
+  { id: "full-time", label: "Employed full-time", icon: Briefcase },
+  { id: "part-time", label: "Employed part-time", icon: Briefcase },
+  { id: "self-employed", label: "Self-employed", icon: Briefcase },
+  { id: "unemployed", label: "Unemployed", icon: Briefcase },
+  { id: "retired", label: "Retired", icon: Briefcase },
 ];
+
 const FAMILY_STATUSES = [
-  "Single, no children",
-  "Single parent",
-  "Married, no children",
-  "Married with children",
-  "Other",
+  { id: "single", label: "Single, no children", icon: Users },
+  { id: "single-parent", label: "Single parent", icon: Users },
+  { id: "married-no-kids", label: "Married, no children", icon: Users },
+  { id: "married-kids", label: "Married with children", icon: Users },
+  { id: "other", label: "Other", icon: Users },
+];
+
+const EXTRA_IDENTIFIERS = [
+  { id: "veteran", label: "I am a veteran", icon: Medal },
+  { id: "student", label: "I am a student", icon: BookOpen },
 ];
 
 export default function Onboarding() {
@@ -62,19 +71,30 @@ export default function Onboarding() {
     }));
   };
 
+  const toggleExtra = (id: string) => {
+    if (id === "veteran") {
+      setProfile((prev) => ({ ...prev, isVeteran: !prev.isVeteran }));
+    } else if (id === "student") {
+      setProfile((prev) => ({ ...prev, isStudent: !prev.isStudent }));
+    }
+  };
+
+  const isExtraSelected = (id: string) => {
+    if (id === "veteran") return profile.isVeteran;
+    if (id === "student") return profile.isStudent;
+    return false;
+  };
+
   const canProceed = () => {
-    if (step === 0) return profile.topics.length > 0;
-    if (step === 1)
-      return profile.ageRange && profile.employmentType && profile.familyStatus;
-    if (step === 2) return profile.zipCode.length === 5;
+    if (step === 0) return profile.topics.length > 0 && profile.employmentType && profile.familyStatus;
+    if (step === 1) return profile.zipCode.length === 5;
     return false;
   };
 
   const handleNext = () => {
-    if (step < 2) {
+    if (step < 1) {
       setStep(step + 1);
     } else {
-      // Navigate to ballot page with profile
       sessionStorage.setItem("voterProfile", JSON.stringify(profile));
       navigate("/ballot");
     }
@@ -118,7 +138,7 @@ export default function Onboarding() {
       {/* Progress */}
       <div className="max-w-2xl mx-auto px-6 -mt-4">
         <div className="flex items-center gap-2">
-          {[0, 1, 2].map((s) => (
+          {[0, 1].map((s) => (
             <div
               key={s}
               className={cn(
@@ -129,173 +149,185 @@ export default function Onboarding() {
           ))}
         </div>
         <p className="text-xs text-muted-foreground mt-2 text-center">
-          Step {step + 1} of 3
+          Step {step + 1} of 2
         </p>
       </div>
 
       {/* Form */}
       <main className="max-w-2xl mx-auto px-6 py-10">
-        {/* Step 0: Topics */}
+        {/* Step 0: Combined Topics + About You */}
         {step === 0 && (
-          <div className="animate-fade-in">
-            <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
-              What issues matter to you?
-            </h2>
-            <p className="text-muted-foreground mb-8">
-              Select all topics you'd like personalized guidance on.
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {TOPICS.map(({ id, label, icon: Icon }) => {
-                const selected = profile.topics.includes(id);
-                return (
-                  <button
-                    key={id}
-                    onClick={() => toggleTopic(id)}
-                    className={cn(
-                      "flex items-center gap-3 p-4 rounded-lg border-2 transition-all duration-200 text-left",
-                      selected
-                        ? "border-accent bg-civic-gold-light shadow-sm"
-                        : "border-border bg-card hover:border-accent/40"
-                    )}
-                  >
-                    <Icon
-                      className={cn(
-                        "w-5 h-5 flex-shrink-0",
-                        selected ? "text-accent" : "text-muted-foreground"
-                      )}
-                    />
-                    <span
-                      className={cn(
-                        "font-medium text-sm",
-                        selected ? "text-foreground" : "text-muted-foreground"
-                      )}
-                    >
-                      {label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* Step 1: Demographics */}
-        {step === 1 && (
-          <div className="animate-fade-in space-y-6">
+          <div className="animate-fade-in space-y-10">
+            {/* Topics */}
             <div>
               <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
-                Tell us about yourself
+                What issues matter to you?
               </h2>
-              <p className="text-muted-foreground mb-8">
-                This helps us personalize how ballot items may affect you.
+              <p className="text-muted-foreground mb-6">
+                Select all topics you'd like personalized guidance on.
               </p>
-            </div>
-
-            {/* Age */}
-            <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">
-                Age Range
-              </label>
-              <div className="flex flex-wrap gap-2">
-                {AGE_RANGES.map((age) => (
-                  <button
-                    key={age}
-                    onClick={() => setProfile({ ...profile, ageRange: age })}
-                    className={cn(
-                      "px-4 py-2 rounded-lg border text-sm font-medium transition-all",
-                      profile.ageRange === age
-                        ? "border-accent bg-civic-gold-light text-foreground"
-                        : "border-border bg-card text-muted-foreground hover:border-accent/40"
-                    )}
-                  >
-                    {age}
-                  </button>
-                ))}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {TOPICS.map(({ id, label, icon: Icon }) => {
+                  const selected = profile.topics.includes(id);
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => toggleTopic(id)}
+                      className={cn(
+                        "flex items-center gap-3 p-4 rounded-lg border-2 transition-all duration-200 text-left",
+                        selected
+                          ? "border-accent bg-civic-gold-light shadow-sm"
+                          : "border-border bg-card hover:border-accent/40"
+                      )}
+                    >
+                      <Icon
+                        className={cn(
+                          "w-5 h-5 flex-shrink-0",
+                          selected ? "text-accent" : "text-muted-foreground"
+                        )}
+                      />
+                      <span
+                        className={cn(
+                          "font-medium text-sm",
+                          selected ? "text-foreground" : "text-muted-foreground"
+                        )}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Employment */}
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">
+              <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
+                Tell us about yourself
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                This helps us personalize how ballot items may affect you.
+              </p>
+
+              <label className="block text-sm font-semibold text-foreground mb-3">
                 Employment Status
               </label>
-              <div className="flex flex-wrap gap-2">
-                {EMPLOYMENT_TYPES.map((emp) => (
-                  <button
-                    key={emp}
-                    onClick={() =>
-                      setProfile({ ...profile, employmentType: emp })
-                    }
-                    className={cn(
-                      "px-4 py-2 rounded-lg border text-sm font-medium transition-all",
-                      profile.employmentType === emp
-                        ? "border-accent bg-civic-gold-light text-foreground"
-                        : "border-border bg-card text-muted-foreground hover:border-accent/40"
-                    )}
-                  >
-                    {emp}
-                  </button>
-                ))}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {EMPLOYMENT_TYPES.map(({ id, label, icon: Icon }) => {
+                  const selected = profile.employmentType === label;
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => setProfile({ ...profile, employmentType: label })}
+                      className={cn(
+                        "flex items-center gap-3 p-4 rounded-lg border-2 transition-all duration-200 text-left",
+                        selected
+                          ? "border-accent bg-civic-gold-light shadow-sm"
+                          : "border-border bg-card hover:border-accent/40"
+                      )}
+                    >
+                      <Icon
+                        className={cn(
+                          "w-5 h-5 flex-shrink-0",
+                          selected ? "text-accent" : "text-muted-foreground"
+                        )}
+                      />
+                      <span
+                        className={cn(
+                          "font-medium text-sm",
+                          selected ? "text-foreground" : "text-muted-foreground"
+                        )}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             {/* Family */}
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">
+              <label className="block text-sm font-semibold text-foreground mb-3">
                 Family Status
               </label>
-              <div className="flex flex-wrap gap-2">
-                {FAMILY_STATUSES.map((fam) => (
-                  <button
-                    key={fam}
-                    onClick={() =>
-                      setProfile({ ...profile, familyStatus: fam })
-                    }
-                    className={cn(
-                      "px-4 py-2 rounded-lg border text-sm font-medium transition-all",
-                      profile.familyStatus === fam
-                        ? "border-accent bg-civic-gold-light text-foreground"
-                        : "border-border bg-card text-muted-foreground hover:border-accent/40"
-                    )}
-                  >
-                    {fam}
-                  </button>
-                ))}
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {FAMILY_STATUSES.map(({ id, label, icon: Icon }) => {
+                  const selected = profile.familyStatus === label;
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => setProfile({ ...profile, familyStatus: label })}
+                      className={cn(
+                        "flex items-center gap-3 p-4 rounded-lg border-2 transition-all duration-200 text-left",
+                        selected
+                          ? "border-accent bg-civic-gold-light shadow-sm"
+                          : "border-border bg-card hover:border-accent/40"
+                      )}
+                    >
+                      <Icon
+                        className={cn(
+                          "w-5 h-5 flex-shrink-0",
+                          selected ? "text-accent" : "text-muted-foreground"
+                        )}
+                      />
+                      <span
+                        className={cn(
+                          "font-medium text-sm",
+                          selected ? "text-foreground" : "text-muted-foreground"
+                        )}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
-            {/* Checkboxes */}
-            <div className="flex flex-wrap gap-6">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={profile.isVeteran}
-                  onChange={(e) =>
-                    setProfile({ ...profile, isVeteran: e.target.checked })
-                  }
-                  className="w-4 h-4 rounded border-border text-accent focus:ring-accent"
-                />
-                <span className="text-sm text-foreground">I am a veteran</span>
+            {/* Extra identifiers */}
+            <div>
+              <label className="block text-sm font-semibold text-foreground mb-3">
+                Anything else?
               </label>
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={profile.isStudent}
-                  onChange={(e) =>
-                    setProfile({ ...profile, isStudent: e.target.checked })
-                  }
-                  className="w-4 h-4 rounded border-border text-accent focus:ring-accent"
-                />
-                <span className="text-sm text-foreground">
-                  I am a student
-                </span>
-              </label>
+              <div className="grid grid-cols-2 gap-3">
+                {EXTRA_IDENTIFIERS.map(({ id, label, icon: Icon }) => {
+                  const selected = isExtraSelected(id);
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => toggleExtra(id)}
+                      className={cn(
+                        "flex items-center gap-3 p-4 rounded-lg border-2 transition-all duration-200 text-left",
+                        selected
+                          ? "border-accent bg-civic-gold-light shadow-sm"
+                          : "border-border bg-card hover:border-accent/40"
+                      )}
+                    >
+                      <Icon
+                        className={cn(
+                          "w-5 h-5 flex-shrink-0",
+                          selected ? "text-accent" : "text-muted-foreground"
+                        )}
+                      />
+                      <span
+                        className={cn(
+                          "font-medium text-sm",
+                          selected ? "text-foreground" : "text-muted-foreground"
+                        )}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}
 
-        {/* Step 2: ZIP Code */}
-        {step === 2 && (
+        {/* Step 1: ZIP Code */}
+        {step === 1 && (
           <div className="animate-fade-in">
             <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
               Your ZIP code
@@ -343,7 +375,7 @@ export default function Onboarding() {
                 : "bg-muted text-muted-foreground cursor-not-allowed"
             )}
           >
-            {step === 2 ? "View My Ballot" : "Continue"}
+            {step === 1 ? "View My Ballot" : "Continue"}
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>

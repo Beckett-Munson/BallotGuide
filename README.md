@@ -30,7 +30,7 @@ BallotGuide translates opaque ballot language into clear, source-grounded explan
 - Trained a **regression model on budget data** to predict category deltas that drive the interactive pie chart experience.
 - Integrated real **3D city models** and used our agent + geo metadata to drop location-based policy annotations directly on the map.
 
-<img width="2968" height="1598" alt="Architecture Diagram Example - Multiplayer (Community)(1)" src="https://github.com/user-attachments/assets/6cfce928-22b1-4dad-957d-962ae811db55" />
+<img width="2968" height="1598" alt="Architecture Diagram Example - Multiplayer (Community)(2)" src="https://github.com/user-attachments/assets/9c68f64e-1765-431a-a790-7f5c280d4529" />
 
 <img width="804" height="539" alt="Screenshot 2026-02-07 at 1 40 12 PM" src="https://github.com/user-attachments/assets/5c3ca0d9-ccc7-491d-94b2-4c5489309017" />
 

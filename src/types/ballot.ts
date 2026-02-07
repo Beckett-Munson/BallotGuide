@@ -29,6 +29,5 @@ export interface PersonalizedBallot {
   greeting: string;
   personalizedSummary: string;
   ballotItems: BallotItem[];
-  raceItems: BallotItem[];
   topicExplanations: TopicExplanation[];
 }

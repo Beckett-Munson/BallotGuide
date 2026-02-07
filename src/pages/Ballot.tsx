@@ -7,6 +7,7 @@ import BallotPaper from "@/components/BallotPaper";
 import BallotAnnotation from "@/components/BallotAnnotation";
 import TopicExplanation from "@/components/TopicExplanation";
 import { cn } from "@/lib/utils";
+import { TOPIC_COLORS, hsl, hslAlpha, topicBorderColor } from "@/lib/topicColors";
 
 export default function Ballot() {
   const navigate = useNavigate();
@@ -58,14 +59,22 @@ export default function Ballot() {
             {ballot.personalizedSummary}
           </p>
           <div className="flex flex-wrap justify-center gap-2 mt-3">
-            {profile.topics.map((t) => (
-              <span
-                key={t}
-                className="px-3 py-1 bg-civic-gold-light text-accent text-xs font-semibold rounded-full capitalize"
-              >
-                {t.replace("_", " ")}
-              </span>
-            ))}
+            {profile.topics.map((t) => {
+              const color = TOPIC_COLORS[t];
+              return (
+                <span
+                  key={t}
+                  className="px-3 py-1 text-xs font-semibold rounded-full capitalize"
+                  style={{
+                    backgroundColor: color ? hslAlpha(color, 0.15) : undefined,
+                    color: color ? hsl(color) : undefined,
+                    border: `1px solid ${color ? hslAlpha(color, 0.3) : "transparent"}`,
+                  }}
+                >
+                  {t.replace("_", " ")}
+                </span>
+              );
+            })}
           </div>
         </header>
 
@@ -117,11 +126,15 @@ export default function Ballot() {
                         : { right: "100%", width: "24px" }
                     }
                   >
-                    <div className="w-full h-px bg-accent/50" />
                     <div
-                      className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent ${
+                      className="w-full h-px"
+                      style={{ backgroundColor: topicBorderColor(item.relatedTopics) + "80" }}
+                    />
+                    <div
+                      className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full ${
                         isLeft ? "right-0" : "left-0"
                       }`}
+                      style={{ backgroundColor: topicBorderColor(item.relatedTopics) }}
                     />
                   </div>
                   <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} />

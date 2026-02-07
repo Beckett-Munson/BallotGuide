@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ChevronDown, ExternalLink, MessageCircle } from "lucide-react";
 import type { BallotItem as BallotItemType } from "@/types/ballot";
 import { cn } from "@/lib/utils";
+import { topicBackground, topicBorderColor, TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 
 interface BallotAnnotationProps {
   item: BallotItemType;
@@ -11,16 +12,47 @@ interface BallotAnnotationProps {
 export default function BallotAnnotation({ item, isActive }: BallotAnnotationProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const borderColor = topicBorderColor(item.relatedTopics);
+  const bgStyle = topicBackground(item.relatedTopics, 0.08);
+  const isGradient = bgStyle.startsWith("linear-gradient");
+
   return (
     <div
       className={cn(
         "transition-all duration-300 rounded-lg border-l-4 p-4",
-        isActive
-          ? "border-l-accent bg-civic-gold-light/50 shadow-sm"
-          : "border-l-border bg-transparent opacity-60"
+        isActive ? "shadow-sm" : "opacity-60"
       )}
+      style={{
+        borderLeftColor: isActive ? borderColor : undefined,
+        background: isActive ? (isGradient ? bgStyle : undefined) : "transparent",
+        backgroundColor: isActive && !isGradient ? bgStyle : undefined,
+      }}
     >
-      <h4 className="text-xs font-semibold uppercase tracking-wider text-accent mb-1.5">
+      {/* Topic pills */}
+      {item.relatedTopics.length > 0 && (
+        <div className="flex flex-wrap gap-1.5 mb-2">
+          {item.relatedTopics.map((topic) => {
+            const color = TOPIC_COLORS[topic];
+            return (
+              <span
+                key={topic}
+                className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full"
+                style={{
+                  backgroundColor: color ? hslAlpha(color, 0.15) : undefined,
+                  color: color ? hsl(color) : undefined,
+                }}
+              >
+                {topic.replace("_", " ")}
+              </span>
+            );
+          })}
+        </div>
+      )}
+
+      <h4
+        className="text-xs font-semibold uppercase tracking-wider mb-1.5"
+        style={{ color: borderColor }}
+      >
         What this means for you
       </h4>
       <p className="text-sm text-foreground/85 leading-relaxed mb-3">
@@ -29,7 +61,8 @@ export default function BallotAnnotation({ item, isActive }: BallotAnnotationPro
 
       <button
         onClick={() => setIsExpanded(!isExpanded)}
-        className="flex items-center gap-1.5 text-xs font-semibold text-civic-blue hover:text-civic-blue/80 transition-colors"
+        className="flex items-center gap-1.5 text-xs font-semibold transition-colors"
+        style={{ color: borderColor }}
       >
         <span>{isExpanded ? "Show less" : "Learn more"}</span>
         <ChevronDown
@@ -62,7 +95,8 @@ export default function BallotAnnotation({ item, isActive }: BallotAnnotationPro
                   href={cite.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-1.5 text-xs text-civic-blue hover:underline"
+                  className="flex items-start gap-1.5 text-xs hover:underline"
+                  style={{ color: borderColor }}
                 >
                   <ExternalLink className="w-3 h-3 flex-shrink-0 mt-0.5" />
                   <span>
@@ -73,10 +107,19 @@ export default function BallotAnnotation({ item, isActive }: BallotAnnotationPro
               </li>
             ))}
           </ul>
-          <div className="p-2.5 bg-civic-blue-light/60 rounded border border-civic-blue/10">
+          <div
+            className="p-2.5 rounded border"
+            style={{
+              backgroundColor: hslAlpha(TOPIC_COLORS[item.relatedTopics[0]] || { h: 215, s: 60, l: 45 }, 0.08),
+              borderColor: hslAlpha(TOPIC_COLORS[item.relatedTopics[0]] || { h: 215, s: 60, l: 45 }, 0.15),
+            }}
+          >
             <div className="flex items-center gap-1.5 mb-1">
-              <MessageCircle className="w-3 h-3 text-civic-blue" />
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-civic-blue">
+              <MessageCircle className="w-3 h-3" style={{ color: borderColor }} />
+              <span
+                className="text-[10px] font-semibold uppercase tracking-wider"
+                style={{ color: borderColor }}
+              >
                 Ask a follow-up
               </span>
             </div>

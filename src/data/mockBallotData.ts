@@ -309,18 +309,27 @@ export function generatePersonalizedBallot(
 
   const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot items in Allegheny County. Each item includes a personalized explanation of how it may affect you, along with trusted sources for further reading.`;
 
-  const ballotItems = ALL_BALLOT_ITEMS.map((item) => ({
-    id: item.id,
-    title: item.title,
-    officialText: item.officialText,
-    annotation: getAnnotation(item, profile.topics),
-    category: item.category,
-    expand: {
-      newsSummary: item.expand.newsSummary,
-      citations: item.expand.citations,
-      chatbotPrompt: `Explain how "${item.title}" affects someone interested in ${topicNames}${profile.aboutYou ? ` who describes themselves as: ${profile.aboutYou}` : ""}.`,
-    },
-  }));
+  const ballotItems = ALL_BALLOT_ITEMS.map((item) => {
+    // Determine which of the user's selected topics this item relates to
+    const relatedTopics = profile.topics.filter((topic) => {
+      const key = topic.toLowerCase().replace(/\s+/g, "_");
+      return key === item.category || key in item.annotations;
+    });
+
+    return {
+      id: item.id,
+      title: item.title,
+      officialText: item.officialText,
+      annotation: getAnnotation(item, profile.topics),
+      category: item.category,
+      relatedTopics: relatedTopics.length > 0 ? relatedTopics : [item.category],
+      expand: {
+        newsSummary: item.expand.newsSummary,
+        citations: item.expand.citations,
+        chatbotPrompt: `Explain how "${item.title}" affects someone interested in ${topicNames}${profile.aboutYou ? ` who describes themselves as: ${profile.aboutYou}` : ""}.`,
+      },
+    };
+  });
 
   const topicExplanations = profile.topics
     .map((topic) => {

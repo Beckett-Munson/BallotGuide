@@ -134,7 +134,7 @@ export default function Onboarding() {
       <header className="relative overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroImage} alt="Civic engagement illustration" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/90 via-primary/80 to-background" />
+          
         </div>
         <div className="relative max-w-3xl mx-auto px-6 pt-16 pb-20 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">

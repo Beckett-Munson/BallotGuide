@@ -150,28 +150,40 @@ export default function Onboarding() {
                   : 'none',
               }}
             >
-              {/* Water fill rising from bottom */}
-              <div
-                className="absolute bottom-0 left-0 right-0 transition-all duration-700 ease-out"
-                style={{
-                  height: profile.topics.length > 0 ? '100%' : '0%',
-                  background: profile.topics.length > 0
-                    ? topicBackground(profile.topics, 0.6)
-                    : 'transparent',
-                }}
-              />
-              {/* Wave surface */}
-              {profile.topics.length > 0 && (
-                <div
-                  className="absolute left-[-10%] right-[-10%] h-3 animate-[wave_2s_ease-in-out_infinite]"
-                  style={{
-                    bottom: '90%',
-                    background: topicBackground(profile.topics, 0.4),
-                    borderRadius: '40%',
-                    transition: 'bottom 0.7s ease-out',
-                  }}
-                />
-              )}
+              {/* Chromatic swirl fill */}
+              {profile.topics.length > 0 && (() => {
+                const colors = profile.topics
+                  .map((id) => TOPIC_COLORS[id])
+                  .filter(Boolean);
+                const stops = colors.length === 1
+                  ? `${hslAlpha(colors[0], 0.7)} 0deg, ${hslAlpha(colors[0], 0.5)} 180deg, ${hslAlpha(colors[0], 0.7)} 360deg`
+                  : colors
+                      .map((c, i) => {
+                        const deg = Math.round((i / colors.length) * 360);
+                        return `${hslAlpha(c, 0.7)} ${deg}deg`;
+                      })
+                      .concat([`${hslAlpha(colors[0], 0.7)} 360deg`])
+                      .join(', ');
+                return (
+                  <>
+                    {/* Swirling conic gradient layer */}
+                    <div
+                      className="absolute inset-[-25%] animate-[swirl_8s_linear_infinite] transition-opacity duration-700"
+                      style={{
+                        background: `conic-gradient(from 0deg at 50% 50%, ${stops})`,
+                        filter: 'blur(6px)',
+                      }}
+                    />
+                    {/* Soft radial overlay for depth */}
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: `radial-gradient(circle at 35% 35%, ${hslAlpha(colors[0], 0.3)}, transparent 70%)`,
+                      }}
+                    />
+                  </>
+                );
+              })()}
             </div>
             <span className="ml-3 text-sm text-muted-foreground">
               {profile.topics.length === 0

@@ -101,12 +101,17 @@ export default {
           "0%, 100%": { transform: "translateX(-5%) rotate(2deg)" },
           "50%": { transform: "translateX(5%) rotate(-2deg)" },
         },
+        "swirl": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.4s ease-out",
         "ballot-enter": "ballot-enter 0.4s ease-out forwards",
+        "swirl": "swirl 8s linear infinite",
       },
     },
   },

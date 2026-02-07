@@ -8,7 +8,7 @@ import {
 import { cn } from "@/lib/utils";
 import type { UserProfile } from "@/types/ballot";
 import { useCyclingPlaceholder } from "@/hooks/use-cycling-placeholder";
-import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
+import { TOPIC_COLORS, hsl, hslAlpha, topicBackground, topicBorderColor } from "@/lib/topicColors";
 import KeywordData from '../data/keywords.json';
 import axios from "axios";
 
@@ -190,6 +190,79 @@ Fetch legislations related to the user.
               );
             })}
           </div>
+
+          {/* Color-blending bubble */}
+          <div className="flex items-center justify-center mt-8">
+            <div
+              className="relative w-16 h-16 rounded-full border-2 transition-all duration-700 ease-out overflow-hidden"
+              style={{
+                borderColor: profile.topics.length > 0
+                  ? topicBorderColor(profile.topics)
+                  : 'hsl(var(--border))',
+                boxShadow: profile.topics.length > 0
+                  ? `0 0 20px 2px ${hslAlpha(
+                      TOPIC_COLORS[profile.topics[0]] ?? { h: 220, s: 15, l: 35 },
+                      0.25
+                    )}`
+                  : 'none',
+              }}
+            >
+              {/* Fluid blob fill */}
+              {profile.topics.length > 0 && (() => {
+                const colors = profile.topics
+                  .map((id) => TOPIC_COLORS[id])
+                  .filter(Boolean);
+                // Each color gets its own drifting blob with a unique starting position
+                const blobAnimations = [
+                  'blob-drift-1', 'blob-drift-2', 'blob-drift-3',
+                  'blob-drift-4', 'blob-drift-5',
+                ];
+                // Distribute starting positions around the bubble
+                const startPositions = [
+                  { top: '10%', left: '10%' },
+                  { top: '60%', left: '55%' },
+                  { top: '15%', left: '60%' },
+                  { top: '55%', left: '5%' },
+                  { top: '35%', left: '35%' },
+                  { top: '5%', left: '40%' },
+                  { top: '65%', left: '30%' },
+                  { top: '30%', left: '65%' },
+                  { top: '50%', left: '15%' },
+                  { top: '20%', left: '50%' },
+                  { top: '45%', left: '45%' },
+                  { top: '10%', left: '30%' },
+                  { top: '55%', left: '60%' },
+                  { top: '40%', left: '10%' },
+                  { top: '25%', left: '55%' },
+                ];
+                return (
+                  <>
+                    {/* Individual drifting color blobs at unique positions */}
+                    {colors.map((c, i) => (
+                      <div
+                        key={i}
+                        className="absolute rounded-full"
+                        style={{
+                          width: '65%',
+                          height: '65%',
+                          top: startPositions[i % startPositions.length].top,
+                          left: startPositions[i % startPositions.length].left,
+                          background: `radial-gradient(circle, ${hsl(c)} 0%, ${hslAlpha(c, 0.6)} 40%, transparent 70%)`,
+                          animation: `${blobAnimations[i % blobAnimations.length]} ${10 + i * 2}s ease-in-out infinite`,
+                          filter: 'blur(2px)',
+                        }}
+                      />
+                    ))}
+                  </>
+                );
+              })()}
+            </div>
+            <span className="ml-3 text-sm text-muted-foreground">
+              {profile.topics.length === 0
+                ? "Select topics to see your blend"
+                : `${profile.topics.length} topic${profile.topics.length > 1 ? "s" : ""} selected`}
+            </span>
+          </div>
         </section>
 
         {/* Tell us about yourself */}
@@ -219,7 +292,7 @@ Fetch legislations related to the user.
                   placeholder.visible ? "opacity-100" : "opacity-0"
                 )}
               >
-                e.g. {placeholder.text}
+                {placeholder.text}
               </div>
             )}
           </div>

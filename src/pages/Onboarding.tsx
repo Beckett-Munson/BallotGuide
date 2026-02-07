@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useScrollLag } from "@/hooks/use-scroll-lag";
 import {
   Heart, DollarSign, Leaf, Globe, GraduationCap, Home,
   Briefcase, Users, Shield, Scale, Landmark, Train,
@@ -53,7 +52,6 @@ export default function Onboarding() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [bubbleRect, setBubbleRect] = useState<DOMRect | null>(null);
   const [bubbleCentered, setBubbleCentered] = useState(false);
-  const scrollLag = useScrollLag(0.07, 0.4);
 
   useEffect(() => {
     if (!isTransitioning || !bubbleRect) return;
@@ -131,7 +129,7 @@ Fetch legislations related to the user.
     if (rect) {
       setBubbleRect(rect);
       setIsTransitioning(true);
-      setTimeout(() => navigate("/ballot"), 1400);
+      setTimeout(() => navigate("/ballot"), 2200);
     } else {
       navigate("/ballot");
     }
@@ -139,39 +137,35 @@ Fetch legislations related to the user.
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Topic bubble: fixed top-right with scroll lag and bobbing */}
+      {/* Topic bubble: fixed top-right */}
       {!isTransitioning && (
-        <div
-          className="fixed top-6 right-6 z-30 transition-transform will-change-transform"
-          style={{
-            transform: `translateY(${scrollLag}px)`,
-          }}
-        >
-          <div className="animate-bubble-bob">
-            <TopicColorBubble
-              ref={bubbleRef}
-              topicIds={issueIds}
-              hideLabel
-            />
-          </div>
+        <div className="fixed top-6 right-6 z-30">
+          <TopicColorBubble
+            ref={bubbleRef}
+            topicIds={issueIds}
+            hideLabel
+          />
         </div>
       )}
 
-      {/* Transition overlay: bubble grows and moves to center */}
-      {isTransitioning && bubbleRect && (
+      {/* Transition overlay: bubble slowly moves to center and grows (never shrinks) while page fades */}
+      {isTransitioning && bubbleRect && (() => {
+        const endSize = Math.max(96, bubbleRect.width, bubbleRect.height);
+        return (
         <div
           className="fixed inset-0 z-50 bg-background flex items-center justify-center"
           aria-hidden
         >
           <div
-            className="flex items-center justify-center transition-all duration-1000 ease-out"
+            className="flex items-center justify-center"
             style={{
               position: "fixed",
               left: bubbleCentered ? "50%" : bubbleRect.left,
               top: bubbleCentered ? "50%" : bubbleRect.top,
-              width: bubbleCentered ? 96 : bubbleRect.width,
-              height: bubbleCentered ? 96 : bubbleRect.height,
+              width: bubbleCentered ? endSize : bubbleRect.width,
+              height: bubbleCentered ? endSize : bubbleRect.height,
               transform: bubbleCentered ? "translate(-50%, -50%)" : "none",
+              transition: "left 1.6s ease-out, top 1.6s ease-out, width 1.6s ease-out, height 1.6s ease-out, transform 1.6s ease-out",
             }}
           >
             <TopicColorBubble
@@ -182,12 +176,13 @@ Fetch legislations related to the user.
             />
           </div>
         </div>
-      )}
+        );
+      })()}
 
-      {/* Page content — fades out when transitioning */}
+      {/* Page content — fades out while bubble moves to center */}
       <div
         className={cn(
-          "transition-opacity duration-700 ease-out",
+          "transition-opacity duration-[1.6s] ease-out",
           isTransitioning && "opacity-0 pointer-events-none"
         )}
       >
@@ -305,45 +300,6 @@ Fetch legislations related to the user.
               );
             })}
           </div>
-
-          <TopicColorBubble topicIds={issueIds} />
-        </section>
-
-        {/* Tell us about yourself */}
-        <section className="mb-10">
-          <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
-            Tell us about yourself
-          </h2>
-          <p className="text-muted-foreground mb-4">
-            Answering this helps us tailor what you see. 
-            Share anything that helps us personalize your guide — your job,
-            family situation, concerns, or goals. (Optional)
-          </p>
-          <div className="relative">
-            <textarea
-              value={profile.aboutYou}
-              onChange={(e) =>
-                setProfile((prev) => ({ ...prev, aboutYou: e.target.value }))
-              }
-              placeholder=" "
-              rows={4}
-              maxLength={500}
-              className="w-full px-4 py-3 rounded-lg border-2 border-border bg-card text-foreground placeholder:text-transparent focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all text-sm font-body leading-relaxed resize-none"
-            />
-            {!profile.aboutYou && (
-              <div
-                className={cn(
-                  "absolute inset-0 px-4 py-3 pointer-events-none text-sm font-body leading-relaxed text-muted-foreground/40 transition-opacity duration-300",
-                  placeholder.visible ? "opacity-100" : "opacity-0"
-                )}
-              >
-                {placeholder.text}
-              </div>
-            )}
-          </div>
-          <p className="text-xs text-muted-foreground mt-2 text-right">
-            {profile.aboutYou.length}/500
-          </p>
         </section>
 
         {/* ZIP Code */}

@@ -1,6 +1,8 @@
 import { useState, useCallback } from "react";
 import { PieChart, Pie, Cell, Sector, ResponsiveContainer } from "recharts";
 import { cn } from "@/lib/utils";
+import oconnorBudget from "../../scripts/output-oconnor-budget.json";
+import morenoBudget from "../../scripts/output-moreno-budget.json";
 
 // ---------------------------------------------------------------------------
 // Data
@@ -91,16 +93,66 @@ const BASE_SLICES: BudgetSlice[] = [
   },
 ];
 
+const CATEGORY_ID_BY_LABEL = Object.fromEntries(
+  BASE_SLICES.map((slice) => [slice.label, slice.id]),
+);
+
 // ---------------------------------------------------------------------------
 // Mayor-projected budget adjustments
 // ---------------------------------------------------------------------------
+
+interface BudgetCitation {
+  title: string;
+  url: string;
+}
+
+interface BudgetSourceCategory {
+  category: string;
+  text: string;
+  projectedChange: string;
+  citations: BudgetCitation[];
+}
+
+interface BudgetSource {
+  candidate: string;
+  categories: BudgetSourceCategory[];
+}
+
+interface BudgetAdjustment {
+  percentage: number;
+  projectedChange: string;
+  text: string;
+  citations: BudgetCitation[];
+}
 
 interface MayorBudget {
   id: string;
   name: string;
   party: "D" | "R";
   summary: string;
-  adjustments: Record<string, { percentage: number; note: string }>;
+  adjustments: Record<string, BudgetAdjustment>;
+}
+
+function parseProjectedChange(value: string): number {
+  if (!value) return 0;
+  const parsed = Number.parseFloat(value.replace("%", ""));
+  return Number.isNaN(parsed) ? 0 : parsed;
+}
+
+function buildAdjustments(source: BudgetSource) {
+  return source.categories.reduce<Record<string, BudgetAdjustment>>((acc, entry) => {
+    const id = CATEGORY_ID_BY_LABEL[entry.category];
+    if (!id) return acc;
+    const base = BASE_SLICES.find((slice) => slice.id === id)?.percentage ?? 0;
+    const delta = parseProjectedChange(entry.projectedChange);
+    acc[id] = {
+      percentage: base + delta,
+      projectedChange: entry.projectedChange,
+      text: entry.text,
+      citations: entry.citations ?? [],
+    };
+    return acc;
+  }, {});
 }
 
 const MAYORS: MayorBudget[] = [
@@ -110,17 +162,7 @@ const MAYORS: MayorBudget[] = [
     party: "D",
     summary:
       "Prioritizes social services, transit investment, and downtown revitalization while moderating public safety spending toward prevention programs.",
-    adjustments: {
-      health_welfare:      { percentage: 39.50, note: "+0.9% — Expand mental health and social services" },
-      public_safety:       { percentage: 28.80, note: "-0.8% — Shift toward violence prevention programs" },
-      general_government:  { percentage: 8.40,  note: "-0.2% — Modernize operations for efficiency" },
-      debt_service:        { percentage: 5.75,  note: "-1.3% — Restructure debt obligations" },
-      public_works:        { percentage: 5.60,  note: "+0.0% — Green infrastructure investment" },
-      transportation:      { percentage: 5.20,  note: "+0.7% — Increase Port Authority advocacy" },
-      education:           { percentage: 3.25,  note: "+0.2% — Support early childhood programs" },
-      culture_recreation:  { percentage: 2.85,  note: "+0.1% — Expand community programs" },
-      economic_development:{ percentage: 0.65,  note: "+0.4% — Downtown revitalization push" },
-    },
+    adjustments: buildAdjustments(oconnorBudget as BudgetSource),
   },
   {
     id: "moreno",
@@ -128,17 +170,7 @@ const MAYORS: MayorBudget[] = [
     party: "R",
     summary:
       "Emphasizes law enforcement expansion and fiscal discipline, cutting administrative overhead and redirecting savings toward public safety and roads.",
-    adjustments: {
-      health_welfare:      { percentage: 37.00, note: "-1.6% — Reduce program administrative overhead" },
-      public_safety:       { percentage: 32.00, note: "+2.4% — Expand police force and enforcement" },
-      general_government:  { percentage: 7.50,  note: "-1.1% — Cut bureaucracy and wasteful spending" },
-      debt_service:        { percentage: 7.00,  note: "-0.1% — Maintain fiscal discipline" },
-      public_works:        { percentage: 5.80,  note: "+0.2% — Practical infrastructure improvements" },
-      transportation:      { percentage: 4.90,  note: "+0.4% — Road and commute improvements" },
-      education:           { percentage: 2.80,  note: "-0.2% — Support school choice initiatives" },
-      culture_recreation:  { percentage: 2.50,  note: "-0.3% — Focus on essential services" },
-      economic_development:{ percentage: 0.50,  note: "+0.2% — Cut red tape to attract business" },
-    },
+    adjustments: buildAdjustments(morenoBudget as BudgetSource),
   },
 ];
 
@@ -154,21 +186,18 @@ function formatDollars(amount: number): string {
 
 function getChartData(mayor: MayorBudget | null) {
   return BASE_SLICES.map((slice) => {
-    const pct = mayor ? (mayor.adjustments[slice.id]?.percentage ?? slice.percentage) : slice.percentage;
+    const adjustment = mayor ? mayor.adjustments[slice.id] : undefined;
+    const pct = adjustment?.percentage ?? slice.percentage;
     return {
       ...slice,
       percentage: pct,
       value: pct, // recharts uses this for sizing
       amount: Math.round((pct / 100) * TOTAL_BUDGET),
-      note: mayor ? (mayor.adjustments[slice.id]?.note ?? "") : "",
+      mayorText: adjustment?.text ?? "",
+      projectedChange: adjustment?.projectedChange ?? "",
+      citations: adjustment?.citations ?? [],
     };
   });
-}
-
-function getDelta(base: number, current: number): string {
-  const diff = current - base;
-  if (Math.abs(diff) < 0.005) return "";
-  return diff > 0 ? `+${diff.toFixed(1)}%` : `${diff.toFixed(1)}%`;
 }
 
 // ---------------------------------------------------------------------------
@@ -402,27 +431,41 @@ export default function BudgetChart() {
                   <span className="text-sm text-muted-foreground">
                     {formatDollars(activeSlice.amount)}
                   </span>
-                  {mayor && (() => {
-                    const base = BASE_SLICES.find((s) => s.id === activeSlice.id);
-                    const delta = base ? getDelta(base.percentage, activeSlice.percentage) : "";
-                    if (!delta) return null;
-                    const isUp = delta.startsWith("+");
+                  {mayor && activeSlice.projectedChange && (() => {
+                    const isUp = activeSlice.projectedChange.startsWith("+");
+                    const isDown = activeSlice.projectedChange.startsWith("-");
                     return (
-                      <span className={cn("text-sm font-semibold", isUp ? "text-green-600" : "text-red-500")}>
-                        {delta}
+                      <span
+                        className={cn(
+                          "text-sm font-semibold",
+                          isUp ? "text-green-600" : isDown ? "text-red-500" : "text-muted-foreground",
+                        )}
+                      >
+                        {activeSlice.projectedChange}
                       </span>
                     );
                   })()}
                 </div>
 
                 <p className="text-xs text-foreground/80 leading-relaxed">
-                  {activeSlice.description}
+                  {mayor && activeSlice.mayorText ? activeSlice.mayorText : activeSlice.description}
                 </p>
 
-                {mayor && activeSlice.note && (
-                  <p className="text-xs text-accent font-medium mt-2 leading-relaxed">
-                    {mayor.name}: {activeSlice.note}
-                  </p>
+                {mayor && activeSlice.citations.length > 0 && (
+                  <ul className="mt-2 space-y-1.5">
+                    {activeSlice.citations.map((citation) => (
+                      <li key={citation.url}>
+                        <a
+                          href={citation.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-xs text-accent font-medium hover:underline"
+                        >
+                          {citation.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </div>
             ) : (

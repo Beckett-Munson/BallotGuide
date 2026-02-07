@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { UserProfile } from "@/types/ballot";
+import { useCyclingPlaceholder } from "@/hooks/use-cycling-placeholder";
 
 const TOPICS = [
   { id: "healthcare", label: "Healthcare", icon: Heart },
@@ -28,6 +29,7 @@ const TOPICS = [
 
 export default function Onboarding() {
   const navigate = useNavigate();
+  const placeholder = useCyclingPlaceholder(5000);
   const [profile, setProfile] = useState<UserProfile>({
     topics: [],
     aboutYou: "",
@@ -130,16 +132,28 @@ export default function Onboarding() {
             Share anything that helps us personalize your guide — your job,
             family situation, concerns, or goals. (Optional)
           </p>
-          <textarea
-            value={profile.aboutYou}
-            onChange={(e) =>
-              setProfile((prev) => ({ ...prev, aboutYou: e.target.value }))
-            }
-            placeholder="e.g. I'm a retired teacher with two grandchildren. I'm concerned about rising property taxes and want to understand the healthcare options available to seniors."
-            rows={4}
-            maxLength={500}
-            className="w-full px-4 py-3 rounded-lg border-2 border-border bg-card text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all text-sm font-body leading-relaxed resize-none"
-          />
+          <div className="relative">
+            <textarea
+              value={profile.aboutYou}
+              onChange={(e) =>
+                setProfile((prev) => ({ ...prev, aboutYou: e.target.value }))
+              }
+              placeholder=" "
+              rows={4}
+              maxLength={500}
+              className="w-full px-4 py-3 rounded-lg border-2 border-border bg-card text-foreground placeholder:text-transparent focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all text-sm font-body leading-relaxed resize-none"
+            />
+            {!profile.aboutYou && (
+              <div
+                className={cn(
+                  "absolute inset-0 px-4 py-3 pointer-events-none text-sm font-body leading-relaxed text-muted-foreground/40 transition-opacity duration-300",
+                  placeholder.visible ? "opacity-100" : "opacity-0"
+                )}
+              >
+                e.g. {placeholder.text}
+              </div>
+            )}
+          </div>
           <p className="text-xs text-muted-foreground mt-2 text-right">
             {profile.aboutYou.length}/500
           </p>

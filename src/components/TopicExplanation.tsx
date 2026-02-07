@@ -28,9 +28,6 @@ export default function TopicExplanation({ topic }: TopicExplanationProps) {
         aria-expanded={isExpanded}
       >
         <div className="flex items-center gap-3">
-          <span className="text-2xl" role="img" aria-label={topic.topic}>
-            {icon}
-          </span>
           <div>
             <h3 className="text-lg font-display font-semibold text-foreground">
               {topic.title}

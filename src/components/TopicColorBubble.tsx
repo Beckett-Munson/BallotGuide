@@ -64,6 +64,15 @@ const TopicColorBubble = forwardRef<HTMLDivElement, TopicColorBubbleProps>(
         ? "w-24 h-24"
         : "w-16 h-16";
 
+  // Sync spinning gradient across instances by using a shared start time.
+  // A negative animation-delay fast-forwards the animation to the correct position.
+  const spinDelay = useMemo(() => {
+    const t = Number(sessionStorage.getItem("bubbleAnimStart") || "0");
+    if (!t) return "0s";
+    return `-${(Date.now() - t) / 1000}s`;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className={hideLabel ? className : `flex items-center justify-center mt-8 ${className}`.trim()}>
       <div
@@ -90,6 +99,7 @@ const TopicColorBubble = forwardRef<HTMLDivElement, TopicColorBubbleProps>(
               style={{
                 background: conicGradient,
                 filter: "blur(6px)",
+                animationDelay: spinDelay,
               }}
             />
 
@@ -101,6 +111,7 @@ const TopicColorBubble = forwardRef<HTMLDivElement, TopicColorBubbleProps>(
                 style={{
                   background: overlay.background,
                   animation: `spin ${overlay.animationDuration} linear infinite reverse, pulse-opacity ${overlay.animationDuration} ease-in-out infinite`,
+                  animationDelay: `${spinDelay}, ${spinDelay}`,
                   filter: "blur(4px)",
                 }}
               />

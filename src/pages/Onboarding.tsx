@@ -133,6 +133,8 @@ Fetch legislations related to the user.
     if (rect) {
       setBubbleRect(rect);
       setIsTransitioning(true);
+      // Store when the spin animation started so the Ballot loading bubble can sync
+      sessionStorage.setItem("bubbleAnimStart", String(Date.now()));
       setTimeout(() => navigate("/ballot"), 2200);
     } else {
       navigate("/ballot");

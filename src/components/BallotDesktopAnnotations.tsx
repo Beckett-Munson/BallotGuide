@@ -9,6 +9,7 @@ interface BallotDesktopAnnotationsProps {
   onHoverIndex: (index: number | null) => void;
   /** Measured vertical center (px) of each ballot item relative to the container. */
   itemPositions?: number[];
+  onChatOpen?: (item: BallotItem) => void;
 }
 
 export default function BallotDesktopAnnotations({
@@ -16,6 +17,7 @@ export default function BallotDesktopAnnotations({
   hoveredIndex,
   onHoverIndex,
   itemPositions,
+  onChatOpen,
 }: BallotDesktopAnnotationsProps) {
   return (
     <>
@@ -73,7 +75,7 @@ export default function BallotDesktopAnnotations({
                 style={{ backgroundColor: topicBorderColor(item.relatedTopics) }}
               />
             </div>
-            <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} />
+            <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} onChatOpen={onChatOpen} />
           </div>
         );
       })}

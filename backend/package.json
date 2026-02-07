@@ -9,7 +9,8 @@
     "start": "node dist/index.js",
     "test": "jest",
     "ingest": "tsx src/utils/ingest.ts ingest",
-    "test:api": "node test-api.js"
+    "test:api": "node test-api.js",
+    "test:chat": "tsx src/test-chat.ts"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^7.0.0",

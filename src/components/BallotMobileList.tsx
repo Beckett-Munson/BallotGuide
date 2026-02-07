@@ -5,12 +5,14 @@ interface BallotMobileListProps {
   items: BallotItem[];
   hoveredIndex: number | null;
   onToggleIndex: (index: number) => void;
+  onChatOpen?: (item: BallotItem) => void;
 }
 
 export default function BallotMobileList({
   items,
   hoveredIndex,
   onToggleIndex,
+  onChatOpen,
 }: BallotMobileListProps) {
   return (
     <div className="space-y-3">
@@ -48,7 +50,7 @@ export default function BallotMobileList({
           </button>
           {hoveredIndex === index && (
             <div className="border border-t-0 border-border rounded-b-lg overflow-hidden animate-fade-in">
-              <BallotAnnotation item={item} isActive={true} />
+              <BallotAnnotation item={item} isActive={true} onChatOpen={onChatOpen} />
             </div>
           )}
         </div>

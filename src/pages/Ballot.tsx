@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Vote, ArrowLeft, BookOpen } from "lucide-react";
-import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
+import type { UserProfile, PersonalizedBallot, BallotItem } from "@/types/ballot";
 import { generatePersonalizedBallot } from "@/data/mockBallotData";
 import BallotPaper from "@/components/BallotPaper";
 import TopicExplanation from "@/components/TopicExplanation";
@@ -10,6 +10,8 @@ import BallotDesktopAnnotations from "@/components/BallotDesktopAnnotations";
 import BallotMobileList from "@/components/BallotMobileList";
 import RaceDesktopLayout from "@/components/RaceDesktopLayout";
 import RaceMobileList from "@/components/RaceMobileList";
+import ChatPanel from "@/components/ChatPanel";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 
@@ -23,6 +25,13 @@ export default function Ballot() {
   const [animDirection, setAnimDirection] = useState<"up" | "down">("up");
   const ballotContainerRef = useRef<HTMLDivElement>(null);
   const [itemPositions, setItemPositions] = useState<number[]>([]);
+
+  // Chat sheet state
+  const [chatItem, setChatItem] = useState<BallotItem | null>(null);
+
+  const handleChatOpen = useCallback((item: BallotItem) => {
+    setChatItem(item);
+  }, []);
 
   /** Measure the vertical center of each ballot item relative to the container. */
   const measureItemPositions = useCallback(() => {
@@ -209,6 +218,7 @@ export default function Ballot() {
                 hoveredIndex={hoveredIndex}
                 onHoverIndex={setHoveredIndex}
                 itemPositions={itemPositions}
+                onChatOpen={handleChatOpen}
               />
             )}
           </div>
@@ -239,6 +249,7 @@ export default function Ballot() {
                 items={currentItems}
                 hoveredIndex={hoveredIndex}
                 onToggleIndex={(index) => setHoveredIndex(hoveredIndex === index ? null : index)}
+                onChatOpen={handleChatOpen}
               />
             )}
           </div>
@@ -276,6 +287,26 @@ export default function Ballot() {
           </p>
         </footer>
       </main>
+
+      {/* Chat sheet with RippleViz */}
+      <Sheet open={!!chatItem} onOpenChange={(open) => { if (!open) setChatItem(null); }}>
+        <SheetContent side="right" className="w-full sm:max-w-md p-0 flex flex-col">
+          <SheetHeader className="px-4 pt-4 pb-2 border-b border-border shrink-0">
+            <SheetTitle className="text-base font-display leading-snug">
+              {chatItem?.title ?? "Chat"}
+            </SheetTitle>
+          </SheetHeader>
+          {chatItem && (
+            <ChatPanel
+              policyId={chatItem.id}
+              policyTitle={chatItem.title}
+              context={`${chatItem.officialText}\n\n${chatItem.annotation}`}
+              initialPrompt={chatItem.expand.chatbotPrompt}
+              selectedIssues={userTopics}
+            />
+          )}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

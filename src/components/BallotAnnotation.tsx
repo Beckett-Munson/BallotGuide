@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink, MessageCircle } from "lucide-react";
 import type { BallotItem as BallotItemType } from "@/types/ballot";
 import { cn } from "@/lib/utils";
 import { topicBackground, topicBorderColor, TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
@@ -7,9 +7,10 @@ import { topicBackground, topicBorderColor, TOPIC_COLORS, hsl, hslAlpha } from "
 interface BallotAnnotationProps {
   item: BallotItemType;
   isActive: boolean;
+  onChatOpen?: (item: BallotItemType) => void;
 }
 
-export default function BallotAnnotation({ item, isActive }: BallotAnnotationProps) {
+export default function BallotAnnotation({ item, isActive, onChatOpen }: BallotAnnotationProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeTopicIdx, setActiveTopicIdx] = useState(0);
 
@@ -143,6 +144,18 @@ export default function BallotAnnotation({ item, isActive }: BallotAnnotationPro
             </ul>
           </div>
         </>
+      )}
+
+      {/* Chat launcher */}
+      {onChatOpen && (
+        <button
+          onClick={() => onChatOpen(item)}
+          className="mt-3 flex items-center gap-1.5 text-xs font-semibold transition-colors hover:opacity-80"
+          style={{ color: activeBorderColor }}
+        >
+          <MessageCircle className="w-3.5 h-3.5" />
+          <span>Ask about this</span>
+        </button>
       )}
     </div>
   );

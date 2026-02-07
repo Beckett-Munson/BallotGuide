@@ -1,7 +1,7 @@
 import { Pinecone } from '@pinecone-database/pinecone';
 import { Policy } from '../types';
 
-/** Matches the Pinecone schema: text, title, type, url, source, tags, summary */
+/** Matches the Pinecone schema: text, title, type, url, source, tags, summary, policyId */
 export interface PineconeVectorMetadata {
   text?: string;
   title?: string;
@@ -11,6 +11,9 @@ export interface PineconeVectorMetadata {
   source?: string;
   tags?: string[];
   summary?: string;
+  policyId?: string;
+  chunkIndex?: number;
+  jurisdiction?: string;
 }
 
 export class PineconeService {

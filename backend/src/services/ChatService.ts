@@ -1,131 +1,154 @@
-import { Dedalus } from 'dedalus-labs';
-import { ChatMessage, UserDemographics, Annotation, RetrievalContext } from '../types';
-import { policyRetriever } from './GraphRetriever';
+import { Dedalus } from "dedalus-labs";
+import { getPineconeService } from "./PineconeService";
 
-interface ChatContext {
-  policyId: string;
-  annotation?: Annotation;
-  demographics?: UserDemographics;
-}
+// Minimal chat turn type for in-memory state
+export type ChatTurn = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+// What we return to the API layer
+export type ChatResult = {
+  answer: string;
+  citations: Array<{
+    title: string;
+    snippet: string;
+    score: number;
+    chunkId?: string;
+  }>;
+};
 
 export class ChatService {
   private dedalus: Dedalus;
   private model: string;
-  private conversationHistory: Map<string, ChatMessage[]> = new Map();
 
-  constructor(apiKey: string, model: string = 'anthropic/claude-sonnet-4-5') {
+  // In-memory store: sessionId -> chat turns
+  // Hackathon-friendly. Swap to Redis for multi-instance persistence.
+  private historyBySession = new Map<string, ChatTurn[]>();
+
+  // Tuning knobs
+  private readonly maxTurnsToKeep = 10;
+  private readonly topK = 6;
+  private readonly maxContextChars = 9000; // helps avoid overly long prompt
+
+  constructor(apiKey: string, model = "anthropic/claude-sonnet-4-5") {
     this.dedalus = new Dedalus({ apiKey });
     this.model = model;
   }
 
-  async chat(
-    sessionId: string,
-    userMessage: string,
-    context: ChatContext
-  ): Promise<{ message: string; context: string[] }> {
-    const history = this.conversationHistory.get(sessionId) || [];
-
-    const retrievalContext = await policyRetriever.retrieveContext(
-      context.policyId,
-      context.demographics
-    );
-
-    const systemPrompt = this.buildSystemPrompt(context, retrievalContext);
-
-    history.push({ role: 'user', content: userMessage });
-
-    try {
-      const response = await this.dedalus.chat.completions.create({
-        model: this.model,
-        messages: [
-          { role: 'system', content: systemPrompt },
-          ...history,
-        ],
-        temperature: 0.5,
-        stream: false,
-      });
-
-      const assistantMessage = response.choices[0].message.content;
-
-      history.push({ role: 'assistant', content: assistantMessage });
-
-      if (history.length > 20) {
-        history.splice(0, history.length - 20);
-      }
-      this.conversationHistory.set(sessionId, history);
-
-      const contextSources = this.extractContextSources(retrievalContext);
-
-      return {
-        message: assistantMessage,
-        context: contextSources,
-      };
-    } catch (error) {
-      console.error('Chat failed:', error);
-      throw new Error('Failed to generate chat response');
+  /**
+   * Primary entrypoint:
+   * - Retrieves relevant excerpts from Pinecone for the question (scoped to policyId)
+   * - Sends excerpts + short history + question to LLM
+   * - Stores the turn in memory
+   */
+  async chat(sessionId: string, policyId: string, userMessage: string): Promise<ChatResult> {
+    const pinecone = getPineconeService();
+    if (!pinecone) {
+      throw new Error("Pinecone is not initialized (set PINECONE_API_KEY and PINECONE_INDEX_NAME)");
     }
+
+    // 1) Retrieve relevant excerpts (RAG)
+    const matches = await pinecone.query(userMessage, this.topK, {
+      policyId: { $eq: policyId },
+    });
+
+    const citations = (matches || []).map((m) => ({
+      title: m.metadata?.title ?? m.metadata?.policyId ?? m.id,
+      snippet: (m.text || "").slice(0, 350),
+      score: m.score ?? 0,
+      chunkId: m.id,
+    }));
+
+    // Build context block for the model
+    let contextBlock = (matches || [])
+      .map((m, i) => {
+        const title = m.metadata?.title ?? m.metadata?.policyId ?? m.id;
+        const score = (m.score ?? 0).toFixed(2);
+        const text = (m.text || "").trim();
+        return `Excerpt ${i + 1} (score ${score}) — ${title}\n${text}`;
+      })
+      .join("\n\n");
+
+    // Truncate context if too long
+    if (contextBlock.length > this.maxContextChars) {
+      contextBlock = contextBlock.slice(0, this.maxContextChars) + "\n\n[Context truncated]";
+    }
+
+    // 2) Load history for this session and prune
+    const history = this.historyBySession.get(sessionId) ?? [];
+    const prunedHistory = this.pruneHistory(history);
+
+    // 3) Compose messages for Dedalus
+    const messages: Array<{ role: "system" | "user" | "assistant"; content: string }> = [
+      { role: "system", content: this.getSystemPrompt() },
+
+      // Evidence goes before the conversation so the model always sees it
+      {
+        role: "user",
+        content:
+          `You are answering questions about policyId="${policyId}".\n` +
+          `Use ONLY the excerpts below as evidence.\n\n` +
+          `EVIDENCE:\n${contextBlock}`,
+      },
+
+      // Prior conversation
+      ...prunedHistory.map((t) => ({ role: t.role, content: t.content })),
+
+      // New user question
+      { role: "user", content: userMessage },
+    ];
+
+    // 4) Call the model
+    const resp = await this.dedalus.chat.completions.create({
+      model: this.model,
+      messages,
+      temperature: 0.2,
+    });
+
+    const answer = (resp.choices?.[0]?.message?.content ?? "").trim();
+
+    // 5) Update memory
+    const newHistory: ChatTurn[] = [
+      ...prunedHistory,
+      { role: "user", content: userMessage },
+      { role: "assistant", content: answer || "The ballot text provided does not specify." },
+    ];
+    this.historyBySession.set(sessionId, this.pruneHistory(newHistory));
+
+    return {
+      answer: answer || "The ballot text provided does not specify.",
+      citations,
+    };
   }
 
-  private buildSystemPrompt(context: ChatContext, retrievalContext: RetrievalContext): string {
-    let prompt = `You are a helpful assistant answering questions about a ballot measure/policy.
-
-**Policy Information:**
-${retrievalContext.policyText}
-`;
-
-    if (retrievalContext.semanticMatches.length > 0) {
-      prompt += `\n**Related Content from Other Policies:**\n`;
-      prompt += retrievalContext.semanticMatches
-        .map(m => `- [${m.metadata?.title || m.id}]: ${m.text.substring(0, 200)}...`)
-        .join('\n');
-      prompt += '\n';
-    }
-
-    if (context.annotation) {
-      prompt += `\n**Previous Annotation:**
-Tags: ${context.annotation.tags.join(', ')}
-How this affects user: ${context.annotation.howThisAffectsUser}
-`;
-    }
-
-    if (context.demographics) {
-      prompt += `\n**User Demographics:**
-Age: ${context.demographics.age || 'Not provided'}
-Occupation: ${context.demographics.occupation || 'Not provided'}
-Location: ${context.demographics.zipCode || 'Not provided'}
-`;
-    }
-
-    prompt += `\n**Guidelines:**
-- Answer questions factually and objectively
-- Reference the policy text and related content when relevant
-- Personalize responses to the user's demographics when appropriate
-- If you don't know something, say so - don't make up information
-- Keep responses concise but informative
-- Maintain a helpful, non-partisan tone`;
-
-    return prompt;
+  /** Clears a session manually (optional utility) */
+  clearSession(sessionId: string) {
+    this.historyBySession.delete(sessionId);
   }
 
-  private extractContextSources(context: RetrievalContext): string[] {
-    const sources: string[] = ['Policy text'];
-
-    if (context.semanticMatches.length > 0) {
-      const titles = context.semanticMatches.map(m => m.metadata?.title || m.id);
-      sources.push(...new Set(titles));
-    }
-
-    return sources;
+  /** Optional: get raw history for debugging */
+  getSessionHistory(sessionId: string): ChatTurn[] {
+    return this.historyBySession.get(sessionId) ?? [];
   }
 
-  clearHistory(sessionId: string): void {
-    this.conversationHistory.delete(sessionId);
+  private pruneHistory(turns: ChatTurn[]): ChatTurn[] {
+    if (turns.length <= this.maxTurnsToKeep) return turns;
+    return turns.slice(turns.length - this.maxTurnsToKeep);
   }
 
-  getHistory(sessionId: string): ChatMessage[] {
-    return this.conversationHistory.get(sessionId) || [];
+  private getSystemPrompt(): string {
+    return `
+You are a helpful, neutral assistant answering questions about a ballot measure or policy.
+
+Rules:
+- Use ONLY the provided excerpts as your source of truth.
+- If the excerpts do not answer the question, reply: "The ballot text provided does not specify."
+- Be non-partisan and factual.
+- Do not introduce outside facts, laws, numbers, or jurisdictions not present in the excerpts.
+- Keep answers concise (2-6 sentences), unless the user asks for more detail.
+
+If helpful, you may quote short phrases from the excerpts, but do not fabricate quotes.
+`.trim();
   }
 }
-
-export const chatService = (apiKey: string, model?: string) =>
-  new ChatService(apiKey, model);

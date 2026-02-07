@@ -53,6 +53,7 @@ export default function Ballot() {
   };
 
   if (!ballot || !profile) return null;
+  const userTopics = Object.keys(profile.issues);
 
   const currentItems = activeSection === "questions" ? ballot.ballotItems : ballot.raceItems;
   const sectionTitle = activeSection === "questions"
@@ -117,7 +118,7 @@ export default function Ballot() {
             {ballot.personalizedSummary}
           </p>
           <div className="flex flex-wrap justify-center gap-2 mt-3">
-            {profile.topics.map((t) => {
+            {userTopics.map((t) => {
               const color = TOPIC_COLORS[t];
               return (
                 <span
@@ -168,7 +169,7 @@ export default function Ballot() {
                 items={currentItems}
                 hoveredIndex={hoveredIndex}
                 onHoverIndex={setHoveredIndex}
-                userTopics={profile.topics}
+                userTopics={userTopics}
               />
             ) : (
               <BallotDesktopAnnotations
@@ -198,7 +199,7 @@ export default function Ballot() {
                 items={currentItems}
                 hoveredIndex={hoveredIndex}
                 onToggleIndex={(index) => setHoveredIndex(hoveredIndex === index ? null : index)}
-                userTopics={profile.topics}
+                userTopics={userTopics}
               />
             ) : (
               <BallotMobileList

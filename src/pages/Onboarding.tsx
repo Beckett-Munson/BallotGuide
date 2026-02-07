@@ -32,7 +32,12 @@ const TOPICS = [
 
 export default function Onboarding() {
 
-  
+  type KeywordEntry = {
+    id: string;
+    keywords: string[];
+  };
+
+  const keywordData = KeywordData as KeywordEntry[];
   const navigate = useNavigate();
   const placeholder = useCyclingPlaceholder(5000);
   const [profile, setProfile] = useState<UserProfile>({
@@ -41,21 +46,21 @@ export default function Onboarding() {
     aboutYou: "",
     zipCode: "",
   });
+  const issueIds = Object.keys(profile.issues);
+  const toggleTopic = (id: string) => {
+    setProfile((prev) => {
+      const nextIssues = { ...prev.issues };
 
-const toggleTopic = (id: string) => {
-  setProfile((prev) => {
-    const nextIssues = { ...prev.issues };
+      if (nextIssues[id]) {
+        delete nextIssues[id];
+      } else {
+        const found = KeywordData.find((x) => x.id === id);
+        nextIssues[id] = found?.keywords ?? [];
+      }
 
-    if (nextIssues[id]) {
-      delete nextIssues[id];
-    } else {
-      const found = (KeywordData as any[]).find((x) => x.id === id);
-      nextIssues[id] = found?.keywords ?? [];
-    }
-
-    return { ...prev, issues: nextIssues };
-  });
-};
+      return { ...prev, issues: nextIssues };
+    });
+  };
 
 const canSubmit =
   Object.keys(profile.issues).length > 0 && profile.zipCode.length === 5;
@@ -191,25 +196,27 @@ Fetch legislations related to the user.
             })}
           </div>
 
+          
+
           {/* Color-blending bubble */}
           <div className="flex items-center justify-center mt-8">
             <div
               className="relative w-16 h-16 rounded-full border-2 transition-all duration-700 ease-out overflow-hidden"
               style={{
-                borderColor: profile.topics.length > 0
-                  ? topicBorderColor(profile.topics)
+                borderColor: issueIds.length > 0
+                  ? topicBorderColor(issueIds)
                   : 'hsl(var(--border))',
-                boxShadow: profile.topics.length > 0
+                boxShadow: issueIds.length > 0
                   ? `0 0 20px 2px ${hslAlpha(
-                      TOPIC_COLORS[profile.topics[0]] ?? { h: 220, s: 15, l: 35 },
+                      TOPIC_COLORS[issueIds[0]] ?? { h: 220, s: 15, l: 35 },
                       0.25
                     )}`
                   : 'none',
               }}
             >
               {/* Fluid blob fill */}
-              {profile.topics.length > 0 && (() => {
-                const colors = profile.topics
+              {issueIds.length > 0 && (() => {
+                const colors = issueIds
                   .map((id) => TOPIC_COLORS[id])
                   .filter(Boolean);
                 // Each color gets its own drifting blob with a unique starting position
@@ -258,9 +265,9 @@ Fetch legislations related to the user.
               })()}
             </div>
             <span className="ml-3 text-sm text-muted-foreground">
-              {profile.topics.length === 0
+              {issueIds.length === 0
                 ? "Select topics to see your blend"
-                : `${profile.topics.length} topic${profile.topics.length > 1 ? "s" : ""} selected`}
+                : `${issueIds.length} topic${issueIds.length > 1 ? "s" : ""} selected`}
             </span>
           </div>
         </section>

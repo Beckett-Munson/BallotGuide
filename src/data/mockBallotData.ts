@@ -117,6 +117,186 @@ const ALL_BALLOT_ITEMS = [
   },
 ];
 
+const ALL_RACE_ITEMS = [
+  {
+    id: "race-mayor",
+    title: "Mayor of Pittsburgh",
+    category: "office",
+    officialText:
+      "Vote for ONE candidate for Mayor of the City of Pittsburgh. The Mayor serves a four-year term and is the chief executive officer of the city, responsible for enforcing city ordinances and managing city operations.",
+    annotations: {
+      default:
+        "The Mayor of Pittsburgh is the city's chief executive, overseeing departments including Public Safety, Public Works, and City Planning. This race determines who will lead the city for the next four years.",
+      housing:
+        "The Mayor directly influences housing policy through zoning decisions, affordable housing initiatives, and oversight of the Urban Redevelopment Authority. This race will shape Pittsburgh's approach to development and affordability.",
+      jobs:
+        "The Mayor sets economic development priorities, manages relationships with major employers, and oversees workforce development programs. This election will determine the city's job growth strategy.",
+      public_safety:
+        "The Mayor oversees the Bureau of Police, Bureau of Fire, and EMS. This race directly affects public safety staffing, training, community policing strategies, and emergency response across Pittsburgh.",
+      environment:
+        "The Mayor shapes Pittsburgh's environmental policy, including climate action plans, green infrastructure investments, and sustainability initiatives across city operations.",
+      taxes:
+        "The Mayor proposes the city's annual budget, influencing tax rates, fee structures, and how revenue is allocated across departments and services.",
+      transit:
+        "While Port Authority operates independently, the Mayor works with transit agencies on route planning, bus rapid transit projects, and pedestrian/cycling infrastructure investments.",
+      government:
+        "This is the most significant local government race. The Mayor appoints department heads, proposes legislation, and sets the overall direction of city government for four years.",
+    },
+    expand: {
+      newsSummary:
+        "The 2025 Pittsburgh mayoral race features candidates debating the city's direction on development, public safety, and affordability. Key issues include the future of major development projects, police staffing levels, and addressing the city's aging infrastructure.",
+      citations: [
+        {
+          title: "2025 Pittsburgh Municipal Elections",
+          url: "https://www.alleghenycounty.us/elections",
+          source: "Allegheny County Elections Division",
+        },
+        {
+          title: "Pittsburgh City Government Structure",
+          url: "https://pittsburghpa.gov/mayor/about",
+          source: "City of Pittsburgh",
+        },
+      ],
+    },
+  },
+  {
+    id: "race-controller",
+    title: "City Controller",
+    category: "office",
+    officialText:
+      "Vote for ONE candidate for Controller of the City of Pittsburgh. The Controller serves a four-year term and is the city's chief fiscal officer, responsible for auditing city finances and ensuring taxpayer dollars are spent properly.",
+    annotations: {
+      default:
+        "The City Controller is Pittsburgh's fiscal watchdog, independently auditing city departments and ensuring tax dollars are spent properly. The Controller can investigate waste, fraud, and mismanagement.",
+      taxes:
+        "The Controller directly protects your tax dollars by auditing how the city spends its budget. Strong Controller oversight can identify waste and save taxpayers money through performance audits of city departments.",
+      government:
+        "The Controller is a key check on government power, operating independently to audit the Mayor's administration and city departments. This race determines who holds the city financially accountable.",
+      jobs:
+        "The Controller audits economic development spending and tax incentive programs, ensuring that public investments in job creation and business development deliver promised results.",
+    },
+    expand: {
+      newsSummary:
+        "The Controller's office has been increasingly active in performance audits of city departments, examining everything from police overtime spending to the efficiency of permit processing. Candidates are debating how aggressively the office should pursue audits and investigations.",
+      citations: [
+        {
+          title: "Office of the City Controller",
+          url: "https://pittsburghpa.gov/controller/about",
+          source: "City of Pittsburgh",
+        },
+        {
+          title: "2025 Pittsburgh Municipal Elections",
+          url: "https://www.alleghenycounty.us/elections",
+          source: "Allegheny County Elections Division",
+        },
+      ],
+    },
+  },
+  {
+    id: "race-council-district",
+    title: "City Council — Your District",
+    category: "office",
+    officialText:
+      "Vote for ONE candidate for City Council in your district. Council members serve four-year terms and are responsible for passing city legislation, approving the budget, and representing constituent interests.",
+    annotations: {
+      default:
+        "Your City Council member is your most direct representative in city government. Council members vote on ordinances, approve the city budget, and can introduce legislation on issues affecting your neighborhood.",
+      housing:
+        "Your Council member votes on zoning changes, development approvals, and affordable housing requirements in your district. They are often the first point of contact when development projects affect your neighborhood.",
+      public_safety:
+        "Council members influence public safety through budget allocation for police and fire departments, and can advocate for neighborhood-specific safety concerns like traffic calming and lighting improvements.",
+      environment:
+        "Council members vote on environmental regulations, green space preservation, and development standards. They can introduce legislation on issues like single-use plastics, tree protection, and stormwater management in your district.",
+      transit:
+        "Your Council member advocates for transit improvements, bike lanes, and pedestrian safety in your district. They vote on capital improvements to roads and infrastructure.",
+    },
+    expand: {
+      newsSummary:
+        "City Council races are particularly competitive this cycle, with debates centering on development policy, neighborhood investment equity, and the balance between growth and preservation of neighborhood character. Several districts have open seats, attracting multiple candidates.",
+      citations: [
+        {
+          title: "Pittsburgh City Council",
+          url: "https://pittsburghpa.gov/council/about",
+          source: "City of Pittsburgh",
+        },
+        {
+          title: "2025 Pittsburgh Municipal Elections",
+          url: "https://www.alleghenycounty.us/elections",
+          source: "Allegheny County Elections Division",
+        },
+      ],
+    },
+  },
+  {
+    id: "race-school-board",
+    title: "Pittsburgh Public Schools — School Board",
+    category: "office",
+    officialText:
+      "Vote for candidates for the Board of Directors of the Pittsburgh School District. Board members serve four-year terms and oversee the district's budget, curriculum standards, and administrative leadership.",
+    annotations: {
+      default:
+        "School Board members oversee Pittsburgh Public Schools, setting policy on curriculum, budgets, and district leadership. They directly shape the education experience for over 20,000 students across the city.",
+      education:
+        "This is the most impactful education race on your ballot. School Board members decide curriculum standards, school closures or openings, teacher contracts, and how to allocate the district's hundreds of millions in annual spending.",
+      taxes:
+        "Pittsburgh School District is one of the largest property tax levies in the city. School Board members set the district's budget and tax rate, directly affecting your property tax bill.",
+      family:
+        "School Board decisions directly affect families — from school assignment policies and after-school programs to special education services and school safety measures.",
+      civil_rights:
+        "The School Board addresses equity in education, including resource allocation across neighborhoods, disciplinary policies, and inclusive curriculum standards that reflect Pittsburgh's diverse communities.",
+    },
+    expand: {
+      newsSummary:
+        "The Pittsburgh School Board races come at a critical time for the district, which is navigating post-pandemic enrollment changes, facility consolidation discussions, and debates over curriculum standards. Candidates are divided on the pace of change and how to address achievement gaps.",
+      citations: [
+        {
+          title: "Pittsburgh Public Schools Board of Directors",
+          url: "https://www.pps.k12.pa.us/domain/30",
+          source: "Pittsburgh Public Schools",
+        },
+        {
+          title: "2025 Pittsburgh Municipal Elections",
+          url: "https://www.alleghenycounty.us/elections",
+          source: "Allegheny County Elections Division",
+        },
+      ],
+    },
+  },
+  {
+    id: "race-judge",
+    title: "Court of Common Pleas Judge",
+    category: "office",
+    officialText:
+      "Vote for candidates for Judge of the Court of Common Pleas of Allegheny County. Judges serve ten-year terms and preside over civil and criminal cases in the county's trial court.",
+    annotations: {
+      default:
+        "Court of Common Pleas judges handle criminal trials, civil disputes, family court matters, and more. These are ten-year terms, making judicial races among the most consequential on your ballot.",
+      civil_rights:
+        "Judges make daily decisions affecting civil rights — from criminal sentencing and bail decisions to civil rights cases and protection-from-abuse orders. Judicial philosophy directly impacts how justice is administered in Allegheny County.",
+      public_safety:
+        "Judges set bail, determine sentences, and oversee criminal cases. Their approach to justice — whether focused on rehabilitation or strict sentencing — directly affects public safety and the criminal justice system.",
+      government:
+        "Judicial elections are a key but often overlooked part of government. Judges serve 10-year terms and operate independently from the legislative and executive branches, providing a check on government power.",
+    },
+    expand: {
+      newsSummary:
+        "Allegheny County judicial races have drawn attention as candidates debate approaches to criminal justice reform, bail reform, and court efficiency. The county's Court of Common Pleas handles thousands of cases annually, and new judges will shape the local justice system for a decade.",
+      citations: [
+        {
+          title: "Allegheny County Court of Common Pleas",
+          url: "https://www.alleghenycourts.us",
+          source: "Allegheny County Courts",
+        },
+        {
+          title: "2025 Pennsylvania Judicial Elections",
+          url: "https://www.pacourts.us/judicial-elections",
+          source: "Pennsylvania Courts",
+        },
+      ],
+    },
+  },
+];
+
 const TOPIC_EXPLANATIONS: Record<string, {
   topic: string;
   title: string;
@@ -271,13 +451,13 @@ const TOPIC_EXPLANATIONS: Record<string, {
 };
 
 function getAnnotation(
-  item: (typeof ALL_BALLOT_ITEMS)[0],
+  item: { annotations: Record<string, string> },
   topics: string[]
 ): string {
   for (const topic of topics) {
     const key = topic.toLowerCase().replace(/\s+/g, "_");
     if (key in item.annotations) {
-      return item.annotations[key as keyof typeof item.annotations] || item.annotations.default;
+      return item.annotations[key] || item.annotations.default;
     }
   }
   return item.annotations.default;
@@ -294,26 +474,30 @@ export function generatePersonalizedBallot(
 
   const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot questions facing City of Pittsburgh voters on May 20, 2025. Each item includes a personalized explanation of how it may affect you, along with trusted sources.`;
 
-  const ballotItems = ALL_BALLOT_ITEMS.map((item) => {
-    const relatedTopics = profile.topics.filter((topic) => {
-      const key = topic.toLowerCase().replace(/\s+/g, "_");
-      return key === item.category || key in item.annotations;
+  const mapItems = (items: { id: string; title: string; category: string; officialText: string; annotations: Record<string, string>; expand: { newsSummary: string; citations: { title: string; url: string; source: string }[] } }[]) =>
+    items.map((item) => {
+      const relatedTopics = profile.topics.filter((topic) => {
+        const key = topic.toLowerCase().replace(/\s+/g, "_");
+        return key === item.category || key in item.annotations;
+      });
+
+      return {
+        id: item.id,
+        title: item.title,
+        officialText: item.officialText,
+        annotation: getAnnotation(item, profile.topics),
+        category: item.category,
+        relatedTopics: relatedTopics.length > 0 ? relatedTopics : [item.category],
+        expand: {
+          newsSummary: item.expand.newsSummary,
+          citations: item.expand.citations,
+          chatbotPrompt: `Explain how "${item.title}" affects someone interested in ${topicNames}${profile.aboutYou ? ` who describes themselves as: ${profile.aboutYou}` : ""}.`,
+        },
+      };
     });
 
-    return {
-      id: item.id,
-      title: item.title,
-      officialText: item.officialText,
-      annotation: getAnnotation(item, profile.topics),
-      category: item.category,
-      relatedTopics: relatedTopics.length > 0 ? relatedTopics : [item.category],
-      expand: {
-        newsSummary: item.expand.newsSummary,
-        citations: item.expand.citations,
-        chatbotPrompt: `Explain how "${item.title}" affects someone interested in ${topicNames}${profile.aboutYou ? ` who describes themselves as: ${profile.aboutYou}` : ""}.`,
-      },
-    };
-  });
+  const ballotItems = mapItems(ALL_BALLOT_ITEMS);
+  const raceItems = mapItems(ALL_RACE_ITEMS);
 
   const topicExplanations = profile.topics
     .map((topic) => {
@@ -326,6 +510,7 @@ export function generatePersonalizedBallot(
     greeting,
     personalizedSummary,
     ballotItems,
+    raceItems,
     topicExplanations,
   };
 }

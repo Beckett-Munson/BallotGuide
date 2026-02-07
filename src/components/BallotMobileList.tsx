@@ -55,11 +55,13 @@ export default function BallotMobileList({
               </div>
             </button>
 
-            {/* Smooth expand container — clips text and reveals as height grows */}
+            {/* Grow-open panel */}
             <div
               className={cn(
-                "overflow-hidden transition-[max-height] duration-[1100ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]",
-                isOpen ? "max-h-[800px]" : "max-h-0",
+                "origin-top transition-[transform,opacity] duration-[900ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]",
+                isOpen
+                  ? "scale-y-100 opacity-100 h-auto"
+                  : "scale-y-0 opacity-0 h-0 pointer-events-none",
               )}
             >
               <div className="border border-t-0 border-border rounded-b-lg">

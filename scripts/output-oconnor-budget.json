@@ -1,0 +1,79 @@
+{
+  "prompt": "How will the election of Corey O'Connor as mayor impact the budget?",
+  "candidate": "Corey O'Connor",
+  "categories": [
+    {
+      "category": "Health & Welfare",
+      "text": "O'Connor's fiscally moderate positioning suggests he would maintain current Health & Welfare spending levels rather than pursue significant expansion. Without specific health policy proposals in the available context, his election would likely result in stable funding with modest adjustments for inflation and existing program commitments.",
+      "projectedChange": "0%",
+      "citations": []
+    },
+    {
+      "category": "Public Safety",
+      "text": "O'Connor's emphasis on community policing suggests a potential modest increase in Public Safety spending to support enhanced community engagement programs and officer training initiatives. His moderate fiscal approach would likely limit increases to sustainable levels focused on improving police-community relations rather than dramatic expansion.",
+      "projectedChange": "+0.8%",
+      "citations": []
+    },
+    {
+      "category": "General Government",
+      "text": "As a fiscally moderate candidate, O'Connor would likely seek efficiencies in General Government operations, potentially reducing administrative overhead. The legislative context shows ongoing investments in budget software and performance management systems that could continue under his administration with emphasis on cost-effectiveness.",
+      "projectedChange": "-0.3%",
+      "citations": [
+        {
+          "title": "Resolution 2025-1885 — Committee on Innovation, Performance, Asset Management, and Technology (2025-05-30) [part 3/4]",
+          "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7421499&GUID=73A22F33-EC25-4DE1-B2DB-106C3EDD8271"
+        },
+        {
+          "title": "Resolution 2022-0289 — Committee on Finance and Law (2022-04-22) [part 2/15]",
+          "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=5566114&GUID=0EFCCD84-A3A2-4B9C-B93B-4B61096E1B41"
+        }
+      ]
+    },
+    {
+      "category": "Debt Service",
+      "text": "Debt Service obligations are contractually fixed and would remain unchanged regardless of O'Connor's election. His fiscal moderation suggests he would honor existing debt commitments while potentially being cautious about incurring new debt.",
+      "projectedChange": "0%",
+      "citations": []
+    },
+    {
+      "category": "Public Works & Facilities",
+      "text": "O'Connor's green infrastructure priority suggests a modest increase in Public Works spending to support sustainable infrastructure projects. The legislative context shows ongoing facility renovation projects that would likely continue with enhanced focus on environmental sustainability under his leadership.",
+      "projectedChange": "+0.6%",
+      "citations": [
+        {
+          "title": "Resolution 2025-2173 — Committee on Intergovernmental and Educational Affairs (2025-08-29) [part 3/6]",
+          "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7660244&GUID=7C9F837A-6A83-4481-977C-493DEDB39197"
+        }
+      ]
+    },
+    {
+      "category": "Transportation",
+      "text": "O'Connor's stated priority for transit investment indicates a notable increase in Transportation spending. His downtown revitalization focus would likely include enhanced public transit connections and infrastructure improvements to support economic activity and accessibility.",
+      "projectedChange": "+1.2%",
+      "citations": []
+    },
+    {
+      "category": "Education",
+      "text": "Without specific education policy positions in the available context, O'Connor would likely maintain current Education funding levels. His moderate fiscal approach suggests stability rather than significant changes in this relatively small budget category.",
+      "projectedChange": "0%",
+      "citations": []
+    },
+    {
+      "category": "Culture & Recreation",
+      "text": "O'Connor's downtown revitalization priority could modestly benefit Culture & Recreation through enhanced programming to attract residents and visitors. The legislative context shows ongoing recreation center investments that would likely continue with potential modest increases to support community engagement.",
+      "projectedChange": "+0.4%",
+      "citations": [
+        {
+          "title": "Resolution 2025-2173 — Committee on Intergovernmental and Educational Affairs (2025-08-29) [part 3/6]",
+          "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7660244&GUID=7C9F837A-6A83-4481-977C-493DEDB39197"
+        }
+      ]
+    },
+    {
+      "category": "Economic Development",
+      "text": "O'Connor's emphasis on downtown revitalization suggests a significant proportional increase in Economic Development spending, though the category's small base means modest absolute dollar increases. His focus on attracting business and investment would likely prioritize strategic economic development initiatives.",
+      "projectedChange": "+1.5%",
+      "citations": []
+    }
+  ]
+}

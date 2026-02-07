@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
 import type { Candidate } from "@/types/ballot";
 import { cn } from "@/lib/utils";
 import { TOPIC_COLORS, PARTY_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
@@ -38,9 +38,9 @@ export default function CandidateCard({
     (t) => candidate.topicBlurbs[t]
   );
 
-  const displayText = activeTab && candidate.topicBlurbs[activeTab]
-    ? candidate.topicBlurbs[activeTab]
-    : candidate.bio;
+  const activeBlurb = activeTab ? candidate.topicBlurbs[activeTab] : null;
+  const displayText = activeBlurb ? activeBlurb.text : candidate.bio;
+  const activeCitations = activeBlurb?.citations ?? [];
 
   if (collapsed) {
     return (
@@ -135,6 +135,25 @@ export default function CandidateCard({
       >
         {displayText}
       </p>
+
+      {/* Citations */}
+      {activeCitations.length > 0 && (
+        <div className="flex flex-wrap gap-x-3 gap-y-0.5 mt-1.5">
+          {activeCitations.map((cite, i) => (
+            <a
+              key={i}
+              href={cite.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-0.5 text-[9px] text-accent/80 hover:text-accent transition-colors truncate max-w-full"
+              title={cite.title}
+            >
+              <ExternalLink className="w-2.5 h-2.5 flex-shrink-0" />
+              <span className="truncate">{cite.title.length > 50 ? cite.title.slice(0, 50) + "…" : cite.title}</span>
+            </a>
+          ))}
+        </div>
+      )}
 
       {/* Topic tabs */}
       {availableTabs.length > 0 && (

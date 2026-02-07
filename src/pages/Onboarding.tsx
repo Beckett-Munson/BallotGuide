@@ -40,7 +40,7 @@ export default function Onboarding() {
 
   const keywordData = KeywordData as KeywordEntry[];
   const navigate = useNavigate();
-  const placeholder = useCyclingPlaceholder(5000);
+  const placeholder = useCyclingPlaceholder(3000);
   const [profile, setProfile] = useState<UserProfile>({
     age: 0,
     issues: {},
@@ -206,6 +206,7 @@ Fetch legislations related to the user.
             Tell us about yourself
           </h2>
           <p className="text-muted-foreground mb-4">
+            Answering this helps us tailor what you see. 
             Share anything that helps us personalize your guide — your job,
             family situation, concerns, or goals. (Optional)
           </p>

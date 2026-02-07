@@ -1,0 +1,780 @@
+[
+  {
+    "raceId": "race-mayor",
+    "candidates": [
+      {
+        "name": "Corey O'Connor",
+        "topicBlurbs": {
+          "jobs": {
+            "text": "Corey O'Connor would serve as Pittsburgh's chief executive officer, overseeing city departments including Innovation & Performance, Management & Budget, and Human Resources & Civil Service. As mayor, he would have authority over workforce development initiatives and city employment policies through these departments.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "housing": {
+            "text": "As Pittsburgh's chief executive, O'Connor would oversee the Department of Permits, Licenses and Inspections, which regulates housing construction and safety standards. He would also work with City Planning on housing development and zoning policies affecting affordability and availability.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "public_safety": {
+            "text": "O'Connor would have direct oversight of Pittsburgh's Public Safety department as chief executive. He would also work with the Citizens Police Review Board, which provides civilian oversight of police conduct and accountability.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "taxes": {
+            "text": "As mayor, O'Connor would oversee the Finance department and work with the City Controller on financial oversight and reporting. He would propose the city budget and tax policies, though City Council holds legislative authority over final approval.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 60/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          },
+          "environment": {
+            "text": "O'Connor would oversee city environmental initiatives through departments like Public Works and City Planning as chief executive. His administration would be responsible for implementing environmental policies and sustainability programs across city operations.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "transit": {
+            "text": "As mayor, O'Connor would have authority over Pittsburgh's Department of Mobility & Infrastructure, which handles transportation planning and infrastructure. He would shape the city's approach to public transit coordination, bike lanes, and pedestrian safety.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "government": {
+            "text": "O'Connor would serve a four-year term as Pittsburgh's chief executive officer, overseeing all city departments and operations. He would work alongside the City Controller on financial matters and City Council on legislation, with authority over day-to-day government operations.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 59/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "water": {
+            "text": "As chief executive, O'Connor would oversee the Public Works department, which typically handles water infrastructure and services. He would be responsible for managing water quality, distribution systems, and stormwater management across Pittsburgh.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "civil_rights": {
+            "text": "O'Connor would oversee the Human Relations Commission, Equal Opportunity Review Commission, and Office of Municipal Investigations as mayor. These departments handle discrimination complaints, equal opportunity enforcement, and civil rights protections for Pittsburgh residents.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "education": {
+            "text": "While Pittsburgh Public Schools operates independently, O'Connor as mayor would influence education through city resources and partnerships. He would oversee Citiparks, which provides after-school and recreational programs that support youth development and learning.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              },
+              {
+                "title": "Communication 2022-0573 — Committee on Hearings (2022-07-01) [part 3/88]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=5715063&GUID=1C41D719-4453-4588-AFF0-BEE70BD137B4"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Tony Moreno",
+        "topicBlurbs": {
+          "jobs": {
+            "text": "Tony Moreno's background as a former Pittsburgh police officer suggests he would prioritize public safety jobs and law enforcement staffing. His law-and-order platform likely means increased hiring and resources for police and emergency services. Economic development would probably focus on supporting businesses through a safe-streets approach.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "housing": {
+            "text": "As a Republican candidate running on law and order, Moreno would likely address housing through the lens of neighborhood safety and property protection. He may focus on reducing crime in residential areas to stabilize property values. Specific housing affordability policies are not clearly outlined in his platform.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 59/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          },
+          "public_safety": {
+            "text": "Moreno's core campaign centers on law-and-order as a former Pittsburgh police officer. He would likely expand police department resources, increase officer presence in neighborhoods, and take a tough-on-crime approach. His 2021 candidacy and police background indicate strong support for traditional law enforcement methods.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              },
+              {
+                "title": "Communication 2022-0573 — Committee on Hearings (2022-07-01) [part 3/88]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=5715063&GUID=1C41D719-4453-4588-AFF0-BEE70BD137B4"
+              }
+            ]
+          },
+          "taxes": {
+            "text": "As a Republican candidate, Moreno would likely favor fiscal restraint and efficient use of taxpayer dollars. He may seek to control spending growth while maintaining essential services, particularly public safety. His approach would probably emphasize accountability in city financial management.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 59/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 60/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          },
+          "environment": {
+            "text": "Environmental policy is not a highlighted part of Moreno's law-and-order platform. As a Republican candidate, he may take a more business-friendly approach to environmental regulations. His priorities would likely focus on public safety over environmental initiatives.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          },
+          "transit": {
+            "text": "Moreno's transit approach would likely emphasize safety on public transportation and in transit areas. As a former police officer, he may prioritize security measures for riders and stations. Infrastructure improvements would probably be secondary to law enforcement presence.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "government": {
+            "text": "Moreno would serve as Pittsburgh's chief executive with authority over city departments including Public Safety, which aligns with his background. His administration would likely emphasize accountability and efficiency in government operations. He may seek to streamline bureaucracy while strengthening law enforcement agencies.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 59/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "water": {
+            "text": "Water infrastructure and services fall under the mayor's executive authority through Public Works. Moreno has not made water policy a central campaign issue. His administration would likely maintain existing water services while focusing resources on his law-and-order priorities.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              }
+            ]
+          },
+          "civil_rights": {
+            "text": "As mayor, Moreno would oversee the Human Relations Commission and Citizens Police Review Board. His law-and-order platform may create tension with police accountability advocates. His approach to civil rights would likely emphasize support for law enforcement while maintaining required oversight structures.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 4/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              },
+              {
+                "title": "Communication 2022-0573 — Committee on Hearings (2022-07-01) [part 3/88]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=5715063&GUID=1C41D719-4453-4588-AFF0-BEE70BD137B4"
+              }
+            ]
+          },
+          "education": {
+            "text": "Education policy in Pittsburgh is not directly controlled by the mayor's office. Moreno's focus on public safety could affect school security and resource officer programs. His administration would likely coordinate with school districts on safety issues rather than curriculum or funding.",
+            "citations": [
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 58/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Communication 2022-0573 — Committee on Hearings (2022-07-01) [part 3/88]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=5715063&GUID=1C41D719-4453-4588-AFF0-BEE70BD137B4"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "raceId": "race-superior-court",
+    "candidates": [
+      {
+        "name": "Brandon Neuman",
+        "topicBlurbs": {
+          "civil_rights": {
+            "text": "Brandon Neuman would hear appeals in criminal cases and family court matters, which often involve civil rights questions like due process and equal treatment under the law. As a Superior Court judge, he would review lower court decisions to ensure they follow constitutional protections. His rulings could affect how civil rights laws are applied across Pennsylvania.",
+            "citations": [
+              {
+                "title": "Title 18 - CRIMES AND OFFENSES [part 2057/2139]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/18/18.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "public_safety": {
+            "text": "Neuman would handle criminal appeals on the Superior Court, reviewing convictions and sentences from trial courts. His decisions would shape how criminal laws are interpreted and enforced statewide. This role directly impacts public safety by determining whether criminal convictions are upheld or overturned.",
+            "citations": [
+              {
+                "title": "Title 18 - CRIMES AND OFFENSES [part 2057/2139]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/18/18.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 100/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "government": {
+            "text": "As a Superior Court judge, Neuman would serve a 10-year term as part of Pennsylvania's appellate judiciary. The Superior Court is a key part of the state's three-tiered court system, handling appeals from common pleas courts. He would be part of the judicial branch that checks the power of other government branches.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 100/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 127/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "jobs": {
+            "text": "While the Superior Court doesn't directly create employment policy, Neuman would hear appeals involving workplace disputes that reach the appellate level. His decisions on employment-related cases could affect how labor and employment laws are interpreted in Pennsylvania. His background as a common pleas judge gives him experience with cases that impact working families.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 100/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "family": {
+            "text": "Neuman would hear family court appeals involving private parties, including custody disputes, divorce proceedings, and child support cases. His rulings would set precedents that guide how family law is applied across Pennsylvania's trial courts. This role gives him significant influence over how the legal system handles family matters.",
+            "citations": [
+              {
+                "title": "Title 18 - CRIMES AND OFFENSES [part 2057/2139]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/18/18.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 100/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Maria Battista",
+        "topicBlurbs": {
+          "civil_rights": {
+            "text": "Battista's conservative judicial philosophy suggests she would likely interpret civil rights laws more narrowly, potentially favoring traditional legal standards over expansive protections. As a Superior Court judge, she would review criminal appeals and family court cases, which often involve questions of individual rights and due process. Her approach could mean stricter adherence to precedent rather than progressive interpretations of rights.",
+            "citations": [
+              {
+                "title": "Title 18 - CRIMES AND OFFENSES [part 2057/2139]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/18/18.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "public_safety": {
+            "text": "With a conservative philosophy, Battista would likely take a tough-on-crime approach in criminal appeals heard by the Superior Court. She would probably be more inclined to uphold criminal convictions and defer to prosecutors' decisions. Her election could mean fewer successful appeals by defendants and stronger support for law enforcement actions.",
+            "citations": [
+              {
+                "title": "Title 18 - CRIMES AND OFFENSES [part 2057/2139]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/18/18.HTM"
+              },
+              {
+                "title": "Title 18 - CRIMES AND OFFENSES [part 2058/2139]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/18/18.HTM"
+              }
+            ]
+          },
+          "government": {
+            "text": "Battista would serve a 10-year term on the Superior Court, which handles criminal and family court appeals. Her conservative approach suggests she would favor limited judicial intervention and deference to legislative decisions. She would be part of Pennsylvania's appellate court system that works alongside the Commonwealth Court and Supreme Court.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 100/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 127/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "jobs": {
+            "text": "As a Superior Court judge, Battista would not directly handle employment law cases, which typically go to Commonwealth Court. However, her conservative judicial philosophy suggests she would likely favor business interests and be skeptical of expansive worker protections in any relevant appeals. Her impact on jobs would be indirect through criminal and family law decisions.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 100/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "family": {
+            "text": "Battista would directly impact family law as the Superior Court hears family court appeals involving private entities. Her conservative philosophy suggests she would likely favor traditional family structures and parental rights, and may be less inclined to expand family law protections. She would review custody disputes, divorce proceedings, and other family matters on appeal.",
+            "citations": [
+              {
+                "title": "Title 18 - CRIMES AND OFFENSES [part 2057/2139]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/18/18.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "raceId": "race-commonwealth-court",
+    "candidates": [
+      {
+        "name": "Stella Tsai",
+        "topicBlurbs": {
+          "government": {
+            "text": "Electing Stella Tsai would bring a judge with Common Pleas experience to the Commonwealth Court, which handles civil and regulatory appeals involving public entities. The court consists of nine judges who serve 10-year terms and has the power to issue writs and processes necessary for exercising its jurisdiction over government matters.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "taxes": {
+            "text": "As a Commonwealth Court judge, Tsai would hear appeals involving tax disputes between citizens and government agencies. Her background as a Common Pleas judge in Philadelphia gives her experience with local government cases that often involve tax and revenue issues. The Commonwealth Court regularly reviews decisions by state agencies on tax matters.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "housing": {
+            "text": "Tsai's experience with zoning cases as a Common Pleas judge would be directly relevant to Commonwealth Court housing appeals. The court hears regulatory appeals that frequently involve land use, zoning disputes, and housing development decisions made by local governments. Her election would bring practical zoning expertise to these appeals.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "environment": {
+            "text": "The Commonwealth Court handles regulatory appeals that include environmental permits and enforcement actions by state agencies. Tsai would review decisions involving environmental regulations and their impact on businesses and communities. Her judicial experience would apply to interpreting environmental laws and agency decisions.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "civil_rights": {
+            "text": "Tsai's experience with elections cases as a Common Pleas judge is relevant to civil rights matters that come before Commonwealth Court. The court hears cases involving voting rights, election procedures, and constitutional challenges to government actions. Her election would bring expertise in protecting electoral participation and reviewing government decisions affecting individual rights.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Matt Wolford",
+        "topicBlurbs": {
+          "government": {
+            "text": "Wolford would serve on Pennsylvania's Commonwealth Court, which handles civil and regulatory appeals involving state and local government agencies. As a judge with regulatory and business law experience, he would likely interpret laws governing how public entities operate and enforce regulations. The court consists of nine judges serving 10-year terms.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              },
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 113/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "taxes": {
+            "text": "If elected, Wolford would hear appeals related to tax disputes between individuals or businesses and Pennsylvania government entities. His background in regulatory and business law suggests he would approach tax cases with an understanding of both government authority and business concerns. The Commonwealth Court regularly decides cases involving state tax assessments and collection.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "housing": {
+            "text": "Wolford would decide appeals involving housing regulations, zoning disputes, and government housing policies that come before the Commonwealth Court. His regulatory law background would inform how he interprets state and local housing rules. These cases often involve conflicts between property owners and government agencies.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "environment": {
+            "text": "As a Commonwealth Court judge, Wolford would hear appeals on environmental permits, regulations, and enforcement actions by state agencies. His business and regulatory law experience would shape how he balances environmental protection with economic interests. The court frequently handles disputes over environmental compliance and agency decisions.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          },
+          "civil_rights": {
+            "text": "Wolford would rule on civil rights cases involving government actions and public entities that reach the Commonwealth Court. His decisions would affect how Pennsylvania agencies implement and enforce civil rights protections. The court's jurisdiction includes appeals challenging government policies that may impact individual rights.",
+            "citations": [
+              {
+                "title": "Title 42 - JUDICIARY AND JUDICIAL PROCEDURE [part 128/3117]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/42/42.HTM"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "raceId": "race-sheriff",
+    "candidates": [
+      {
+        "name": "Kevin Kraus",
+        "topicBlurbs": {
+          "public_safety": {
+            "text": "Kevin Kraus's re-election would continue his leadership overseeing court security, prisoner transport, warrant execution, and fugitive pursuit. With decades of experience in the Pittsburgh police force, he brings law enforcement expertise to managing these core sheriff responsibilities. His administration would maintain the sheriff's traditional public safety functions as defined by Pennsylvania law.",
+            "citations": [
+              {
+                "title": "Title 16 - COUNTIES [part 120/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              },
+              {
+                "title": "Title 16 - COUNTIES [part 201/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              },
+              {
+                "title": "Title 16 - COUNTIES [part 83/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              }
+            ]
+          },
+          "government": {
+            "text": "As the elected sheriff, Kraus serves a four-year term managing one of Allegheny County's key constitutional offices. He oversees deputies and staff who execute court orders, conduct sheriff's sales, and maintain official records as required by state law. His continued tenure would provide stability in this independently elected position that operates alongside other county row offices.",
+            "citations": [
+              {
+                "title": "Title 16 - COUNTIES [part 120/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              },
+              {
+                "title": "Title 16 - COUNTIES [part 233/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              },
+              {
+                "title": "Title 16 - COUNTIES [part 201/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              }
+            ]
+          },
+          "immigration": {
+            "text": "The sheriff's office handles warrants and court orders, which can include immigration-related detainers when issued by courts. Kraus's approach to cooperating with federal immigration authorities or honoring such requests would shape how the office balances local law enforcement duties with federal immigration enforcement. His policies on this issue would affect immigrant communities' interactions with county law enforcement.",
+            "citations": [
+              {
+                "title": "Title 16 - COUNTIES [part 201/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              }
+            ]
+          },
+          "civil_rights": {
+            "text": "The sheriff's office executes evictions, foreclosures, and sheriff's sales that directly impact residents' housing and property rights. Kraus's policies on how deputies conduct these proceedings—including timing, communication with affected families, and enforcement discretion—would affect vulnerable residents facing financial hardship. His training requirements and oversight of deputies also shape how fairly and professionally the office treats all county residents.",
+            "citations": [
+              {
+                "title": "Title 16 - COUNTIES [part 140/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              },
+              {
+                "title": "Title 16 - COUNTIES [part 201/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Brian Weismantle",
+        "topicBlurbs": {
+          "public_safety": {
+            "text": "Weismantle's decades of experience with the Pittsburgh Bureau of Police would likely bring a law enforcement-focused approach to the Sheriff's office. As Sheriff, he would oversee warrants, fugitive pursuit, court security, and prisoner transport—core public safety functions that directly affect how the county handles crime and keeps courts secure.",
+            "citations": []
+          },
+          "government": {
+            "text": "The Sheriff is an elected county officer responsible for executing writs, maintaining court security, and performing duties required by law. Weismantle would need to meet state training requirements for sheriffs and would be bonded to protect the county from losses, ensuring accountability in this constitutional office.",
+            "citations": [
+              {
+                "title": "Title 16 - COUNTIES [part 120/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              },
+              {
+                "title": "Title 16 - COUNTIES [part 201/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              },
+              {
+                "title": "Title 16 - COUNTIES [part 83/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              },
+              {
+                "title": "Title 16 - COUNTIES [part 140/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              }
+            ]
+          },
+          "immigration": {
+            "text": "While the Sheriff's office primarily handles local warrants and court security, sheriffs can cooperate with federal immigration authorities on detainers and enforcement. Weismantle's law enforcement background suggests he may take a cooperative approach, though the extent would depend on county policy and his own priorities.",
+            "citations": []
+          },
+          "civil_rights": {
+            "text": "The Sheriff executes court orders and handles prisoner transport, which involves protecting individuals' rights during arrest and detention. Weismantle's policing experience would shape how his office balances enforcement duties with constitutional protections during warrants, arrests, and interactions with vulnerable populations.",
+            "citations": [
+              {
+                "title": "Title 16 - COUNTIES [part 201/1088]",
+                "url": "https://www.legis.state.pa.us/WU01/LI/LI/CT/HTM/16/16.HTM"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "raceId": "race-council-at-large",
+    "candidates": [
+      {
+        "name": "Mike Embrescia",
+        "topicBlurbs": {
+          "government": {
+            "text": "Mike Embrescia was appointed to fill a vacancy on the 15-member Allegheny County Council, which serves as the county's legislative body. If elected, he would continue serving a four-year term helping pass the county budget and enact local ordinances. His business background may influence his approach to county governance and policy decisions.",
+            "citations": [
+              {
+                "title": "Communication 2025-2158 — Committee on Hearings and Policy (2025-08-22) [part 24/179]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7524236&GUID=04A91C3F-E2B4-43BA-B8B4-AA1B2CE2DE31"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 5/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 60/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          },
+          "taxes": {
+            "text": "As a County Council member, Embrescia would have a vote on the annual county budget, which determines tax rates and spending priorities. His business background suggests he may approach tax policy with a focus on fiscal responsibility and economic considerations. Council members have direct authority over financial oversight and budgetary decisions.",
+            "citations": [
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 5/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 60/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 59/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          },
+          "housing": {
+            "text": "Embrescia would have legislative authority to shape county housing policies through ordinances and budget allocations. Coming from a business background, he may approach housing issues with an emphasis on market-based solutions and economic development. County Council members can influence housing through zoning, development incentives, and funding decisions.",
+            "citations": [
+              {
+                "title": "Communication 2025-2158 — Committee on Hearings and Policy (2025-08-22) [part 24/179]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7524236&GUID=04A91C3F-E2B4-43BA-B8B4-AA1B2CE2DE31"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 60/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          },
+          "jobs": {
+            "text": "With his business background, Embrescia would likely prioritize economic development and job creation initiatives through County Council's legislative powers. He would vote on budget allocations that affect workforce development programs and business incentives. His private sector experience may inform his approach to attracting employers and supporting local businesses.",
+            "citations": [
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 5/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 60/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          },
+          "public_safety": {
+            "text": "As a Council member, Embrescia would vote on funding for county law enforcement, emergency services, and public safety programs through the annual budget process. County Council has legislative authority to enact ordinances affecting public safety operations and priorities. His decisions would directly impact resource allocation for police, fire, and emergency response services.",
+            "citations": [
+              {
+                "title": "Communication 2025-2158 — Committee on Hearings and Policy (2025-08-22) [part 24/179]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7524236&GUID=04A91C3F-E2B4-43BA-B8B4-AA1B2CE2DE31"
+              },
+              {
+                "title": "Communication 2025-2121 — Committee on Hearings and Policy (2025-07-25) [part 5/83]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7496515&GUID=CD9E138D-4468-4FC6-BDCD-344E6CAAFC80"
+              },
+              {
+                "title": "Resolution 2025-1463 — Committee on Finance and Law (2025-01-31) [part 60/237]",
+                "url": "https://pittsburgh.legistar.com/LegislationDetail.aspx?ID=7124614&GUID=45603C1E-F624-404E-86A6-61E18D7B3DE7"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Alex Rose",
+        "topicBlurbs": {
+          "government": {
+            "text": "Alex Rose would serve on the 15-member Allegheny County Council, which passes the county budget and enacts ordinances. As a left-leaning independent, Rose would bring a non-partisan perspective to the legislative body's four-year term. Council members hold legislative authority over county operations and financial decisions.",
+            "citations": []
+          },
+          "taxes": {
+            "text": "As a County Council member, Rose would vote on the annual county budget, which determines tax rates and spending priorities. A left-leaning independent would likely support progressive tax policies that ask wealthier residents to contribute more. Rose's vote would be one of 15 on all budget and tax matters.",
+            "citations": []
+          },
+          "housing": {
+            "text": "Rose would have the power to enact ordinances addressing housing issues in Allegheny County. As a left-leaning candidate, Rose would likely support policies to increase affordable housing availability and tenant protections. County Council can pass legislation affecting zoning, development, and housing assistance programs.",
+            "citations": []
+          },
+          "jobs": {
+            "text": "Through budget decisions and ordinances, Rose could influence county economic development and job creation initiatives. A left-leaning independent would likely prioritize worker protections, living wages, and investments in job training programs. County Council controls funding for workforce development and can set labor standards for county contracts.",
+            "citations": []
+          },
+          "public_safety": {
+            "text": "Rose would vote on funding for county law enforcement, courts, and emergency services through the annual budget process. As a left-leaning candidate, Rose might emphasize community-based safety approaches alongside traditional policing. County Council has oversight of the county's public safety departments and can pass related ordinances.",
+            "citations": []
+          },
+          "transit": {
+            "text": "County Council members like Rose can influence transit funding and policy through budget allocations and ordinances. A left-leaning independent would likely support expanded public transportation access and sustainable transit options. Rose's vote would affect county contributions to regional transit authorities and infrastructure projects.",
+            "citations": []
+          }
+        }
+      }
+    ]
+  }
+]

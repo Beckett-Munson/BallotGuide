@@ -11,6 +11,18 @@ export interface Policy {
   question: string;
 }
 
+export interface Annotation {
+  id: string;
+  type: "policy" | "question" | "candidate";
+  issues: string[]; // list of issues from the user that connect to this annotation
+  annotation: string; // how this affects user
+  citations: { title: string; url: string }[];
+}
+
+export interface AnnotationResponse { // maps each policy id to a list of its annotations
+  [policyId: string]: Annotation[];
+}
+
 export interface Candidate {
   name: string;
   party: "D" | "R" | "I" | "L";

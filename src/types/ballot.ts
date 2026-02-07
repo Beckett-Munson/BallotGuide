@@ -4,6 +4,14 @@ export interface UserProfile {
   zipCode: string;
 }
 
+export interface Candidate {
+  name: string;
+  party: "D" | "R" | "I" | "L";
+  isIncumbent?: boolean;
+  bio: string;
+  topicBlurbs: Record<string, string>;
+}
+
 export interface BallotItem {
   id: string;
   title: string;
@@ -11,6 +19,7 @@ export interface BallotItem {
   annotation: string;
   category: string;
   relatedTopics: string[];
+  candidates?: Candidate[];
   expand: {
     newsSummary: string;
     citations: { title: string; url: string; source: string }[];

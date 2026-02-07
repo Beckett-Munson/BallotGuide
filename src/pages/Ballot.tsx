@@ -1,14 +1,15 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Vote, ArrowLeft, BookOpen } from "lucide-react";
-import type { UserProfile, PersonalizedBallot, BallotItem } from "@/types/ballot";
+import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
 import { generatePersonalizedBallot } from "@/data/mockBallotData";
 import BallotPaper from "@/components/BallotPaper";
-import BallotAnnotation from "@/components/BallotAnnotation";
 import TopicExplanation from "@/components/TopicExplanation";
 import BallotSectionTabs, { type BallotSection } from "@/components/BallotSectionTabs";
 import BallotDesktopAnnotations from "@/components/BallotDesktopAnnotations";
 import BallotMobileList from "@/components/BallotMobileList";
+import RaceDesktopLayout from "@/components/RaceDesktopLayout";
+import RaceMobileList from "@/components/RaceMobileList";
 import { cn } from "@/lib/utils";
 import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 
@@ -59,7 +60,8 @@ export default function Ballot() {
     : "Active Races";
   const sectionSubtitle = activeSection === "questions"
     ? "City of Pittsburgh • Primary Election — May 20, 2025"
-    : "Allegheny County • Primary Election — May 20, 2025";
+    : "Pittsburgh & Allegheny County • General Election — Nov. 4, 2025";
+  const isRaces = activeSection === "races";
 
   // Animation classes
   const getAnimClass = () => {
@@ -161,11 +163,20 @@ export default function Ballot() {
               sectionSubtitle={sectionSubtitle}
             />
 
-            <BallotDesktopAnnotations
-              items={currentItems}
-              hoveredIndex={hoveredIndex}
-              onHoverIndex={setHoveredIndex}
-            />
+            {isRaces ? (
+              <RaceDesktopLayout
+                items={currentItems}
+                hoveredIndex={hoveredIndex}
+                onHoverIndex={setHoveredIndex}
+                userTopics={profile.topics}
+              />
+            ) : (
+              <BallotDesktopAnnotations
+                items={currentItems}
+                hoveredIndex={hoveredIndex}
+                onHoverIndex={setHoveredIndex}
+              />
+            )}
           </div>
         </section>
 
@@ -182,11 +193,20 @@ export default function Ballot() {
               "--enter-from": animDirection === "up" ? "2rem" : "-2rem",
             } as React.CSSProperties : undefined}
           >
-            <BallotMobileList
-              items={currentItems}
-              hoveredIndex={hoveredIndex}
-              onToggleIndex={(index) => setHoveredIndex(hoveredIndex === index ? null : index)}
-            />
+            {isRaces ? (
+              <RaceMobileList
+                items={currentItems}
+                hoveredIndex={hoveredIndex}
+                onToggleIndex={(index) => setHoveredIndex(hoveredIndex === index ? null : index)}
+                userTopics={profile.topics}
+              />
+            ) : (
+              <BallotMobileList
+                items={currentItems}
+                hoveredIndex={hoveredIndex}
+                onToggleIndex={(index) => setHoveredIndex(hoveredIndex === index ? null : index)}
+              />
+            )}
           </div>
         </section>
 

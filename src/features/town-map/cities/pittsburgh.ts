@@ -175,7 +175,7 @@ export const PITTSBURGH_SCENARIO: CityScenario = {
       id: "pgh-education",
       topic: "education",
       title: "Point Park University District",
-      markerLabel: "Schools",
+      markerLabel: "Education",
       highlightedBuilding: "Point Park University classroom and student corridor",
       mapPoint: [0.187, 0.095],
       text:
@@ -223,7 +223,7 @@ export const PITTSBURGH_SCENARIO: CityScenario = {
       id: "pgh-technology",
       topic: "technology",
       title: "Digital Economy Growth Near the Riverfront",
-      markerLabel: "Tech",
+      markerLabel: "Technology",
       highlightedBuilding: "Downtown innovation office cluster near the Cultural District",
       mapPoint: [0.041, 0.789],
       text:

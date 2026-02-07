@@ -131,6 +131,10 @@ export default {
           "66%": { transform: "translate(5%, 20%)" },
           "100%": { transform: "translate(10%, 5%)" },
         },
+        "pulse-opacity": {
+          "0%, 100%": { opacity: "0.7" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

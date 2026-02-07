@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Vote, ArrowLeft, BookOpen } from "lucide-react";
+import { Vote, ArrowLeft, BookOpen, BarChart3 } from "lucide-react";
 import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
 import { generatePersonalizedBallot } from "@/data/mockBallotData";
 import BallotPaper from "@/components/BallotPaper";
@@ -12,6 +12,7 @@ import RaceDesktopLayout from "@/components/RaceDesktopLayout";
 import RaceMobileList from "@/components/RaceMobileList";
 import { cn } from "@/lib/utils";
 import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
+import BudgetChart from "@/components/BudgetChart";
 
 export default function Ballot() {
   const navigate = useNavigate();
@@ -263,6 +264,21 @@ export default function Ballot() {
             </div>
           </section>
         )}
+
+        {/* County Budget Visualization */}
+        <section className="mb-16 max-w-4xl mx-auto">
+          <div className="flex items-center gap-2 mb-3">
+            <BarChart3 className="w-5 h-5 text-accent" />
+            <h2 className="font-display text-2xl font-semibold text-foreground">
+              Follow the Money
+            </h2>
+          </div>
+          <p className="text-muted-foreground mb-6">
+            See how Allegheny County spends its $1.05 billion budget — and how each mayoral candidate would shift priorities.
+            Click any slice to learn more.
+          </p>
+          <BudgetChart />
+        </section>
 
         {/* Footer */}
         <footer className="border-t border-border pt-8 pb-16 text-center max-w-lg mx-auto">

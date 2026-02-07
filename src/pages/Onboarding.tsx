@@ -133,25 +133,25 @@ export default function Onboarding() {
       {/* Hero */}
       <header className="relative overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="Civic engagement illustration" className="w-full h-full object-cover" />
+          
           
         </div>
         <div className="relative max-w-3xl mx-auto px-6 pt-16 pb-20 text-center">
           <div className="flex items-center justify-center gap-2 mb-6">
             <Vote className="w-8 h-8 text-accent" />
-            <span className="font-display text-2xl font-bold text-primary-foreground tracking-tight">
+            <span className="font-display text-2xl font-bold tracking-tight text-primary">
               BallotGuide
             </span>
           </div>
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-4 leading-tight">Your Personalized
+          <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 leading-tight text-secondary-foreground">Your Personalized
 Ballot Briefing <br />
             Voter Guide
           </h1>
-          <p className="text-lg text-primary-foreground/80 max-w-xl mx-auto font-body">
+          <p className="text-lg max-w-xl mx-auto font-body text-secondary-foreground">
             Get clear, unbiased explanations of every ballot item in Allegheny
             County — tailored to what matters most to you.
           </p>
-          <div className="flex items-center justify-center gap-2 mt-6 text-sm text-primary-foreground/60">
+          <div className="flex items-center justify-center gap-2 mt-6 text-sm text-primary">
             <Shield className="w-4 h-4" />
             <span>Non-partisan • Source-verified • Privacy-first</span>
           </div>

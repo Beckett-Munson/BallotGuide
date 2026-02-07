@@ -155,14 +155,32 @@ export default function Onboarding() {
                 const colors = profile.topics
                   .map((id) => TOPIC_COLORS[id])
                   .filter(Boolean);
-                // Each color gets its own drifting blob
+                // Each color gets its own drifting blob with a unique starting position
                 const blobAnimations = [
                   'blob-drift-1', 'blob-drift-2', 'blob-drift-3',
                   'blob-drift-4', 'blob-drift-5',
                 ];
+                // Distribute starting positions around the bubble
+                const startPositions = [
+                  { top: '10%', left: '10%' },
+                  { top: '60%', left: '55%' },
+                  { top: '15%', left: '60%' },
+                  { top: '55%', left: '5%' },
+                  { top: '35%', left: '35%' },
+                  { top: '5%', left: '40%' },
+                  { top: '65%', left: '30%' },
+                  { top: '30%', left: '65%' },
+                  { top: '50%', left: '15%' },
+                  { top: '20%', left: '50%' },
+                  { top: '45%', left: '45%' },
+                  { top: '10%', left: '30%' },
+                  { top: '55%', left: '60%' },
+                  { top: '40%', left: '10%' },
+                  { top: '25%', left: '55%' },
+                ];
                 return (
                   <>
-                    {/* Individual drifting color blobs — smaller & sharper for separation */}
+                    {/* Individual drifting color blobs at unique positions */}
                     {colors.map((c, i) => (
                       <div
                         key={i}
@@ -170,6 +188,8 @@ export default function Onboarding() {
                         style={{
                           width: '65%',
                           height: '65%',
+                          top: startPositions[i % startPositions.length].top,
+                          left: startPositions[i % startPositions.length].left,
                           background: `radial-gradient(circle, ${hsl(c)} 0%, ${hslAlpha(c, 0.6)} 40%, transparent 70%)`,
                           animation: `${blobAnimations[i % blobAnimations.length]} ${10 + i * 2}s ease-in-out infinite`,
                           filter: 'blur(2px)',

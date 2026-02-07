@@ -1,0 +1,60 @@
+{
+  "prompt": "How will the election of Tony Moreno as mayor impact the budget?",
+  "candidate": "Tony Moreno",
+  "categories": [
+    {
+      "category": "Health & Welfare",
+      "text": "Moreno's platform emphasizes law enforcement and tax reduction over social services expansion. His focus on cutting bureaucracy and reducing city spending could lead to modest reductions in health and welfare programs, though the magnitude is unclear from available sources. Any cuts would likely be redirected toward public safety priorities.",
+      "projectedChange": "-1.5%",
+      "citations": []
+    },
+    {
+      "category": "Public Safety",
+      "text": "As a former police officer running on a law-and-order platform with explicit proposals to expand police presence, Moreno would likely prioritize increased funding for public safety. This represents his core campaign commitment and would be a primary beneficiary of any budget reallocation. The increase would come from reductions in other categories and potentially from efficiency gains in bureaucracy.",
+      "projectedChange": "+3.0%",
+      "citations": []
+    },
+    {
+      "category": "General Government",
+      "text": "Moreno's stated goal of cutting bureaucracy would directly impact general government spending, which includes administrative functions and departmental operations. His business-friendly, efficiency-focused approach suggests meaningful reductions in administrative overhead. However, some baseline administrative capacity must be maintained for government operations.",
+      "projectedChange": "-2.0%",
+      "citations": []
+    },
+    {
+      "category": "Debt Service",
+      "text": "Debt service obligations are contractually fixed and cannot be reduced through policy choices in the short term. Moreno's election would not materially impact these mandatory payments. Any long-term effects would depend on future borrowing decisions, which are not clearly outlined in his known positions.",
+      "projectedChange": "0%",
+      "citations": []
+    },
+    {
+      "category": "Public Works & Facilities",
+      "text": "Moreno's tax reduction agenda and focus on core services could result in modest decreases to public works spending. However, basic infrastructure maintenance is essential for any administration. The impact would likely be limited as severe cuts could undermine his business-friendly economic goals.",
+      "projectedChange": "-0.5%",
+      "citations": []
+    },
+    {
+      "category": "Transportation",
+      "text": "Transportation spending would likely see modest reductions under Moreno's cost-cutting approach, though not dramatic cuts given the importance of mobility infrastructure to economic activity. His business-friendly platform may preserve some transportation investments that support commerce. The available sources provide no specific transportation policy positions.",
+      "projectedChange": "-0.5%",
+      "citations": []
+    },
+    {
+      "category": "Education",
+      "text": "Education represents a relatively small portion of the county budget. Moreno's platform does not explicitly address education spending, making the impact unclear. Given his focus on tax reduction and core services, education would likely see flat or slightly reduced funding rather than expansion.",
+      "projectedChange": "-0.3%",
+      "citations": []
+    },
+    {
+      "category": "Culture & Recreation",
+      "text": "Culture and recreation programs are often viewed as discretionary spending and would be vulnerable under Moreno's tax-cutting, law-and-order focused administration. These programs would likely be deprioritized relative to public safety. However, complete elimination is unlikely as these services have constituency support.",
+      "projectedChange": "-0.7%",
+      "citations": []
+    },
+    {
+      "category": "Economic Development",
+      "text": "Moreno's business-friendly approach and focus on reducing regulatory burdens suggests increased attention to economic development, though perhaps through deregulation rather than direct spending. Modest increases in this category could support his pro-business agenda. However, his overall tax-cutting philosophy may limit the scale of new spending initiatives.",
+      "projectedChange": "+2.5%",
+      "citations": []
+    }
+  ]
+}

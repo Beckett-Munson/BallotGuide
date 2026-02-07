@@ -81,7 +81,7 @@ export default function Onboarding() {
   };
 
 const canSubmit =
-  Object.keys(profile.issues).length > 0 && profile.zipCode.length === 5;
+  Object.keys(profile.issues).length > 0 && profile.zipCode.length === 5 && profile.aboutYou.trim().length > 0;
 
   // call to backend with prompt
   const getAnnotations = async ({
@@ -133,6 +133,8 @@ Fetch legislations related to the user.
     if (rect) {
       setBubbleRect(rect);
       setIsTransitioning(true);
+      // Store when the spin animation started so the Ballot loading bubble can sync
+      sessionStorage.setItem("bubbleAnimStart", String(Date.now()));
       setTimeout(() => navigate("/ballot"), 2200);
     } else {
       navigate("/ballot");
@@ -215,7 +217,7 @@ Fetch legislations related to the user.
       {/* Single-page form */}
       <main className="max-w-2xl mx-auto px-6 pb-16">
         {/* Tell us about yourself */}
-        <section className="mb-10">
+        <section className="mb-6">
           <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
             Tell us about yourself
           </h2>

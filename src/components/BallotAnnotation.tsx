@@ -99,12 +99,12 @@ export default function BallotAnnotation({
       )}
 
       {/* Title — always visible */}
-      <p className={cn(
-        "font-semibold text-foreground leading-snug transition-all duration-300",
+      <h3 className={cn(
+        "font-semibold font-display text-foreground leading-snug transition-all duration-300",
         isOpen ? "text-sm" : "text-sm truncate"
       )}>
         {item.title}
-      </p>
+      </h3>
 
       {/* Expandable body — height expands via grid rows, content fades in */}
       <div

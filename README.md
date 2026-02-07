@@ -17,17 +17,27 @@ BallotGuide translates opaque ballot language into clear, source-grounded explan
 - A budget-impact experience that shows predicted spending shifts by category
 - A 3D city interface where policy markers are pinned to real places
 
-[IMAGE PLACEHOLDER: Product hero screenshot or GIF]
+<br/>
+
+<img width="1063" height="803" alt="PNG image" src="https://github.com/user-attachments/assets/e4b45531-8456-42e3-a65e-1d2c6fa00903" />
+
+<br/>
 
 ## Technical Highlights
+
 - Built a Pinecone vector database with **30,000+ scraped embeddings** from real local legislation and legal code.
 - Added a **Dedalus agent pipeline** that queries the vector database first, then returns grounded explanations with reliable source links.
 - Trained a **regression model on budget data** to predict category deltas that drive the interactive pie chart experience.
 - Integrated real **3D city models** and used our agent + geo metadata to drop location-based policy annotations directly on the map.
 
 [IMAGE PLACEHOLDER: Architecture diagram]
-[IMAGE PLACEHOLDER: Budget prediction chart]
-[IMAGE PLACEHOLDER: 3D map with geo-annotations]
+
+
+<img width="804" height="539" alt="Screenshot 2026-02-07 at 1 40 12 PM" src="https://github.com/user-attachments/assets/5c3ca0d9-ccc7-491d-94b2-4c5489309017" />
+
+<br/>
+
+<img width="804" height="618" alt="Screenshot 2026-02-07 at 1 42 28 PM" src="https://github.com/user-attachments/assets/5091eaf9-852e-449f-a81b-d3dd24c6ee7d" />
 
 ## Stack
 - React, TypeScript, Vite, Tailwind, shadcn/ui

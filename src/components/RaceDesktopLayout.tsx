@@ -1,5 +1,4 @@
 import type { BallotItem } from "@/types/ballot";
-import type { ItemPosition } from "@/hooks/useBallotItemPositions";
 import { cn } from "@/lib/utils";
 import { topicBorderColor } from "@/lib/topicColors";
 import CandidateCard from "@/components/CandidateCard";
@@ -9,7 +8,6 @@ interface RaceDesktopLayoutProps {
   hoveredIndex: number | null;
   onHoverIndex: (index: number | null) => void;
   userTopics: string[];
-  positions: ItemPosition[];
 }
 
 export default function RaceDesktopLayout({
@@ -17,7 +15,6 @@ export default function RaceDesktopLayout({
   hoveredIndex,
   onHoverIndex,
   userTopics,
-  positions,
 }: RaceDesktopLayoutProps) {
   return (
     <>
@@ -25,11 +22,9 @@ export default function RaceDesktopLayout({
         const candidates = item.candidates || [];
         if (candidates.length < 2) return null;
 
-        const pos = positions[index];
-        if (!pos) return null;
-
         const isHighlighted = hoveredIndex === index;
         const hasSomeHover = hoveredIndex !== null;
+        const yPercent = ((index + 0.5) / items.length) * 100;
         const connectorColor = topicBorderColor(item.relatedTopics);
 
         return (
@@ -44,7 +39,7 @@ export default function RaceDesktopLayout({
                 isHighlighted && "z-10"
               )}
               style={{
-                top: `${pos.centerY}px`,
+                top: `${yPercent}%`,
                 right: "calc(100% + 24px)",
                 transform: `translateY(-50%) ${hasSomeHover && !isHighlighted ? "scale(0.97)" : "scale(1)"}`,
                 width: "280px",
@@ -83,7 +78,7 @@ export default function RaceDesktopLayout({
                 isHighlighted && "z-10"
               )}
               style={{
-                top: `${pos.centerY}px`,
+                top: `${yPercent}%`,
                 left: "calc(100% + 24px)",
                 transform: `translateY(-50%) ${hasSomeHover && !isHighlighted ? "scale(0.97)" : "scale(1)"}`,
                 width: "280px",

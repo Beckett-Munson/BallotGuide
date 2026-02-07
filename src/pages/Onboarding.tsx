@@ -8,7 +8,7 @@ import {
 import { cn } from "@/lib/utils";
 import type { UserProfile } from "@/types/ballot";
 import { useCyclingPlaceholder } from "@/hooks/use-cycling-placeholder";
-import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
+import { TOPIC_COLORS, hsl, hslAlpha, topicBackground, topicBorderColor } from "@/lib/topicColors";
 
 const TOPICS = [
   { id: "healthcare", label: "Healthcare", icon: Heart },
@@ -132,6 +132,39 @@ export default function Onboarding() {
                 </button>
               );
             })}
+          </div>
+
+          {/* Color-blending bubble */}
+          <div className="flex items-center justify-center mt-8">
+            <div
+              className="relative w-16 h-16 rounded-full border-2 transition-all duration-500 ease-out overflow-hidden"
+              style={{
+                borderColor: profile.topics.length > 0
+                  ? topicBorderColor(profile.topics)
+                  : 'hsl(var(--border))',
+                boxShadow: profile.topics.length > 0
+                  ? `0 0 20px 2px ${hslAlpha(
+                      TOPIC_COLORS[profile.topics[0]] ?? { h: 220, s: 15, l: 35 },
+                      0.25
+                    )}`
+                  : 'none',
+              }}
+            >
+              <div
+                className="absolute inset-0 transition-all duration-500 ease-out"
+                style={{
+                  background: profile.topics.length > 0
+                    ? topicBackground(profile.topics, 0.6)
+                    : 'transparent',
+                  transform: profile.topics.length > 0 ? 'scale(1)' : 'scale(0)',
+                }}
+              />
+            </div>
+            <span className="ml-3 text-sm text-muted-foreground">
+              {profile.topics.length === 0
+                ? "Select topics to see your blend"
+                : `${profile.topics.length} topic${profile.topics.length > 1 ? "s" : ""} selected`}
+            </span>
           </div>
         </section>
 

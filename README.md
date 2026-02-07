@@ -3,9 +3,9 @@
 ## Why This Matters
 Local elections have some of the lowest turnout, even though they shape the policies people feel every day.
 
-- In the 100 largest U.S. cities, average mayoral-election turnout was **20.2%**, and **73 of 100 cities were below 25%** turnout.[1]
-- Local governments control spending and policy areas tied to daily life, including schools, public safety, transportation, housing, and water infrastructure.[2]
-- Climate is local too: urban systems account for **67-72%** of global greenhouse gas emissions, and local land use + transportation choices are key mitigation levers.[3][4]
+- In the 100 largest U.S. cities, average mayoral-election turnout was **20.2%**, and **73 of 100 cities were below 25%** turnout. [1]
+- Local governments control spending and policy areas tied to daily life, including schools, public safety, transportation, housing, and water infrastructure. [2]
+- Climate is local too: urban systems account for **67-72%** of global greenhouse gas emissions, and local land use + transportation choices are key mitigation levers. [3][4]
 
 Our goal: make ballots understandable and personally relevant so more people vote with confidence.
 

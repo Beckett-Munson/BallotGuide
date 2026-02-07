@@ -162,7 +162,7 @@ export default function Onboarding() {
                   placeholder.visible ? "opacity-100" : "opacity-0"
                 )}
               >
-                e.g. {placeholder.text}
+                {placeholder.text}
               </div>
             )}
           </div>

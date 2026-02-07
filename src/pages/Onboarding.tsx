@@ -154,9 +154,7 @@ export default function Onboarding() {
               <div
                 className="absolute bottom-0 left-0 right-0 transition-all duration-700 ease-out"
                 style={{
-                  height: profile.topics.length > 0
-                    ? `${Math.min(100, (profile.topics.length / TOPICS.length) * 100 + 15)}%`
-                    : '0%',
+                  height: profile.topics.length > 0 ? '100%' : '0%',
                   background: profile.topics.length > 0
                     ? topicBackground(profile.topics, 0.6)
                     : 'transparent',
@@ -167,7 +165,7 @@ export default function Onboarding() {
                 <div
                   className="absolute left-[-10%] right-[-10%] h-3 animate-[wave_2s_ease-in-out_infinite]"
                   style={{
-                    bottom: `${Math.min(100, (profile.topics.length / TOPICS.length) * 100 + 15) - 4}%`,
+                    bottom: '90%',
                     background: topicBackground(profile.topics, 0.4),
                     borderRadius: '40%',
                     transition: 'bottom 0.7s ease-out',

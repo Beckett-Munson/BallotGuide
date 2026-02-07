@@ -113,7 +113,7 @@ export default function BallotPaper({
                     >
                       {item.title}
                     </h3>
-                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed line-clamp-2">
+                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
                       {item.officialText}
                     </p>
                   </div>

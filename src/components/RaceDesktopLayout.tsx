@@ -1,6 +1,6 @@
 import type { BallotItem } from "@/types/ballot";
 import { cn } from "@/lib/utils";
-import { topicBorderColor } from "@/lib/topicColors";
+import { partyBorderColor } from "@/lib/topicColors";
 import CandidateCard from "@/components/CandidateCard";
 
 interface RaceDesktopLayoutProps {
@@ -25,11 +25,12 @@ export default function RaceDesktopLayout({
         const isHighlighted = hoveredIndex === index;
         const hasSomeHover = hoveredIndex !== null;
         const yPercent = ((index + 0.5) / items.length) * 100;
-        const connectorColor = topicBorderColor(item.relatedTopics);
+        const leftColor = partyBorderColor(candidates[0].party);
+        const rightColor = partyBorderColor(candidates[1].party);
 
         return (
           <div key={`race-annotations-${item.id}`}>
-            {/* Left candidate (candidate 0) */}
+            {/* Left candidate (candidate 0) — blue dot */}
             <div
               className={cn(
                 "absolute transition-all duration-300",
@@ -47,7 +48,7 @@ export default function RaceDesktopLayout({
               onMouseEnter={() => onHoverIndex(index)}
               onMouseLeave={() => onHoverIndex(null)}
             >
-              {/* Connector line */}
+              {/* Connector line — dot centered on ballot boundary */}
               <div
                 className={cn(
                   "absolute top-1/2 -translate-y-1/2 transition-opacity duration-300",
@@ -55,10 +56,10 @@ export default function RaceDesktopLayout({
                 )}
                 style={{ left: "100%", width: "24px" }}
               >
-                <div className="w-full h-px" style={{ backgroundColor: connectorColor + "80" }} />
+                <div className="w-full h-px" style={{ backgroundColor: leftColor + "80" }} />
                 <div
-                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full right-0"
-                  style={{ backgroundColor: connectorColor }}
+                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full right-0 translate-x-1/2"
+                  style={{ backgroundColor: leftColor }}
                 />
               </div>
               <CandidateCard
@@ -68,7 +69,7 @@ export default function RaceDesktopLayout({
               />
             </div>
 
-            {/* Right candidate (candidate 1) */}
+            {/* Right candidate (candidate 1) — red dot */}
             <div
               className={cn(
                 "absolute transition-all duration-300",
@@ -86,7 +87,7 @@ export default function RaceDesktopLayout({
               onMouseEnter={() => onHoverIndex(index)}
               onMouseLeave={() => onHoverIndex(null)}
             >
-              {/* Connector line */}
+              {/* Connector line — dot centered on ballot boundary */}
               <div
                 className={cn(
                   "absolute top-1/2 -translate-y-1/2 transition-opacity duration-300",
@@ -94,10 +95,10 @@ export default function RaceDesktopLayout({
                 )}
                 style={{ right: "100%", width: "24px" }}
               >
-                <div className="w-full h-px" style={{ backgroundColor: connectorColor + "80" }} />
+                <div className="w-full h-px" style={{ backgroundColor: rightColor + "80" }} />
                 <div
-                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full left-0"
-                  style={{ backgroundColor: connectorColor }}
+                  className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full left-0 -translate-x-1/2"
+                  style={{ backgroundColor: rightColor }}
                 />
               </div>
               <CandidateCard

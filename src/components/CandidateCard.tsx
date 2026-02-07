@@ -1,14 +1,7 @@
 import { useState } from "react";
 import type { Candidate } from "@/types/ballot";
 import { cn } from "@/lib/utils";
-import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
-
-const PARTY_COLORS = {
-  D: { h: 215, s: 60, l: 45 },
-  R: { h: 0, s: 55, l: 48 },
-  I: { h: 270, s: 45, l: 50 },
-  L: { h: 280, s: 40, l: 55 },
-};
+import { TOPIC_COLORS, PARTY_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 
 const PARTY_LABELS: Record<string, string> = {
   D: "Democrat",
@@ -29,7 +22,7 @@ export default function CandidateCard({
   isActive,
 }: CandidateCardProps) {
   const [activeTab, setActiveTab] = useState<string | null>(null);
-  const partyColor = PARTY_COLORS[candidate.party];
+  const partyColor = PARTY_COLORS[candidate.party] ?? { h: 220, s: 15, l: 35 };
   const initials = candidate.name
     .split(" ")
     .map((w) => w[0])

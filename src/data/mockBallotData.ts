@@ -318,7 +318,7 @@ export function generatePersonalizedBallot(
     expand: {
       newsSummary: item.expand.newsSummary,
       citations: item.expand.citations,
-      chatbotPrompt: `Explain how "${item.title}" affects someone interested in ${topicNames} who is ${profile.ageRange}, ${profile.employmentType}, and ${profile.familyStatus}${profile.isVeteran ? ", and is a veteran" : ""}${profile.isStudent ? ", and is a student" : ""}.`,
+      chatbotPrompt: `Explain how "${item.title}" affects someone interested in ${topicNames}${profile.aboutYou ? ` who describes themselves as: ${profile.aboutYou}` : ""}.`,
     },
   }));
 

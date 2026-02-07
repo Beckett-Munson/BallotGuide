@@ -1,10 +1,6 @@
 export interface UserProfile {
   topics: string[];
-  ageRange: string;
-  employmentType: string;
-  familyStatus: string;
-  isVeteran: boolean;
-  isStudent: boolean;
+  aboutYou: string;
   zipCode: string;
 }
 

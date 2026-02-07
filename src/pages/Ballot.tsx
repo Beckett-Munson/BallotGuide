@@ -130,24 +130,14 @@ export default function Ballot() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Top bar */}
-      <nav className="sticky top-0 z-50 bg-primary/95 backdrop-blur-sm border-b border-primary-foreground/10">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Vote className="w-5 h-5 text-accent" />
-            <span className="font-display text-lg font-bold text-primary-foreground">
-              BallotGuide
-            </span>
-          </div>
-          <button
-            onClick={() => navigate("/")}
-            className="flex items-center gap-1.5 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Start over
-          </button>
-        </div>
-      </nav>
+      {/* Floating Start over button */}
+      <button
+        onClick={() => navigate("/")}
+        className="fixed top-4 right-4 z-50 flex items-center gap-1.5 px-3 py-2 text-sm bg-background/90 backdrop-blur-sm border border-border rounded-lg text-foreground/70 hover:text-foreground hover:bg-background transition-colors shadow-sm"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Start over
+      </button>
 
       <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
         {/* Greeting */}

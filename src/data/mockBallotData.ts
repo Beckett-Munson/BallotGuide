@@ -464,7 +464,7 @@ const TOPIC_EXPLANATIONS: Record<string, {
   },
   housing: {
     topic: "housing",
-    title: "Housing & Your Ballot",
+    title: "Housing on Your Ballot",
     explanation:
       "Question 2 is most relevant to housing concerns. Water and sewer costs are a significant component of monthly housing expenses. In Pennsylvania communities where utilities were privatized, residents have seen substantial rate increases that directly affect housing affordability. Keeping Pittsburgh's water and sewer systems public helps stabilize one component of housing costs for both homeowners and renters.",
     citations: [
@@ -477,7 +477,7 @@ const TOPIC_EXPLANATIONS: Record<string, {
   },
   immigration: {
     topic: "immigration",
-    title: "Immigration & Your Ballot",
+    title: "Immigration on Your Ballot",
     explanation:
       "Question 1 is particularly relevant to immigrant communities. The anti-discrimination amendment would protect against discrimination based on national origin, place of birth, and association with any foreign state in all city business dealings. This provides an additional layer of protection for Pittsburgh's growing immigrant communities and businesses with international ties.",
     citations: [
@@ -503,7 +503,7 @@ const TOPIC_EXPLANATIONS: Record<string, {
   },
   public_safety: {
     topic: "public_safety",
-    title: "Public Safety & Your Ballot",
+    title: "Public Safety on Your Ballot",
     explanation:
       "Question 2 has direct public safety implications. Clean drinking water and functioning sewer and stormwater systems are fundamental to public health and safety. Keeping these systems under public ownership ensures they remain accountable to voters and subject to public oversight, rather than being managed by private entities whose primary obligation is to shareholders.",
     citations: [

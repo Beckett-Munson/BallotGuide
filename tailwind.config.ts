@@ -101,9 +101,35 @@ export default {
           "0%, 100%": { transform: "translateX(-5%) rotate(2deg)" },
           "50%": { transform: "translateX(5%) rotate(-2deg)" },
         },
-        "swirl": {
-          from: { transform: "rotate(0deg)" },
-          to: { transform: "rotate(360deg)" },
+        "blob-drift-1": {
+          "0%": { transform: "translate(-20%, -10%)" },
+          "33%": { transform: "translate(10%, -25%)" },
+          "66%": { transform: "translate(-10%, 15%)" },
+          "100%": { transform: "translate(-20%, -10%)" },
+        },
+        "blob-drift-2": {
+          "0%": { transform: "translate(15%, 10%)" },
+          "33%": { transform: "translate(-15%, 20%)" },
+          "66%": { transform: "translate(20%, -15%)" },
+          "100%": { transform: "translate(15%, 10%)" },
+        },
+        "blob-drift-3": {
+          "0%": { transform: "translate(5%, -20%)" },
+          "33%": { transform: "translate(-20%, 5%)" },
+          "66%": { transform: "translate(15%, 10%)" },
+          "100%": { transform: "translate(5%, -20%)" },
+        },
+        "blob-drift-4": {
+          "0%": { transform: "translate(-15%, 15%)" },
+          "33%": { transform: "translate(10%, -10%)" },
+          "66%": { transform: "translate(-5%, -20%)" },
+          "100%": { transform: "translate(-15%, 15%)" },
+        },
+        "blob-drift-5": {
+          "0%": { transform: "translate(10%, 5%)" },
+          "33%": { transform: "translate(-10%, -15%)" },
+          "66%": { transform: "translate(5%, 20%)" },
+          "100%": { transform: "translate(10%, 5%)" },
         },
       },
       animation: {
@@ -111,7 +137,6 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.4s ease-out",
         "ballot-enter": "ballot-enter 0.4s ease-out forwards",
-        "swirl": "swirl 8s linear infinite",
       },
     },
   },

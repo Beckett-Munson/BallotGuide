@@ -150,37 +150,39 @@ export default function Onboarding() {
                   : 'none',
               }}
             >
-              {/* Chromatic swirl fill */}
+              {/* Fluid blob fill */}
               {profile.topics.length > 0 && (() => {
                 const colors = profile.topics
                   .map((id) => TOPIC_COLORS[id])
                   .filter(Boolean);
-                const stops = colors.length === 1
-                  ? `${hslAlpha(colors[0], 0.7)} 0deg, ${hslAlpha(colors[0], 0.5)} 180deg, ${hslAlpha(colors[0], 0.7)} 360deg`
-                  : colors
-                      .map((c, i) => {
-                        const deg = Math.round((i / colors.length) * 360);
-                        return `${hslAlpha(c, 0.7)} ${deg}deg`;
-                      })
-                      .concat([`${hslAlpha(colors[0], 0.7)} 360deg`])
-                      .join(', ');
+                // Each color gets its own drifting blob
+                const blobAnimations = [
+                  'blob-drift-1', 'blob-drift-2', 'blob-drift-3',
+                  'blob-drift-4', 'blob-drift-5',
+                ];
                 return (
                   <>
-                    {/* Swirling conic gradient layer */}
+                    {/* Base fill so there's no gap */}
                     <div
-                      className="absolute inset-[-25%] animate-[swirl_8s_linear_infinite] transition-opacity duration-700"
+                      className="absolute inset-0 transition-colors duration-700"
                       style={{
-                        background: `conic-gradient(from 0deg at 50% 50%, ${stops})`,
-                        filter: 'blur(6px)',
+                        backgroundColor: hslAlpha(colors[0], 0.35),
                       }}
                     />
-                    {/* Soft radial overlay for depth */}
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background: `radial-gradient(circle at 35% 35%, ${hslAlpha(colors[0], 0.3)}, transparent 70%)`,
-                      }}
-                    />
+                    {/* Individual drifting color blobs */}
+                    {colors.map((c, i) => (
+                      <div
+                        key={i}
+                        className="absolute rounded-full"
+                        style={{
+                          width: '120%',
+                          height: '120%',
+                          background: `radial-gradient(circle, ${hslAlpha(c, 0.7)} 0%, ${hslAlpha(c, 0.2)} 50%, transparent 70%)`,
+                          animation: `${blobAnimations[i % blobAnimations.length]} ${10 + i * 2}s ease-in-out infinite`,
+                          filter: 'blur(4px)',
+                        }}
+                      />
+                    ))}
                   </>
                 );
               })()}

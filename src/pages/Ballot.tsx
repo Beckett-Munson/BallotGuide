@@ -275,12 +275,12 @@ export default function Ballot() {
           </p>
           <Suspense
             fallback={
-              <div className="h-[420px] rounded-xl border border-border bg-muted flex items-center justify-center">
+              <div className="h-[520px] rounded-xl border border-border bg-muted flex items-center justify-center">
                 <p className="text-sm text-muted-foreground animate-pulse">Loading 3D map…</p>
               </div>
             }
           >
-            <TownMap />
+            <TownMap interestTopics={userTopics} />
           </Suspense>
         </section>
 

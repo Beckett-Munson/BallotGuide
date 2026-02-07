@@ -247,26 +247,6 @@ export default function Ballot() {
           </div>
         </section>
 
-        {/* Topic Education */}
-        {ballot.topicExplanations.length > 0 && (
-          <section className="mb-16 max-w-3xl mx-auto">
-            <div className="flex items-center gap-2 mb-6">
-              <BookOpen className="w-5 h-5 text-accent" />
-              <h2 className="font-display text-2xl font-semibold text-foreground">
-                Understanding Your Issues
-              </h2>
-            </div>
-            <p className="text-muted-foreground mb-6">
-              Deep-dive into how the topics you care about intersect with items on your ballot.
-            </p>
-            <div className="space-y-3">
-              {ballot.topicExplanations.map((topic) => (
-                <TopicExplanation key={topic.topic} topic={topic} />
-              ))}
-            </div>
-          </section>
-        )}
-
         {/* County Budget Visualization */}
         <section className="mb-16 max-w-4xl mx-auto">
           <div className="flex items-center gap-2 mb-3">
@@ -281,6 +261,7 @@ export default function Ballot() {
           </p>
           <BudgetChart />
         </section>
+
         {/* Interactive Town Map */}
         <section className="mb-16 max-w-3xl mx-auto">
           <div className="flex items-center gap-2 mb-3">
@@ -302,6 +283,26 @@ export default function Ballot() {
             <TownMap />
           </Suspense>
         </section>
+
+        {/* Topic Education */}
+        {ballot.topicExplanations.length > 0 && (
+          <section className="mb-16 max-w-3xl mx-auto">
+            <div className="flex items-center gap-2 mb-6">
+              <BookOpen className="w-5 h-5 text-accent" />
+              <h2 className="font-display text-2xl font-semibold text-foreground">
+                Understanding Your Issues
+              </h2>
+            </div>
+            <p className="text-muted-foreground mb-6">
+              Deep-dive into how the topics you care about intersect with items on your ballot.
+            </p>
+            <div className="space-y-3">
+              {ballot.topicExplanations.map((topic) => (
+                <TopicExplanation key={topic.topic} topic={topic} />
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Footer */}
         <footer className="border-t border-border pt-8 pb-16 text-center max-w-lg mx-auto">

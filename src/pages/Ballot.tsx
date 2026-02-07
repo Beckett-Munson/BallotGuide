@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Vote, ArrowLeft, BookOpen } from "lucide-react";
+import { Vote, ArrowLeft, BookOpen, Map } from "lucide-react";
+
+const TownMap = lazy(() => import("@/components/TownMap"));
 import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
 import { generatePersonalizedBallot } from "@/data/mockBallotData";
 import BallotPaper from "@/components/BallotPaper";
@@ -263,6 +265,28 @@ export default function Ballot() {
             </div>
           </section>
         )}
+
+        {/* Interactive Town Map */}
+        <section className="mb-16 max-w-3xl mx-auto">
+          <div className="flex items-center gap-2 mb-3">
+            <Map className="w-5 h-5 text-accent" />
+            <h2 className="font-display text-2xl font-semibold text-foreground">
+              Your Neighborhood, Your Ballot
+            </h2>
+          </div>
+          <p className="text-muted-foreground mb-6">
+            Explore how ballot items affect everyday places in your community. Click on a feature to learn more.
+          </p>
+          <Suspense
+            fallback={
+              <div className="h-[420px] rounded-xl border border-border bg-muted flex items-center justify-center">
+                <p className="text-sm text-muted-foreground animate-pulse">Loading 3D map…</p>
+              </div>
+            }
+          >
+            <TownMap />
+          </Suspense>
+        </section>
 
         {/* Footer */}
         <footer className="border-t border-border pt-8 pb-16 text-center max-w-lg mx-auto">

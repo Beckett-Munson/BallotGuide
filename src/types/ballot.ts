@@ -1,7 +1,14 @@
 export interface UserProfile {
-  topics: string[];
+  age: number;
+  issues: Record<string, string[]>; // dictionary for string (issue) : list of strings (keywords)
   aboutYou: string;
   zipCode: string;
+}
+
+export interface Policy {
+  id: string;
+  title: string;
+  question: string;
 }
 
 export interface Candidate {

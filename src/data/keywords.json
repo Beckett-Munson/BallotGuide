@@ -1,0 +1,258 @@
+[
+  {
+    "id": "climate",
+    "label": "Climate",
+    "keywords": [
+      "climate change",
+      "global warming",
+      "carbon emissions",
+      "greenhouse gas",
+      "renewable energy",
+      "sustainability",
+      "environment",
+      "fossil fuels",
+      "EPA",
+      "clean energy"
+    ]
+  },
+  {
+    "id": "housing",
+    "label": "Housing",
+    "keywords": [
+      "affordable housing",
+      "zoning",
+      "rent control",
+      "mortgage",
+      "homelessness",
+      "real estate",
+      "tenants rights",
+      "property tax",
+      "housing market",
+      "subsidized housing"
+    ]
+  },
+  {
+    "id": "healthcare",
+    "label": "Healthcare",
+    "keywords": [
+      "health insurance",
+      "medicare",
+      "medicaid",
+      "affordable care act",
+      "public health",
+      "pharmaceuticals",
+      "drug pricing",
+      "mental health",
+      "hospital",
+      "medical coverage"
+    ]
+  },
+  {
+    "id": "education",
+    "label": "Education",
+    "keywords": [
+      "student loans",
+      "tuition",
+      "k-12",
+      "public schools",
+      "university",
+      "curriculum",
+      "charter schools",
+      "teachers union",
+      "early childhood education",
+      "funding"
+    ]
+  },
+  {
+    "id": "transportation",
+    "label": "Transportation",
+    "keywords": [
+      "public transit",
+      "subway",
+      "infrastructure",
+      "highways",
+      "rail",
+      "aviation",
+      "traffic",
+      "EV",
+      "commuter",
+      "DOT"
+    ]
+  },
+  {
+    "id": "taxes",
+    "label": "Taxes",
+    "keywords": [
+      "income tax",
+      "corporate tax",
+      "IRS",
+      "tax reform",
+      "capital gains",
+      "deductions",
+      "revenue",
+      "fiscal policy",
+      "tax credits",
+      "estate tax"
+    ]
+  },
+  {
+    "id": "unions",
+    "label": "Unions",
+    "keywords": [
+      "labor rights",
+      "collective bargaining",
+      "strike",
+      "trade union",
+      "workers compensation",
+      "NLRB",
+      "workplace safety",
+      "minimum wage",
+      "organizing",
+      "labor dispute"
+    ]
+  },
+  {
+    "id": "abortion",
+    "label": "Abortion",
+    "keywords": [
+      "reproductive rights",
+      "pro-choice",
+      "pro-life",
+      "roe v wade",
+      "planned parenthood",
+      "family planning",
+      "women's health",
+      "contraception",
+      "pregnancy termination",
+      "fetal viability"
+    ]
+  },
+  {
+    "id": "immigration",
+    "label": "Immigration",
+    "keywords": [
+      "border security",
+      "visa",
+      "green card",
+      "citizenship",
+      "deportation",
+      "asylum",
+      "DACA",
+      "undocumented",
+      "migrant",
+      "naturalization"
+    ]
+  },
+  {
+    "id": "crime",
+    "label": "Crime",
+    "keywords": [
+      "law enforcement",
+      "police reform",
+      "criminal justice",
+      "public safety",
+      "gun control",
+      "incarceration",
+      "violent crime",
+      "sentencing",
+      "recidivism",
+      "drug enforcement"
+    ]
+  },
+  {
+    "id": "international_relations",
+    "label": "International Relations",
+    "keywords": [
+      "foreign policy",
+      "diplomacy",
+      "trade agreements",
+      "sanctions",
+      "national security",
+      "NATO",
+      "United Nations",
+      "geopolitics",
+      "human rights",
+      "military aid"
+    ]
+  },
+  {
+    "id": "infrastructure",
+    "label": "Infrastructure",
+    "keywords": [
+      "bridges",
+      "broadband",
+      "water supply",
+      "power grid",
+      "construction",
+      "civil engineering",
+      "public works",
+      "roads",
+      "modernization",
+      "utilities"
+    ]
+  },
+  {
+    "id": "lgbtq",
+    "label": "LGBTQ",
+    "keywords": [
+      "marriage equality",
+      "discrimination",
+      "transgender rights",
+      "gender identity",
+      "civil rights",
+      "pride",
+      "sexual orientation",
+      "inclusion",
+      "conversion therapy",
+      "equality act"
+    ]
+  },
+  {
+    "id": "job",
+    "label": "Job",
+    "keywords": [
+      "employment",
+      "unemployment rate",
+      "workforce",
+      "hiring",
+      "wages",
+      "career development",
+      "job market",
+      "labor force",
+      "recruitment",
+      "staffing"
+    ]
+  },
+  {
+    "id": "social",
+    "label": "Social Life",
+    "keywords": [
+      "community events",
+      "recreation",
+      "civic engagement",
+      "culture",
+      "arts",
+      "social services",
+      "volunteering",
+      "lifestyle",
+      "public spaces",
+      "entertainment"
+    ]
+  },
+  {
+    "id": "kids",
+    "label": "Kids",
+    "keywords": [
+      "childcare",
+      "pediatrics",
+      "parenting",
+      "youth programs",
+      "adoption",
+      "foster care",
+      "child welfare",
+      "early development",
+      "family support",
+      "after school"
+    ]
+  }
+]

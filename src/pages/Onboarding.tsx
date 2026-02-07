@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 import type { UserProfile } from "@/types/ballot";
 import { useCyclingPlaceholder } from "@/hooks/use-cycling-placeholder";
 import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
+import KeywordData from '../data/keywords.json';
+import axios from "axios";
 
 const TOPICS = [
   { id: "healthcare", label: "Healthcare", icon: Heart },
@@ -29,27 +31,82 @@ const TOPICS = [
 ];
 
 export default function Onboarding() {
+
+  
   const navigate = useNavigate();
   const placeholder = useCyclingPlaceholder(5000);
   const [profile, setProfile] = useState<UserProfile>({
-    topics: [],
+    age: 0,
+    issues: {},
     aboutYou: "",
     zipCode: "",
   });
 
-  const toggleTopic = (id: string) => {
-    setProfile((prev) => ({
-      ...prev,
-      topics: prev.topics.includes(id)
-        ? prev.topics.filter((t) => t !== id)
-        : [...prev.topics, id],
-    }));
-  };
+const toggleTopic = (id: string) => {
+  setProfile((prev) => {
+    const nextIssues = { ...prev.issues };
 
-  const canSubmit = profile.topics.length > 0 && profile.zipCode.length === 5;
+    if (nextIssues[id]) {
+      delete nextIssues[id];
+    } else {
+      const found = (KeywordData as any[]).find((x) => x.id === id);
+      nextIssues[id] = found?.keywords ?? [];
+    }
+
+    return { ...prev, issues: nextIssues };
+  });
+};
+
+const canSubmit =
+  Object.keys(profile.issues).length > 0 && profile.zipCode.length === 5;
+
+  // call to backend with prompt
+  const getAnnotations = async ({
+  age,
+  district,
+  issues,
+  notes,
+}: {
+  age: number;
+  district: string;
+  issues: Record<string, string[]>;
+  notes: string;
+}) => {
+  try {
+    const prompt = `
+User Profile:
+Age: ${age}
+District: ${district}
+
+Selected Issues:
+${Object.keys(issues).join(", ")}
+
+Keywords by Issue (dictionary format):
+${JSON.stringify(issues, null, 2)}
+
+Additional Context:
+${notes}
+
+Task:
+Fetch legislations related to the user.
+`;
+
+    const response = await axios.post(
+      "http://localhost:5001/annotations",
+      { prompt },
+      { headers: { "Content-Type": "application/json" }, withCredentials: true }
+    );
+
+    console.log("LLM Response:", response.data);
+  } catch (error) {
+    console.error("Error generating annotations:", error);
+  }
+};
 
   const handleSubmit = () => {
     sessionStorage.setItem("voterProfile", JSON.stringify(profile));
+    console.log(profile);
+
     navigate("/ballot");
   };
 
@@ -92,7 +149,7 @@ export default function Onboarding() {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {TOPICS.map(({ id, label, icon: Icon }) => {
-              const selected = profile.topics.includes(id);
+              const selected = Boolean(profile.issues[id]);
               const color = TOPIC_COLORS[id];
               return (
                 <button

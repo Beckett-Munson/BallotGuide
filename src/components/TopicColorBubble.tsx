@@ -9,7 +9,7 @@ interface TopicColorBubbleProps {
   /** Subtle scale pulse animation */
   pulse?: boolean;
   /** Circle size */
-  size?: "default" | "large";
+  size?: "default" | "large" | "xl";
   /** Fill parent (for transition overlay; use with w/h on wrapper) */
   fillContainer?: boolean;
   /** Wrapper className (for positioning in transition) */
@@ -58,9 +58,11 @@ const TopicColorBubble = forwardRef<HTMLDivElement, TopicColorBubbleProps>(
 
   const sizeClass = fillContainer
     ? "w-full h-full"
-    : size === "large"
-      ? "w-24 h-24"
-      : "w-16 h-16";
+    : size === "xl"
+      ? "w-32 h-32"
+      : size === "large"
+        ? "w-24 h-24"
+        : "w-16 h-16";
 
   return (
     <div className={hideLabel ? className : `flex items-center justify-center mt-8 ${className}`.trim()}>

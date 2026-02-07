@@ -118,7 +118,8 @@ export default function Ballot() {
           <TopicColorBubble
             topicIds={loadingTopicIds}
             hideLabel
-            size="large"
+            pulse
+            size="xl"
           />
           <LoadingMessages />
         </div>
@@ -240,7 +241,8 @@ export default function Ballot() {
           <TopicColorBubble
             topicIds={loadingTopicIds}
             hideLabel
-            size="large"
+            pulse
+            size="xl"
           />
           <LoadingMessages />
         </div>

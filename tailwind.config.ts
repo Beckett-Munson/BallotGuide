@@ -149,7 +149,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.4s ease-out",
         "ballot-enter": "ballot-enter 0.4s ease-out forwards",
-        "bubble-pulse": "bubble-pulse 2s ease-in-out infinite",
+        "bubble-pulse": "bubble-pulse 2.6s ease-in-out infinite",
         "bubble-bob": "bubble-bob 4s ease-in-out infinite",
       },
     },

@@ -7,6 +7,8 @@ interface BallotPaperProps {
   activeIndex: number | null;
   onItemClick: (index: number) => void;
   onItemHover: (index: number | null) => void;
+  sectionTitle?: string;
+  sectionSubtitle?: string;
 }
 
 export default function BallotPaper({
@@ -14,6 +16,8 @@ export default function BallotPaper({
   activeIndex,
   onItemClick,
   onItemHover,
+  sectionTitle = "Official Sample Ballot",
+  sectionSubtitle = "City of Pittsburgh • Primary Election — May 20, 2025",
 }: BallotPaperProps) {
   const hasHover = activeIndex !== null;
 
@@ -37,10 +41,10 @@ export default function BallotPaper({
             <div className="w-12 h-px bg-foreground/20" />
           </div>
           <h2 className="font-display text-xl md:text-2xl font-bold text-foreground tracking-tight">
-            Official Sample Ballot
+            {sectionTitle}
           </h2>
           <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground mt-1 font-medium">
-            City of Pittsburgh • Primary Election — May 20, 2025
+            {sectionSubtitle}
           </p>
         </div>
 

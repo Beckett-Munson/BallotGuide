@@ -117,6 +117,162 @@ const ALL_BALLOT_ITEMS = [
   },
 ];
 
+const ALL_RACE_ITEMS = [
+  {
+    id: "race-mayor",
+    title: "Mayor of Pittsburgh",
+    category: "office",
+    officialText:
+      "Vote for one candidate for Mayor of the City of Pittsburgh. The mayor serves a four-year term and is the chief executive officer of the city, responsible for administering city operations, proposing the annual budget, and appointing department heads.",
+    annotations: {
+      default:
+        "The mayoral race features competitive primaries on both sides. Democrats Ed Gainey (incumbent) and Corey O'Connor, and Republicans Tony Moreno and Thomas West are running. The race reflects Pittsburgh at a crossroads — recovering from COVID-era disruptions while facing challenges in downtown real estate, public safety, and infrastructure.",
+      jobs:
+        "The next mayor will shape Pittsburgh's economic recovery. Downtown office vacancies have surged post-COVID, and the mayor's approach to attracting businesses, supporting small enterprises, and managing the city's workforce will directly impact local employment.",
+      housing:
+        "Housing affordability is a central campaign issue. The next mayor will influence zoning policy, development incentives, and tenant protections as Pittsburgh grapples with rising housing costs in popular neighborhoods.",
+      public_safety:
+        "Public safety has been a defining issue. Candidates have debated approaches to policing, gun violence reduction, and community safety programs. The mayor oversees the Bureau of Police and sets public safety priorities.",
+      taxes:
+        "The mayor proposes Pittsburgh's annual budget and influences tax policy. With changing downtown economics, the next mayor will need to address potential revenue shortfalls while maintaining city services.",
+      environment:
+        "Environmental policy is a key differentiator. The mayor shapes the city's climate action plan, controls infrastructure investment in flood mitigation, and influences sustainability initiatives across departments.",
+      transit:
+        "The mayor works with Port Authority and state officials on transit funding and planning. Transportation infrastructure investment and connections between neighborhoods are key issues in this race.",
+      government:
+        "This race will determine the executive leadership of Pittsburgh's government for the next four years. The mayor appoints department heads, proposes the budget, and sets the administration's policy priorities.",
+    },
+    expand: {
+      newsSummary:
+        "The Democratic primary features incumbent Ed Gainey facing challenger Corey O'Connor, a former City Council member and son of the late Mayor Bob O'Connor. The Republican primary has Tony Moreno and Thomas West competing. Key issues include downtown revitalization, public safety, infrastructure, and the city's financial health post-COVID.",
+      citations: [
+        {
+          title: "Pittsburgh's 2025 Mayoral Primaries — Candidate Guide",
+          url: "https://www.publicsource.org/pittsburgh-mayoral-primary-2025-candidate-highlights-achievements-endorsements-democrat-republican/",
+          source: "PublicSource",
+        },
+        {
+          title: "Top Races on Today's Ballot in Pittsburgh and Allegheny County",
+          url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary",
+          source: "90.5 WESA",
+        },
+      ],
+    },
+  },
+  {
+    id: "race-common-pleas",
+    title: "Allegheny County Court of Common Pleas (8 Seats)",
+    category: "office",
+    officialText:
+      "Vote for up to eight candidates for Judge of the Court of Common Pleas of Allegheny County. Judges serve a 10-year term and preside over civil and criminal cases in the county's trial court, including family, civil, criminal, and orphans' court divisions.",
+    annotations: {
+      default:
+        "Eight seats are open on the county's main trial court due to a wave of retirements — 22 candidates are competing. Combined with a similar 2021 contest, over one-third of the county bench will have turned over in four years. These judges handle everything from criminal cases to family disputes.",
+      civil_rights:
+        "Judges on the Court of Common Pleas make critical decisions affecting civil rights — from criminal sentencing disparities to family court custody decisions. The composition of the bench directly impacts how justice is administered across communities.",
+      public_safety:
+        "These judges handle criminal cases in Allegheny County, setting bail, conducting trials, and imposing sentences. Their approach to criminal justice — whether emphasizing rehabilitation or punishment — affects public safety outcomes county-wide.",
+      government:
+        "This is an unusually consequential judicial election. With 8 of the court's seats open, voters will reshape over one-third of the bench in a single election cycle. Judicial elections rarely get much attention, but these judges make daily decisions that affect thousands of residents.",
+      jobs:
+        "The Court of Common Pleas handles business disputes, contract enforcement, and employment law cases. The judges elected here will influence the legal environment for businesses and workers throughout Allegheny County.",
+    },
+    expand: {
+      newsSummary:
+        "A total of 22 candidates are seeking 8 open seats, making this one of the largest judicial contests in recent county history. The wave of retirements creating these vacancies means voters have an unusual opportunity to reshape the bench. Candidates range from experienced attorneys to sitting magistrate judges, with backgrounds spanning criminal defense, prosecution, family law, and civil litigation.",
+      citations: [
+        {
+          title: "Election Results: Allegheny County Judicial Races",
+          url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary",
+          source: "90.5 WESA",
+        },
+      ],
+    },
+  },
+  {
+    id: "race-county-council-1",
+    title: "Allegheny County Council — District 1",
+    category: "office",
+    officialText:
+      "Vote for one candidate for Allegheny County Council, District 1. Council members serve a four-year term on the 15-member legislative body that passes the county budget, enacts ordinances, and provides oversight of county operations.",
+    annotations: {
+      default:
+        "District 1 has a contested Democratic primary between Kathleen Madonna-Emmerling and Carl Villella, replacing incumbent Jack Betkowski. Republican Mary Jo Wise is running unopposed on the GOP side. County Council controls the county budget and passes local ordinances.",
+      government:
+        "County Council is the legislative branch of Allegheny County government. Council members set policy, approve the budget, and provide oversight. This seat is being vacated by incumbent Jack Betkowski, creating an open-seat race.",
+      taxes:
+        "County Council approves the county budget and sets property tax rates. The person elected to this seat will vote on how county tax revenue is spent across departments and services.",
+    },
+    expand: {
+      newsSummary:
+        "Democrats Kathleen Madonna-Emmerling and Carl Villella are competing to replace retiring incumbent Jack Betkowski. The winner of the Democratic primary will likely face Republican Mary Jo Wise, who is running unopposed, in the November general election.",
+      citations: [
+        {
+          title: "Allegheny County Council Races — 2025 Primary",
+          url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary",
+          source: "90.5 WESA",
+        },
+      ],
+    },
+  },
+  {
+    id: "race-county-council-9",
+    title: "Allegheny County Council — District 9",
+    category: "office",
+    officialText:
+      "Vote for one candidate for Allegheny County Council, District 9. Council members serve a four-year term on the 15-member legislative body that passes the county budget, enacts ordinances, and provides oversight of county operations.",
+    annotations: {
+      default:
+        "For the first time in nearly 20 years, District 9 will have new representation. Incumbent Bob Macey announced his retirement, and Democrats Aaron Adams, Dylan Altemara, and Kelliane Frketic are seeking to replace him.",
+      government:
+        "This is a rare open-seat race — Bob Macey has held this seat for nearly two decades. The new council member will represent District 9 on the 15-member body that governs Allegheny County.",
+      taxes:
+        "As with all County Council seats, the person elected here will vote on county budgets, tax rates, and spending priorities that affect all Allegheny County residents.",
+    },
+    expand: {
+      newsSummary:
+        "Incumbent Democrat Bob Macey announced his retirement earlier this year, opening up the seat for the first time in nearly 20 years. Three Democrats — Aaron Adams, Dylan Altemara, and Kelliane Frketic — are competing in the primary.",
+      citations: [
+        {
+          title: "Allegheny County Council Races — 2025 Primary",
+          url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary",
+          source: "90.5 WESA",
+        },
+      ],
+    },
+  },
+  {
+    id: "race-school-board",
+    title: "Pittsburgh Public Schools Board of Directors",
+    category: "office",
+    officialText:
+      "Vote for candidates for the Board of Directors of Pittsburgh Public Schools. Board members serve four-year terms and are responsible for setting district policy, approving the school budget, and hiring the superintendent.",
+    annotations: {
+      default:
+        "The school board oversees Pittsburgh Public Schools, which serves approximately 20,000 students. Board members set educational policy, approve the district budget, and hire the superintendent. Several seats are contested in this primary.",
+      education:
+        "This is the most directly impactful education race on your ballot. School board members determine curriculum standards, school funding priorities, teacher contracts, and building maintenance for all Pittsburgh public schools.",
+      taxes:
+        "The school board sets the school district's property tax rate, which is a significant portion of Pittsburgh homeowners' total property tax bills. Board decisions on spending directly affect your tax burden.",
+      family:
+        "If you have children in Pittsburgh Public Schools, this race directly affects their education. Board members decide on school closures, program offerings, special education services, and safety policies.",
+      housing:
+        "School quality significantly influences property values and housing decisions. The school board's direction affects the desirability and affordability of Pittsburgh neighborhoods.",
+    },
+    expand: {
+      newsSummary:
+        "Pittsburgh Public Schools has faced ongoing challenges including declining enrollment, aging facilities, and debates over school closures and consolidation. The board will also need to navigate the post-pandemic academic recovery and decisions about how to allocate federal relief funds.",
+      citations: [
+        {
+          title: "Pittsburgh Public Schools Board Candidates",
+          url: "https://www.publicsource.org/live-election-results-pittsburgh-mayoral-primaries/",
+          source: "PublicSource",
+        },
+      ],
+    },
+  },
+];
+
 const TOPIC_EXPLANATIONS: Record<string, {
   topic: string;
   title: string;
@@ -271,30 +427,36 @@ const TOPIC_EXPLANATIONS: Record<string, {
 };
 
 function getAnnotation(
-  item: (typeof ALL_BALLOT_ITEMS)[0],
+  item: RawBallotItem,
   topics: string[]
 ): string {
   for (const topic of topics) {
     const key = topic.toLowerCase().replace(/\s+/g, "_");
-    if (key in item.annotations) {
-      return item.annotations[key as keyof typeof item.annotations] || item.annotations.default;
+    if (key in item.annotations && item.annotations[key]) {
+      return item.annotations[key];
     }
   }
-  return item.annotations.default;
+  return item.annotations.default || "";
 }
 
-export function generatePersonalizedBallot(
-  profile: UserProfile
-): PersonalizedBallot {
-  const topicNames = profile.topics
-    .map((t) => t.charAt(0).toUpperCase() + t.slice(1).replace("_", " "))
-    .join(", ");
+interface RawBallotItem {
+  id: string;
+  title: string;
+  category: string;
+  officialText: string;
+  annotations: Record<string, string>;
+  expand: {
+    newsSummary: string;
+    citations: { title: string; url: string; source: string }[];
+  };
+}
 
-  const greeting = `Your personalized guide to Pittsburgh's 2025 Primary Election ballot questions.`;
-
-  const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot questions facing City of Pittsburgh voters on May 20, 2025. Each item includes a personalized explanation of how it may affect you, along with trusted sources.`;
-
-  const ballotItems = ALL_BALLOT_ITEMS.map((item) => {
+function buildItems(
+  items: RawBallotItem[],
+  profile: UserProfile,
+  topicNames: string
+) {
+  return items.map((item) => {
     const relatedTopics = profile.topics.filter((topic) => {
       const key = topic.toLowerCase().replace(/\s+/g, "_");
       return key === item.category || key in item.annotations;
@@ -314,6 +476,21 @@ export function generatePersonalizedBallot(
       },
     };
   });
+}
+
+export function generatePersonalizedBallot(
+  profile: UserProfile
+): PersonalizedBallot {
+  const topicNames = profile.topics
+    .map((t) => t.charAt(0).toUpperCase() + t.slice(1).replace("_", " "))
+    .join(", ");
+
+  const greeting = `Your personalized guide to Pittsburgh's 2025 Primary Election ballot questions.`;
+
+  const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot questions and ${ALL_RACE_ITEMS.length} active races facing voters on May 20, 2025. Each item includes a personalized explanation of how it may affect you, along with trusted sources.`;
+
+  const ballotItems = buildItems(ALL_BALLOT_ITEMS, profile, topicNames);
+  const raceItems = buildItems(ALL_RACE_ITEMS, profile, topicNames);
 
   const topicExplanations = profile.topics
     .map((topic) => {
@@ -326,6 +503,7 @@ export function generatePersonalizedBallot(
     greeting,
     personalizedSummary,
     ballotItems,
+    raceItems,
     topicExplanations,
   };
 }

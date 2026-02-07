@@ -66,6 +66,7 @@ export default function BallotPaper({
             return (
               <button
                 key={item.id}
+                data-ballot-item={index}
                 className={cn(
                   "w-full text-left px-6 py-4 md:px-10 md:py-5 transition-all duration-300 group cursor-pointer border-b border-foreground/8",
                   isActive

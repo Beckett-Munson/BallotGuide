@@ -1,4 +1,5 @@
-import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
+import type { UserProfile, PersonalizedBallot, Policy, AnnotationResponse } from "@/types/ballot";
+import { AnnotationGenerator } from "@/services/AnnotationGenerator";
 
 const ALL_BALLOT_ITEMS = [
   {
@@ -515,19 +516,6 @@ const TOPIC_EXPLANATIONS: Record<string, {
   },
 };
 
-function getAnnotation(
-  item: RawBallotItem,
-  topics: string[]
-): string {
-  for (const topic of topics) {
-    const key = topic.toLowerCase().replace(/\s+/g, "_");
-    if (key in item.annotations && item.annotations[key]) {
-      return item.annotations[key];
-    }
-  }
-  return item.annotations.default || "";
-}
-
 interface RawBallotItem {
   id: string;
   title: string;
@@ -562,9 +550,10 @@ function buildItems(
       id: item.id,
       title: item.title,
       officialText: item.officialText,
-      annotation: getAnnotation(item, topics),
+      annotation: "",  // filled by AnnotationGenerator
       category: item.category,
       relatedTopics: relatedTopics.length > 0 ? relatedTopics : [item.category],
+      topicAnnotations: undefined as import("@/types/ballot").TopicAnnotation[] | undefined,
       candidates: item.candidates,
       expand: {
         newsSummary: item.expand.newsSummary,
@@ -575,7 +564,74 @@ function buildItems(
       },
     };
   });
-}export function generatePersonalizedBallot(profile: UserProfile): PersonalizedBallot {
+}/**
+ * Convert raw ballot/race items into the Policy[] shape required by AnnotationGenerator.
+ */
+function toPolicies(items: RawBallotItem[]): Policy[] {
+  return items.map((item) => ({
+    id: item.id,
+    title: item.title,
+    question: item.officialText,
+  }));
+}
+
+/**
+ * Apply AnnotationGenerator results to built ballot items.
+ *
+ * For every item whose id appears in `annotationResponse`, the generator's
+ * annotations replace the hardcoded mock annotation. Multiple annotations
+ * (one per relevant user-issue) are joined into a single string. Related
+ * topics and citations are also enriched from the generator output.
+ */
+function applyAnnotations(
+  items: ReturnType<typeof buildItems>,
+  annotationResponse: AnnotationResponse
+) {
+  for (const item of items) {
+    const annotations = annotationResponse[item.id];
+
+    if (!annotations || annotations.length === 0) {
+      console.warn(`⚠️ No annotations returned for "${item.id}" — annotation will be empty.`);
+      continue;
+    }
+
+    console.log(
+      `📝 ${item.id}: ${annotations.length} annotation(s) from generator`,
+      annotations.map((a) => ({ issue: a.issues, text: a.annotation.slice(0, 80) }))
+    );
+
+    // Store per-topic annotations so the UI can switch between them
+    item.topicAnnotations = annotations.map((a) => ({
+      topic: a.issues[0] ?? "general",
+      text: a.annotation,
+      citations: a.citations,
+    }));
+
+    // Set the default annotation to the first topic's text
+    item.annotation = item.topicAnnotations[0]?.text ?? "";
+
+    // Collect all issues referenced by the generator
+    const generatorTopics = annotations.flatMap((a) => a.issues);
+    if (generatorTopics.length > 0) {
+      item.relatedTopics = [...new Set(generatorTopics)];
+    }
+
+    // Merge generator citations into the expand section (avoid duplicates)
+    const existingUrls = new Set(item.expand.citations.map((c) => c.url));
+    for (const ann of annotations) {
+      for (const cite of ann.citations) {
+        if (!existingUrls.has(cite.url)) {
+          existingUrls.add(cite.url);
+          item.expand.citations.push({ ...cite, source: "" });
+        }
+      }
+    }
+  }
+}
+
+export async function generatePersonalizedBallot(
+  profile: UserProfile
+): Promise<PersonalizedBallot> {
   const topics = Object.keys(profile.issues ?? {});
 
   const topicNames = topics
@@ -586,8 +642,57 @@ function buildItems(
 
   const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot questions and ${ALL_RACE_ITEMS.length} active races facing voters on May 20, 2025. Each item includes a personalized explanation of how it may affect you, along with trusted sources.`;
 
+  // Build items with hardcoded mock annotations as baseline
   const ballotItems = buildItems(ALL_BALLOT_ITEMS, profile, topics, topicNames);
   const raceItems = buildItems(ALL_RACE_ITEMS, profile, topics, topicNames);
+
+  // --- Annotation Generator integration ---
+  const dedalusApiKey = import.meta.env.VITE_DEDALUS_API_KEY ?? "";
+  const pineconeApiKey = import.meta.env.VITE_PINECONE_API_KEY ?? "";
+  const pineconeIndexName = import.meta.env.VITE_PINECONE_INDEX_NAME ?? "";
+
+  if (dedalusApiKey && pineconeApiKey && pineconeIndexName) {
+    try {
+      const generator = new AnnotationGenerator({
+        pineconeApiKey,
+        pineconeIndexName,
+        dedalusApiKey,
+      });
+
+      // Only generate annotations for the three ballot questions, not races
+      const questionPolicies: Policy[] = toPolicies(ALL_BALLOT_ITEMS);
+
+      console.log(
+        `📋 Generating annotations for ${questionPolicies.length} ballot questions…`
+      );
+      const startTime = Date.now();
+
+      const annotationResponse = await generator.getAllAnnotations(
+        profile,
+        questionPolicies
+      );
+
+      const elapsed = Date.now() - startTime;
+      console.log(`✅ Annotations generated in ${(elapsed / 1000).toFixed(1)}s`);
+      console.log(
+        "🔑 Response policy IDs:",
+        Object.keys(annotationResponse),
+        "| Annotation counts:",
+        Object.fromEntries(
+          Object.entries(annotationResponse).map(([k, v]) => [k, v.length])
+        )
+      );
+
+      // Override annotations with generator output (questions only)
+      applyAnnotations(ballotItems, annotationResponse);
+    } catch (err) {
+      console.error("⚠️ AnnotationGenerator failed, falling back to mock annotations:", err);
+    }
+  } else {
+    console.warn(
+      "⚠️ Missing VITE_DEDALUS_API_KEY / VITE_PINECONE_API_KEY / VITE_PINECONE_INDEX_NAME – using mock annotations."
+    );
+  }
 
   const topicExplanations = topics
     .map((topic) => {

@@ -7,12 +7,15 @@ interface BallotDesktopAnnotationsProps {
   items: BallotItem[];
   hoveredIndex: number | null;
   onHoverIndex: (index: number | null) => void;
+  /** Measured vertical center (px) of each ballot item relative to the container. */
+  itemPositions?: number[];
 }
 
 export default function BallotDesktopAnnotations({
   items,
   hoveredIndex,
   onHoverIndex,
+  itemPositions,
 }: BallotDesktopAnnotationsProps) {
   return (
     <>
@@ -20,6 +23,12 @@ export default function BallotDesktopAnnotations({
         const isLeft = index % 2 === 0;
         const isHighlighted = hoveredIndex === index;
         const hasSomeHover = hoveredIndex !== null;
+
+        // Use measured position if available, otherwise fall back to percentage
+        const topValue =
+          itemPositions && itemPositions[index] != null
+            ? `${itemPositions[index]}px`
+            : `${((index + 0.5) / items.length) * 100}%`;
 
         return (
           <div
@@ -32,7 +41,7 @@ export default function BallotDesktopAnnotations({
               isHighlighted && "z-10"
             )}
             style={{
-              top: `${((index + 0.5) / items.length) * 100}%`,
+              top: topValue,
               ...(isLeft
                 ? { right: "calc(100% + 24px)", transform: `translateY(-50%) ${hasSomeHover && !isHighlighted ? "scale(0.97)" : "scale(1)"}` }
                 : { left: "calc(100% + 24px)", transform: `translateY(-50%) ${hasSomeHover && !isHighlighted ? "scale(0.97)" : "scale(1)"}` }),

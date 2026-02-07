@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ExternalLink, MessageCircle, FileText } from "lucide-react";
+import { ChevronDown, ExternalLink, FileText } from "lucide-react";
 import type { BallotItem as BallotItemType } from "@/types/ballot";
 import { cn } from "@/lib/utils";
 
@@ -19,6 +19,8 @@ const categoryLabels: Record<string, { label: string; className: string }> = {
 export default function BallotItem({ item, index }: BallotItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const category = categoryLabels[item.category] || categoryLabels.office;
+
+  const hasCitations = item.expand.citations.length > 0;
 
   return (
     <article
@@ -62,40 +64,33 @@ export default function BallotItem({ item, index }: BallotItemProps) {
           <p className="text-base text-foreground/85 leading-relaxed">{item.annotation}</p>
         </div>
 
-        {/* Expand button */}
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center gap-2 text-sm font-semibold text-civic-blue hover:text-civic-blue/80 transition-colors"
-          aria-expanded={isExpanded}
-        >
-          <span>{isExpanded ? "Show less" : "Learn more"}</span>
-          <ChevronDown
-            className={cn(
-              "w-4 h-4 transition-transform duration-300",
-              isExpanded && "rotate-180"
-            )}
-          />
-        </button>
+        {/* Show sources button */}
+        {hasCitations && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="flex items-center gap-2 text-sm font-semibold text-civic-blue hover:text-civic-blue/80 transition-colors"
+            aria-expanded={isExpanded}
+          >
+            <span>{isExpanded ? "Hide sources" : "Show sources"}</span>
+            <ChevronDown
+              className={cn(
+                "w-4 h-4 transition-transform duration-300",
+                isExpanded && "rotate-180"
+              )}
+            />
+          </button>
+        )}
       </div>
 
-      {/* Expanded content */}
-      <div
-        className={cn(
-          "overflow-hidden transition-all duration-500 ease-in-out",
-          isExpanded ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
-        )}
-      >
-        <div className="px-6 pb-6 md:px-8 md:pb-8 border-t border-border pt-5 space-y-5">
-          {/* News summary */}
-          <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-2">
-              Recent Coverage
-            </h4>
-            <p className="text-sm text-foreground/80 leading-relaxed">{item.expand.newsSummary}</p>
-          </div>
-
-          {/* Citations */}
-          <div>
+      {/* Expanded sources */}
+      {hasCitations && (
+        <div
+          className={cn(
+            "overflow-hidden transition-all duration-500 ease-in-out",
+            isExpanded ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"
+          )}
+        >
+          <div className="px-6 pb-6 md:px-8 md:pb-8 border-t border-border pt-5">
             <h4 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-3">
               Sources
             </h4>
@@ -110,27 +105,18 @@ export default function BallotItem({ item, index }: BallotItemProps) {
                   >
                     <ExternalLink className="w-3.5 h-3.5 flex-shrink-0" />
                     <span>
-                      {cite.title}{" "}
-                      <span className="text-muted-foreground">— {cite.source}</span>
+                      {cite.title}
+                      {cite.source && (
+                        <span className="text-muted-foreground"> — {cite.source}</span>
+                      )}
                     </span>
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Chatbot prompt */}
-          <div className="p-4 bg-civic-blue-light rounded-lg border border-civic-blue/10">
-            <div className="flex items-center gap-2 mb-2">
-              <MessageCircle className="w-4 h-4 text-civic-blue" />
-              <span className="text-xs font-semibold uppercase tracking-wider text-civic-blue">
-                Ask a follow-up
-              </span>
-            </div>
-            <p className="text-sm text-foreground/70 italic">"{item.expand.chatbotPrompt}"</p>
-          </div>
         </div>
-      </div>
+      )}
     </article>
   );
 }

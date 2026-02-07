@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Vote, ArrowLeft, BookOpen } from "lucide-react";
 import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
@@ -21,6 +21,33 @@ export default function Ballot() {
   const [activeSection, setActiveSection] = useState<BallotSection>("questions");
   const [animState, setAnimState] = useState<"idle" | "exit" | "enter">("idle");
   const [animDirection, setAnimDirection] = useState<"up" | "down">("up");
+  const ballotContainerRef = useRef<HTMLDivElement>(null);
+  const [itemPositions, setItemPositions] = useState<number[]>([]);
+
+  /** Measure the vertical center of each ballot item relative to the container. */
+  const measureItemPositions = useCallback(() => {
+    const container = ballotContainerRef.current;
+    if (!container) return;
+    const items = container.querySelectorAll<HTMLElement>("[data-ballot-item]");
+    if (items.length === 0) return;
+    const containerRect = container.getBoundingClientRect();
+    const positions = Array.from(items).map((el) => {
+      const rect = el.getBoundingClientRect();
+      return rect.top + rect.height / 2 - containerRect.top;
+    });
+    setItemPositions(positions);
+  }, []);
+
+  // Re-measure whenever the section or ballot data changes
+  useLayoutEffect(() => {
+    measureItemPositions();
+  }, [activeSection, ballot, measureItemPositions]);
+
+  // Also re-measure on window resize
+  useEffect(() => {
+    window.addEventListener("resize", measureItemPositions);
+    return () => window.removeEventListener("resize", measureItemPositions);
+  }, [measureItemPositions]);
 
   useEffect(() => {
     const stored = sessionStorage.getItem("voterProfile");
@@ -30,7 +57,12 @@ export default function Ballot() {
     }
     const parsed: UserProfile = JSON.parse(stored);
     setProfile(parsed);
-    setBallot(generatePersonalizedBallot(parsed));
+
+    generatePersonalizedBallot(parsed)
+      .then((result) => setBallot(result))
+      .catch((err) => {
+        console.error("Failed to generate personalized ballot:", err);
+      });
   }, [navigate]);
 
   const handleSectionChange = (section: BallotSection) => {
@@ -52,7 +84,16 @@ export default function Ballot() {
     }, 300);
   };
 
-  if (!ballot || !profile) return null;
+  if (!ballot || !profile) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <Vote className="w-8 h-8 text-accent mx-auto mb-3 animate-pulse" />
+          <p className="text-muted-foreground text-sm">Generating your personalized ballot…</p>
+        </div>
+      </div>
+    );
+  }
   const userTopics = Object.keys(profile.issues);
 
   const currentItems = activeSection === "questions" ? ballot.ballotItems : ballot.raceItems;
@@ -145,6 +186,7 @@ export default function Ballot() {
         {/* Desktop: Centered ballot with annotations */}
         <section className="mb-16 hidden md:block">
           <div
+            ref={ballotContainerRef}
             className={cn(
               "relative max-w-[520px] mx-auto transition-all duration-300 ease-in-out",
               animState === "exit" && (animDirection === "up" ? "-translate-y-8 opacity-0" : "translate-y-8 opacity-0"),
@@ -176,6 +218,7 @@ export default function Ballot() {
                 items={currentItems}
                 hoveredIndex={hoveredIndex}
                 onHoverIndex={setHoveredIndex}
+                itemPositions={itemPositions}
               />
             )}
           </div>

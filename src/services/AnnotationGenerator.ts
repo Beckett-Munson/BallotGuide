@@ -255,19 +255,23 @@ Use ONLY the provided policy text and retrieved legislative context. Do NOT use 
 
 The user cares about these issues: ${issueList.join(", ")}.
 
-YOUR OUTPUT must be a JSON array of annotation objects. Produce one annotation for each of the user's issues that is RELEVANT to the policy. If an issue is not relevant, omit it—do not force connections. It is fine to return an empty array if nothing is relevant.
+YOUR OUTPUT must be a JSON array of annotation objects. Only produce an annotation for issues that have a genuine, meaningful connection to the policy — do NOT force annotations for issues that aren't relevant. Skip issues with no real connection.
+
+You MUST always return at least one annotation. If none of the user's issues are strongly relevant, pick the single closest issue and provide a general-purpose annotation that explains what the policy does.
 
 Each annotation object must have this exact structure:
 {
   "issue": "the user issue this annotation connects to (must be one of the user's issues listed above)",
-  "annotation": "1-3 sentences explaining how the policy affects the user in relation to this issue. Reference the user's demographics where relevant. Quote the policy or legislation where appropriate. No speculation.",
+  "annotation": "1-3 SHORT sentences in plain, everyday language (no legal jargon). Explain what this means for the user in relation to this issue. Be direct and conversational.",
   "sourceIndices": [1, 3]
 }
 
 RULES:
 - "issue" must exactly match one of the user's issues listed above.
 - "annotation" must be grounded in the provided context. No speculation or outside facts.
+- Keep annotations SHORT and in plain language. Avoid legal terms like "supplemented", "amended", "Home Rule Charter" — instead say what it actually does in simple words. Write as if explaining to a friend.
 - "sourceIndices": a list of the [Source N] numbers from the retrieved context that support this annotation. Use ONLY the source numbers shown in the context. Do NOT fabricate any URLs or titles—just list the integer indices.
+- You MUST return at least one annotation object. NEVER return an empty array.
 - Return ONLY the JSON array.`;
   }
 

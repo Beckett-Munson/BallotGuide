@@ -31,6 +31,12 @@ export interface Candidate {
   topicBlurbs: Record<string, string>;
 }
 
+export interface TopicAnnotation {
+  topic: string;
+  text: string;
+  citations: { title: string; url: string }[];
+}
+
 export interface BallotItem {
   id: string;
   title: string;
@@ -38,6 +44,8 @@ export interface BallotItem {
   annotation: string;
   category: string;
   relatedTopics: string[];
+  /** Per-topic annotation texts from the generator. When present, topic pills become clickable tabs. */
+  topicAnnotations?: TopicAnnotation[];
   candidates?: Candidate[];
   expand: {
     newsSummary: string;

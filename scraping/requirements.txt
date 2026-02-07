@@ -1,0 +1,6 @@
+requests>=2.31.0
+pinecone>=5.0.0
+python-dotenv>=1.0.0
+pypdf>=4.0.0
+python-docx>=1.0.0
+beautifulsoup4>=4.12.0

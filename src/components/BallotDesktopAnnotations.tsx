@@ -34,7 +34,7 @@ export default function BallotDesktopAnnotations({
           <div
             key={`annotation-${item.id}`}
             className={cn(
-              "absolute transition-all duration-300",
+              "absolute transition-all duration-700 ease-in-out",
               hasSomeHover && !isHighlighted
                 ? "opacity-20 scale-[0.97]"
                 : "opacity-100 scale-100",
@@ -50,10 +50,10 @@ export default function BallotDesktopAnnotations({
             onMouseEnter={() => onHoverIndex(index)}
             onMouseLeave={() => onHoverIndex(null)}
           >
-            {/* Connector line */}
+            {/* Connector line — dot centered on ballot boundary */}
             <div
               className={cn(
-                "absolute top-1/2 -translate-y-1/2 transition-opacity duration-300",
+                "absolute top-1/2 -translate-y-1/2 transition-opacity duration-700 ease-in-out",
                 hasSomeHover && !isHighlighted ? "opacity-20" : "opacity-100"
               )}
               style={
@@ -67,13 +67,14 @@ export default function BallotDesktopAnnotations({
                 style={{ backgroundColor: topicBorderColor(item.relatedTopics) + "80" }}
               />
               <div
-                className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full ${
-                  isLeft ? "right-0" : "left-0"
-                }`}
+                className={cn(
+                  "absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full",
+                  isLeft ? "right-0 translate-x-1/2" : "left-0 -translate-x-1/2"
+                )}
                 style={{ backgroundColor: topicBorderColor(item.relatedTopics) }}
               />
             </div>
-            <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} />
+            <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} collapsed={!isHighlighted} />
           </div>
         );
       })}

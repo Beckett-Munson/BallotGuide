@@ -18,6 +18,19 @@ export const TOPIC_COLORS: Record<string, { h: number; s: number; l: number }> =
   office:        { h: 220, s: 15, l: 35 },
 };
 
+/** Party colors for candidate cards and race connector dots (D=blue, R=red, etc.) */
+export const PARTY_COLORS: Record<string, { h: number; s: number; l: number }> = {
+  D: { h: 215, s: 60, l: 45 },
+  R: { h: 0, s: 55, l: 48 },
+  I: { h: 270, s: 45, l: 50 },
+  L: { h: 280, s: 40, l: 55 },
+};
+
+export function partyBorderColor(party: string): string {
+  const color = PARTY_COLORS[party];
+  return color ? hsl(color) : hsl({ h: 220, s: 15, l: 35 });
+}
+
 export function hsl(color: { h: number; s: number; l: number }) {
   return `hsl(${color.h}, ${color.s}%, ${color.l}%)`;
 }

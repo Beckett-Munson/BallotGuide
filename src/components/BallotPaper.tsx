@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import type { BallotItem } from "@/types/ballot";
-import { topicBorderColor } from "@/lib/topicColors";
 
 interface BallotPaperProps {
   items: BallotItem[];
@@ -60,7 +59,6 @@ export default function BallotPaper({
         {/* Ballot items */}
         <div>
           {items.map((item, index) => {
-            const dotColorStr = topicBorderColor(item.relatedTopics);
             const isActive = activeIndex === index;
 
             return (
@@ -99,12 +97,6 @@ export default function BallotPaper({
                   </div>
 
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: dotColorStr }} />
-                      <span className="text-[9px] uppercase tracking-[0.15em] font-bold text-muted-foreground">
-                        {item.category === "office" ? "Elected Office" : item.category}
-                      </span>
-                    </div>
                     <h3
                       className={cn(
                         "font-display text-sm md:text-base font-semibold leading-snug transition-colors",
@@ -113,7 +105,7 @@ export default function BallotPaper({
                     >
                       {item.title}
                     </h3>
-                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed line-clamp-2">
+                    <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
                       {item.officialText}
                     </p>
                   </div>

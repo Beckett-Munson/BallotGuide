@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ExternalLink } from "lucide-react";
+import { ChevronDown, ChevronRight, ExternalLink } from "lucide-react";
 import type { BallotItem as BallotItemType } from "@/types/ballot";
 import { cn } from "@/lib/utils";
 import { topicBackground, topicBorderColor, TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
@@ -7,9 +7,11 @@ import { topicBackground, topicBorderColor, TOPIC_COLORS, hsl, hslAlpha } from "
 interface BallotAnnotationProps {
   item: BallotItemType;
   isActive: boolean;
+  /** When true, show only topic pills + title (e.g. desktop when row not hovered). */
+  collapsed?: boolean;
 }
 
-export default function BallotAnnotation({ item, isActive }: BallotAnnotationProps) {
+export default function BallotAnnotation({ item, isActive, collapsed = false }: BallotAnnotationProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [activeTopicIdx, setActiveTopicIdx] = useState(0);
 
@@ -36,10 +38,57 @@ export default function BallotAnnotation({ item, isActive }: BallotAnnotationPro
 
   const hasCitations = displayCitations.length > 0;
 
+  const borderColor = topicBorderColor(item.relatedTopics);
+  const collapsedBg = topicBackground(item.relatedTopics, 0.08);
+  const collapsedBgIsGradient = collapsedBg.startsWith("linear-gradient");
+
+  if (collapsed) {
+    return (
+      <div
+        className={cn(
+          "transition-all duration-700 ease-in-out rounded-lg border-l-4 p-2 px-3 overflow-hidden",
+          isActive ? "shadow-sm" : "opacity-60"
+        )}
+        style={{
+          borderLeftColor: isActive ? borderColor : undefined,
+          background: isActive ? (collapsedBgIsGradient ? collapsedBg : undefined) : "transparent",
+          backgroundColor: isActive && !collapsedBgIsGradient ? collapsedBg : undefined,
+        }}
+      >
+        {item.relatedTopics.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-1">
+            {item.relatedTopics.map((topic) => {
+              const color = TOPIC_COLORS[topic];
+              return (
+                <span
+                  key={topic}
+                  className="px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider rounded-full"
+                  style={{
+                    backgroundColor: color ? hslAlpha(color, 0.15) : undefined,
+                    color: color ? hsl(color) : undefined,
+                  }}
+                >
+                  {topic.replace("_", " ")}
+                </span>
+              );
+            })}
+          </div>
+        )}
+        <p className="text-sm font-semibold text-foreground leading-snug truncate">
+          {item.title}
+        </p>
+        <p className="text-[10px] text-muted-foreground mt-0.5 flex items-center gap-0.5">
+          <ChevronRight className="w-3 h-3 flex-shrink-0" />
+          Hover for details
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
-        "transition-all duration-300 rounded-lg border-l-4 p-4",
+        "transition-all duration-700 ease-in-out rounded-lg border-l-4 p-4 overflow-hidden",
         isActive ? "shadow-sm" : "opacity-60"
       )}
       style={{
@@ -116,7 +165,7 @@ export default function BallotAnnotation({ item, isActive }: BallotAnnotationPro
 
           <div
             className={cn(
-              "overflow-hidden transition-all duration-500 ease-in-out",
+              "overflow-hidden transition-all duration-700 ease-in-out",
               isExpanded ? "max-h-[400px] opacity-100 mt-3" : "max-h-0 opacity-0"
             )}
           >
@@ -133,8 +182,8 @@ export default function BallotAnnotation({ item, isActive }: BallotAnnotationPro
                     <ExternalLink className="w-3 h-3 flex-shrink-0 mt-0.5" />
                     <span>
                       {cite.title}
-                      {"source" in cite && (cite as any).source && (
-                        <span className="text-muted-foreground"> — {(cite as any).source}</span>
+                      {"source" in cite && (cite as { source?: string }).source && (
+                        <span className="text-muted-foreground"> — {(cite as { source: string }).source}</span>
                       )}
                     </span>
                   </a>

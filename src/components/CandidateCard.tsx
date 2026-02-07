@@ -1,14 +1,8 @@
 import { useState } from "react";
+import { ChevronRight } from "lucide-react";
 import type { Candidate } from "@/types/ballot";
 import { cn } from "@/lib/utils";
-import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
-
-const PARTY_COLORS = {
-  D: { h: 215, s: 60, l: 45 },
-  R: { h: 0, s: 55, l: 48 },
-  I: { h: 270, s: 45, l: 50 },
-  L: { h: 280, s: 40, l: 55 },
-};
+import { TOPIC_COLORS, PARTY_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 
 const PARTY_LABELS: Record<string, string> = {
   D: "Democrat",
@@ -21,15 +15,18 @@ interface CandidateCardProps {
   candidate: Candidate;
   userTopics: string[];
   isActive: boolean;
+  /** When true, show only avatar + name + party (e.g. desktop when row not hovered). */
+  collapsed?: boolean;
 }
 
 export default function CandidateCard({
   candidate,
   userTopics,
   isActive,
+  collapsed = false,
 }: CandidateCardProps) {
   const [activeTab, setActiveTab] = useState<string | null>(null);
-  const partyColor = PARTY_COLORS[candidate.party];
+  const partyColor = PARTY_COLORS[candidate.party] ?? { h: 220, s: 15, l: 35 };
   const initials = candidate.name
     .split(" ")
     .map((w) => w[0])
@@ -45,10 +42,52 @@ export default function CandidateCard({
     ? candidate.topicBlurbs[activeTab]
     : candidate.bio;
 
+  if (collapsed) {
+    return (
+      <div
+        className={cn(
+          "rounded-lg border-l-4 p-2 px-3 transition-all duration-700 ease-in-out overflow-hidden",
+          isActive ? "shadow-sm" : "opacity-60"
+        )}
+        style={{
+          borderLeftColor: isActive ? hsl(partyColor) : undefined,
+          backgroundColor: isActive ? hslAlpha(partyColor, 0.06) : "transparent",
+        }}
+      >
+        <div className="flex items-center gap-2">
+          <div
+            className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold flex-shrink-0"
+            style={{
+              backgroundColor: hslAlpha(partyColor, 0.15),
+              color: hsl(partyColor),
+            }}
+          >
+            {initials}
+          </div>
+          <div className="min-w-0 flex-1">
+            <h4 className="text-xs font-semibold font-display text-foreground leading-tight truncate">
+              {candidate.name}
+            </h4>
+            <span
+              className="text-[9px] font-bold uppercase tracking-wider"
+              style={{ color: hsl(partyColor) }}
+            >
+              {PARTY_LABELS[candidate.party]}
+            </span>
+          </div>
+        </div>
+        <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-0.5">
+          <ChevronRight className="w-3 h-3 flex-shrink-0" />
+          Hover for details
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn(
-        "rounded-lg border-l-4 p-3.5 transition-all duration-300",
+        "rounded-lg border-l-4 p-3.5 transition-all duration-700 ease-in-out overflow-hidden",
         isActive ? "shadow-sm" : "opacity-60"
       )}
       style={{

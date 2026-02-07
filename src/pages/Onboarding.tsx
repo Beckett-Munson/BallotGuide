@@ -8,6 +8,7 @@ import {
 import { cn } from "@/lib/utils";
 import type { UserProfile } from "@/types/ballot";
 import { useCyclingPlaceholder } from "@/hooks/use-cycling-placeholder";
+import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 
 const TOPICS = [
   { id: "healthcare", label: "Healthcare", icon: Heart },
@@ -92,6 +93,7 @@ export default function Onboarding() {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {TOPICS.map(({ id, label, icon: Icon }) => {
               const selected = profile.topics.includes(id);
+              const color = TOPIC_COLORS[id];
               return (
                 <button
                   key={id}
@@ -99,15 +101,25 @@ export default function Onboarding() {
                   className={cn(
                     "flex items-center gap-3 p-4 rounded-lg border-2 transition-all duration-200 text-left",
                     selected
-                      ? "border-accent bg-civic-gold-light shadow-sm"
+                      ? "shadow-sm"
                       : "border-border bg-card hover:border-accent/40"
                   )}
+                  style={
+                    selected && color
+                      ? {
+                          borderColor: hslAlpha(color, 0.5),
+                          backgroundColor: hslAlpha(color, 0.1),
+                        }
+                      : undefined
+                  }
                 >
                   <Icon
-                    className={cn(
-                      "w-5 h-5 flex-shrink-0",
-                      selected ? "text-accent" : "text-muted-foreground"
-                    )}
+                    className="w-5 h-5 flex-shrink-0"
+                    style={
+                      selected && color
+                        ? { color: hsl(color) }
+                        : undefined
+                    }
                   />
                   <span
                     className={cn(

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useScrollLag } from "@/hooks/use-scroll-lag";
 import {
   Heart, DollarSign, Leaf, Globe, GraduationCap, Home,
   Briefcase, Users, Shield, Scale, Landmark, Train,
@@ -48,6 +49,20 @@ export default function Onboarding() {
     zipCode: "",
   });
   const issueIds = Object.keys(profile.issues);
+  const bubbleRef = useRef<HTMLDivElement>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [bubbleRect, setBubbleRect] = useState<DOMRect | null>(null);
+  const [bubbleCentered, setBubbleCentered] = useState(false);
+  const scrollLag = useScrollLag(0.07, 0.4);
+
+  useEffect(() => {
+    if (!isTransitioning || !bubbleRect) return;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setBubbleCentered(true));
+    });
+    return () => cancelAnimationFrame(id);
+  }, [isTransitioning, bubbleRect]);
+
   const toggleTopic = (id: string) => {
     setProfile((prev) => {
       const nextIssues = { ...prev.issues };
@@ -111,13 +126,71 @@ Fetch legislations related to the user.
 
   const handleSubmit = () => {
     sessionStorage.setItem("voterProfile", JSON.stringify(profile));
-    console.log(profile);
 
-    navigate("/ballot");
+    const rect = bubbleRef.current?.getBoundingClientRect();
+    if (rect) {
+      setBubbleRect(rect);
+      setIsTransitioning(true);
+      setTimeout(() => navigate("/ballot"), 1400);
+    } else {
+      navigate("/ballot");
+    }
   };
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Topic bubble: fixed top-right with scroll lag and bobbing */}
+      {!isTransitioning && (
+        <div
+          className="fixed top-6 right-6 z-30 transition-transform will-change-transform"
+          style={{
+            transform: `translateY(${scrollLag}px)`,
+          }}
+        >
+          <div className="animate-bubble-bob">
+            <TopicColorBubble
+              ref={bubbleRef}
+              topicIds={issueIds}
+              hideLabel
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Transition overlay: bubble grows and moves to center */}
+      {isTransitioning && bubbleRect && (
+        <div
+          className="fixed inset-0 z-50 bg-background flex items-center justify-center"
+          aria-hidden
+        >
+          <div
+            className="flex items-center justify-center transition-all duration-1000 ease-out"
+            style={{
+              position: "fixed",
+              left: bubbleCentered ? "50%" : bubbleRect.left,
+              top: bubbleCentered ? "50%" : bubbleRect.top,
+              width: bubbleCentered ? 96 : bubbleRect.width,
+              height: bubbleCentered ? 96 : bubbleRect.height,
+              transform: bubbleCentered ? "translate(-50%, -50%)" : "none",
+            }}
+          >
+            <TopicColorBubble
+              topicIds={issueIds}
+              hideLabel
+              fillContainer
+              className="!m-0"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Page content — fades out when transitioning */}
+      <div
+        className={cn(
+          "transition-opacity duration-700 ease-out",
+          isTransitioning && "opacity-0 pointer-events-none"
+        )}
+      >
       {/* Hero */}
       <header className="relative overflow-hidden">
         <div className="relative max-w-3xl mx-auto px-6 pt-16 pb-14 text-center">
@@ -145,6 +218,42 @@ Fetch legislations related to the user.
 
       {/* Single-page form */}
       <main className="max-w-2xl mx-auto px-6 pb-16">
+        {/* Tell us about yourself */}
+        <section className="mb-10">
+          <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
+            Tell us about yourself
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            Share anything that helps us personalize your guide — your job,
+            family situation, concerns, or goals. (Optional)
+          </p>
+          <div className="relative">
+            <textarea
+              value={profile.aboutYou}
+              onChange={(e) =>
+                setProfile((prev) => ({ ...prev, aboutYou: e.target.value }))
+              }
+              placeholder=" "
+              rows={4}
+              maxLength={500}
+              className="w-full px-4 py-3 rounded-lg border-2 border-border bg-card text-foreground placeholder:text-transparent focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all text-sm font-body leading-relaxed resize-none"
+            />
+            {!profile.aboutYou && (
+              <div
+                className={cn(
+                  "absolute inset-0 px-4 py-3 pointer-events-none text-sm font-body leading-relaxed text-muted-foreground/40 transition-opacity duration-300",
+                  placeholder.visible ? "opacity-100" : "opacity-0"
+                )}
+              >
+                {placeholder.text}
+              </div>
+            )}
+          </div>
+          <p className="text-xs text-muted-foreground mt-2 text-right">
+            {profile.aboutYou.length}/500
+          </p>
+        </section>
+
         {/* Topics */}
         <section className="mb-10">
           <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
@@ -196,44 +305,6 @@ Fetch legislations related to the user.
               );
             })}
           </div>
-
-          <TopicColorBubble topicIds={issueIds} />
-        </section>
-
-        {/* Tell us about yourself */}
-        <section className="mb-10">
-          <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
-            Tell us about yourself
-          </h2>
-          <p className="text-muted-foreground mb-4">
-            Share anything that helps us personalize your guide — your job,
-            family situation, concerns, or goals. (Optional)
-          </p>
-          <div className="relative">
-            <textarea
-              value={profile.aboutYou}
-              onChange={(e) =>
-                setProfile((prev) => ({ ...prev, aboutYou: e.target.value }))
-              }
-              placeholder=" "
-              rows={4}
-              maxLength={500}
-              className="w-full px-4 py-3 rounded-lg border-2 border-border bg-card text-foreground placeholder:text-transparent focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all text-sm font-body leading-relaxed resize-none"
-            />
-            {!profile.aboutYou && (
-              <div
-                className={cn(
-                  "absolute inset-0 px-4 py-3 pointer-events-none text-sm font-body leading-relaxed text-muted-foreground/40 transition-opacity duration-300",
-                  placeholder.visible ? "opacity-100" : "opacity-0"
-                )}
-              >
-                {placeholder.text}
-              </div>
-            )}
-          </div>
-          <p className="text-xs text-muted-foreground mt-2 text-right">
-            {profile.aboutYou.length}/500
-          </p>
         </section>
 
         {/* ZIP Code */}
@@ -283,6 +354,7 @@ Fetch legislations related to the user.
           </button>
         </div>
       </main>
+      </div>
     </div>
   );
 }

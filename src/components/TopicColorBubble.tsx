@@ -1,11 +1,26 @@
-import { useMemo } from "react";
+import { forwardRef, useMemo } from "react";
+import { cn } from "@/lib/utils";
 import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 
 interface TopicColorBubbleProps {
   topicIds: string[];
+  /** Hide the "N topics selected" label (e.g. for loading/transition) */
+  hideLabel?: boolean;
+  /** Subtle scale pulse animation */
+  pulse?: boolean;
+  /** Circle size */
+  size?: "default" | "large";
+  /** Fill parent (for transition overlay; use with w/h on wrapper) */
+  fillContainer?: boolean;
+  /** Wrapper className (for positioning in transition) */
+  className?: string;
 }
 
-export default function TopicColorBubble({ topicIds }: TopicColorBubbleProps) {
+const TopicColorBubble = forwardRef<HTMLDivElement, TopicColorBubbleProps>(
+  function TopicColorBubble(
+    { topicIds, hideLabel = false, pulse = false, size = "default", fillContainer = false, className = "" },
+    ref
+  ) {
   const colors = useMemo(
     () => topicIds.map((id) => TOPIC_COLORS[id]).filter(Boolean),
     [topicIds]
@@ -41,10 +56,21 @@ export default function TopicColorBubble({ topicIds }: TopicColorBubbleProps) {
     });
   }, [colors]);
 
+  const sizeClass = fillContainer
+    ? "w-full h-full"
+    : size === "large"
+      ? "w-24 h-24"
+      : "w-16 h-16";
+
   return (
-    <div className="flex items-center justify-center mt-8">
+    <div className={hideLabel ? className : `flex items-center justify-center mt-8 ${className}`.trim()}>
       <div
-        className="relative w-16 h-16 rounded-full border-2 transition-all duration-700 ease-out overflow-hidden"
+        ref={ref}
+        className={cn(
+          "relative rounded-full border-2 transition-all duration-700 ease-out overflow-hidden",
+          sizeClass,
+          pulse && "animate-bubble-pulse"
+        )}
         style={{
           borderColor: hasColors
             ? hslAlpha(colors[0], 0.5)
@@ -88,11 +114,15 @@ export default function TopicColorBubble({ topicIds }: TopicColorBubbleProps) {
           </>
         )}
       </div>
-      <span className="ml-3 text-sm text-muted-foreground">
-        {topicIds.length === 0
-          ? "Select topics to see your blend"
-          : `${topicIds.length} topic${topicIds.length > 1 ? "s" : ""} selected`}
-      </span>
+      {!hideLabel && (
+        <span className="ml-3 text-sm text-muted-foreground">
+          {topicIds.length === 0
+            ? "Select topics to see your blend"
+            : `${topicIds.length} topic${topicIds.length > 1 ? "s" : ""} selected`}
+        </span>
+      )}
     </div>
   );
-}
+});
+
+export default TopicColorBubble;

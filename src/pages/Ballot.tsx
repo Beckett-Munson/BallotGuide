@@ -14,6 +14,8 @@ import { cn } from "@/lib/utils";
 import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 import BudgetChart from "@/components/BudgetChart";
 import TownMap from "@/components/TownMap";
+import TopicColorBubble from "@/components/TopicColorBubble";
+import LoadingMessages from "@/components/LoadingMessages";
 
 export default function Ballot() {
   const navigate = useNavigate();
@@ -87,11 +89,17 @@ export default function Ballot() {
   };
 
   if (!ballot || !profile) {
+    const loadingTopicIds = profile ? Object.keys(profile.issues) : [];
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <Vote className="w-8 h-8 text-accent mx-auto mb-3 animate-pulse" />
-          <p className="text-muted-foreground text-sm">Generating your personalized ballot…</p>
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center gap-6">
+          <TopicColorBubble
+            topicIds={loadingTopicIds}
+            hideLabel
+            pulse
+            size="large"
+          />
+          <LoadingMessages />
         </div>
       </div>
     );

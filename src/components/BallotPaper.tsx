@@ -17,7 +17,7 @@ export default function BallotPaper({
   onItemClick,
   onItemHover,
   sectionTitle = "Official Sample Ballot",
-  sectionSubtitle = "City of Pittsburgh • Primary Election — May 20, 2025",
+  sectionSubtitle = "City of Pittsburgh • General Election",
   renderOfficialText,
 }: BallotPaperProps) {
   const hasHover = activeIndex !== null;

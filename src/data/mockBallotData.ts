@@ -638,9 +638,9 @@ export async function generatePersonalizedBallot(
     .map((t) => t.charAt(0).toUpperCase() + t.slice(1).replace("_", " "))
     .join(", ");
 
-  const greeting = `Your personalized guide to Pittsburgh's 2025 Primary Election ballot questions.`;
+  const greeting = `Your personalized guide to Pittsburgh's ballot.`;
 
-  const personalizedSummary = `Based on your interests in ${topicNames}, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot questions and ${ALL_RACE_ITEMS.length} active races facing voters on May 20, 2025. Each item includes a personalized explanation of how it may affect you, along with trusted sources.`;
+  const personalizedSummary = `Based on your interests, we've prepared annotations for ${ALL_BALLOT_ITEMS.length} ballot questions and ${ALL_RACE_ITEMS.length} active races. Each item includes a personalized explanation of how it may affect you, along with trusted sources.`;
 
   // Build items with hardcoded mock annotations as baseline
   const ballotItems = buildItems(ALL_BALLOT_ITEMS, profile, topics, topicNames);
@@ -673,7 +673,7 @@ export async function generatePersonalizedBallot(
       );
 
       const elapsed = Date.now() - startTime;
-      console.log(`✅ Annotations generated in ${(elapsed / 1000).toFixed(1)}s`);
+      console.log(`Annotations generated in ${(elapsed / 1000).toFixed(1)}s`);
       console.log(
         "🔑 Response policy IDs:",
         Object.keys(annotationResponse),

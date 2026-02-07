@@ -261,6 +261,7 @@ function renderActiveShape(props: any) {
 export default function BudgetChart() {
   const [selectedMayor, setSelectedMayor] = useState<string | null>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [pinnedIndex, setPinnedIndex] = useState<number | null>(null);
 
   const mayor = MAYORS.find((m) => m.id === selectedMayor) ?? null;
   const data = getChartData(mayor);
@@ -274,7 +275,8 @@ export default function BudgetChart() {
     setActiveIndex(index);
   }, []);
 
-  const activeSlice = activeIndex !== null ? data[activeIndex] : null;
+  const displayIndex = pinnedIndex ?? activeIndex;
+  const activeSlice = displayIndex !== null ? data[displayIndex] : null;
 
   return (
     <div className="rounded-xl border border-border bg-card overflow-hidden">
@@ -312,8 +314,18 @@ export default function BudgetChart() {
                   activeIndex={activeIndex ?? undefined}
                   activeShape={renderActiveShape}
                   onMouseEnter={onPieEnter}
-                  onMouseLeave={() => setActiveIndex(null)}
-                  onClick={(_, idx) => setActiveIndex((prev) => (prev === idx ? null : idx))}
+                  onMouseLeave={() => {
+                    if (pinnedIndex === null) {
+                      setActiveIndex(null);
+                    }
+                  }}
+                  onClick={(_, idx) =>
+                    setPinnedIndex((prev) => {
+                      const next = prev === idx ? null : idx;
+                      setActiveIndex(next);
+                      return next;
+                    })
+                  }
                   isAnimationActive
                   animationDuration={600}
                   animationEasing="ease-in-out"
@@ -337,10 +349,16 @@ export default function BudgetChart() {
             {data.map((entry, idx) => (
               <button
                 key={entry.id}
-                onClick={() => setActiveIndex((prev) => (prev === idx ? null : idx))}
+                onClick={() =>
+                  setPinnedIndex((prev) => {
+                    const next = prev === idx ? null : idx;
+                    setActiveIndex(next);
+                    return next;
+                  })
+                }
                 className={cn(
                   "flex items-center gap-1.5 text-[11px] transition-opacity",
-                  activeIndex !== null && activeIndex !== idx ? "opacity-40" : "opacity-100",
+                  displayIndex !== null && displayIndex !== idx ? "opacity-40" : "opacity-100",
                 )}
               >
                 <span

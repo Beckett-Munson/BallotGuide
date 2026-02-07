@@ -5,7 +5,7 @@ const CITYWEFT_PITTSBURGH_MODEL_URL =
 
 const CITATIONS = {
   ballotQuestions: {
-    title: "2025 Ballot Questions for May 20, 2025 - Primary Election",
+    title: "2025 Ballot Questions for May 20, 2025 - General Election",
     url: "https://www.lwvpgh.org/ballot",
   },
   cityBudget: {

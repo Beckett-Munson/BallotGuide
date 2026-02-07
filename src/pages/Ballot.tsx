@@ -135,8 +135,8 @@ export default function Ballot() {
     ? "Special Election Questions"
     : "Active Races";
   const sectionSubtitle = activeSection === "questions"
-    ? "City of Pittsburgh • Primary Election — May 20, 2025"
-    : "Pittsburgh & Allegheny County • General Election — Nov. 4, 2025";
+    ? "City of Pittsburgh • Primary Election"
+    : "Pittsburgh & Allegheny County • General Election";
   const isRaces = activeSection === "races";
 
   // Animation classes
@@ -380,7 +380,7 @@ export default function Ballot() {
             </h2>
           </div>
           <p className="text-muted-foreground mb-6">
-            See how Allegheny County spends its $1.05 billion budget — and how each mayoral candidate would shift priorities.
+            See how Allegheny County spends its $1.05 billion budget and how each candidate would shift priorities.
             Click any slice to learn more.
           </p>
           <BudgetChart />
@@ -418,7 +418,7 @@ export default function Ballot() {
               </h2>
             </div>
             <p className="text-muted-foreground mb-6">
-              Deep-dive into how the topics you care about intersect with items on your ballot.
+              Read more about how the topics you care about are reflected in your local ballot.
             </p>
             <div className="space-y-3">
               {ballot.topicExplanations.map((topic) => (

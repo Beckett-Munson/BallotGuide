@@ -199,11 +199,11 @@ Fetch legislations related to the user.
           <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 leading-tight text-secondary-foreground">
             Your Personalized
             <br />
-            Voter Guide
+            Ballot Guide
           </h1>
           <p className="text-lg max-w-xl mx-auto font-body text-secondary-foreground">
-            Get clear, unbiased explanations of every ballot item in Allegheny
-            County — tailored to what matters most to you.
+            Clear, unbiased explanations of every local ballot item in your
+            county.
           </p>
           <div className="flex items-center justify-center gap-2 mt-6 text-sm text-primary">
             <Shield className="w-4 h-4" />
@@ -220,8 +220,8 @@ Fetch legislations related to the user.
             Tell us about yourself
           </h2>
           <p className="text-muted-foreground mb-4">
-            Share anything that helps us personalize your guide — your job,
-            family situation, concerns, or goals. (Optional)
+            Share anything that helps us personalize your guide, like your job,
+             concerns, or goals. 
           </p>
           <div className="relative">
             <textarea
@@ -253,10 +253,10 @@ Fetch legislations related to the user.
         {/* Topics */}
         <section className="mb-10">
           <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
-            What issues matter to you?
+            What matters to you?
           </h2>
           <p className="text-muted-foreground mb-6">
-            Select all topics you'd like personalized guidance on.
+            Select topics to see how they are reflected in your local ballot.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {TOPICS.map(({ id, label, icon: Icon }) => {
@@ -309,7 +309,7 @@ Fetch legislations related to the user.
             Your ZIP code
           </h2>
           <p className="text-muted-foreground mb-4">
-            We use this to identify your specific ballot in Allegheny County.
+            We use this to identify the specific ballot in your county.
           </p>
           <div className="flex items-center gap-3">
             <div className="relative">
@@ -327,9 +327,6 @@ Fetch legislations related to the user.
                 className="pl-10 pr-4 py-3 w-40 text-lg font-display font-semibold tracking-widest border-2 border-border rounded-lg bg-card text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
               />
             </div>
-            <span className="text-xs text-muted-foreground">
-              Allegheny County, PA
-            </span>
           </div>
         </section>
 

@@ -1,19 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Vote, ArrowLeft, BookOpen } from "lucide-react";
 import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
 import { generatePersonalizedBallot } from "@/data/mockBallotData";
-import BallotPaper from "@/components/BallotPaper";
-import BallotAnnotation from "@/components/BallotAnnotation";
+import BallotTabBar, { type BallotTab } from "@/components/BallotTabBar";
+import BallotDesktopSection from "@/components/BallotDesktopSection";
+import BallotMobileSection from "@/components/BallotMobileSection";
 import TopicExplanation from "@/components/TopicExplanation";
-import { cn } from "@/lib/utils";
-import { TOPIC_COLORS, hsl, hslAlpha, topicBorderColor } from "@/lib/topicColors";
+import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 
 export default function Ballot() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [ballot, setBallot] = useState<PersonalizedBallot | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<BallotTab>("questions");
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [displayedTab, setDisplayedTab] = useState<BallotTab>("questions");
+  const prevTabRef = useRef<BallotTab>("questions");
 
   useEffect(() => {
     const stored = sessionStorage.getItem("voterProfile");
@@ -26,7 +30,31 @@ export default function Ballot() {
     setBallot(generatePersonalizedBallot(parsed));
   }, [navigate]);
 
+  const handleTabChange = (newTab: BallotTab) => {
+    if (newTab === activeTab || isTransitioning) return;
+    prevTabRef.current = activeTab;
+    setActiveTab(newTab);
+    setIsTransitioning(true);
+    setHoveredIndex(null);
+
+    // After exit animation, swap content and play enter animation
+    setTimeout(() => {
+      setDisplayedTab(newTab);
+      // Small delay to let the new content mount before animating in
+      requestAnimationFrame(() => {
+        setIsTransitioning(false);
+      });
+    }, 350);
+  };
+
   if (!ballot || !profile) return null;
+
+  // Determine scroll direction: questions→races = scroll up, races→questions = scroll down
+  const goingUp = activeTab === "races";
+  const exitDirection = goingUp ? "-translate-y-8" : "translate-y-8";
+  const enterDirection = goingUp ? "translate-y-8" : "-translate-y-8";
+
+  const currentItems = displayedTab === "questions" ? ballot.ballotItems : ballot.raceItems;
 
   return (
     <div className="min-h-screen bg-background">
@@ -78,116 +106,36 @@ export default function Ballot() {
           </div>
         </header>
 
-        {/* Desktop: Centered ballot with all annotations always visible */}
-        <section className="mb-16 hidden md:block">
-          <div className="relative max-w-[520px] mx-auto">
-            <BallotPaper
-              items={ballot.ballotItems}
-              activeIndex={hoveredIndex}
-              onItemClick={setHoveredIndex}
-              onItemHover={setHoveredIndex}
-            />
+        {/* Tab Bar */}
+        <div className="max-w-[520px] mx-auto mb-8">
+          <BallotTabBar activeTab={activeTab} onTabChange={handleTabChange} />
+        </div>
 
-            {/* All annotations always visible, dimmed when not hovered */}
-            {ballot.ballotItems.map((item, index) => {
-              const isLeft = index % 2 === 0;
-              const isHighlighted = hoveredIndex === index;
-              const hasSomeHover = hoveredIndex !== null;
+        {/* Animated ballot content */}
+        <div className="overflow-hidden">
+          <div
+            className="transition-all duration-350 ease-in-out"
+            style={{
+              transform: isTransitioning ? `translateY(${exitDirection === "-translate-y-8" ? "-2rem" : "2rem"})` : "translateY(0)",
+              opacity: isTransitioning ? 0 : 1,
+              transitionDuration: "350ms",
+            }}
+          >
+            {/* Desktop */}
+            <section className="mb-16 hidden md:block">
+              <BallotDesktopSection
+                items={currentItems}
+                hoveredIndex={hoveredIndex}
+                onHoverChange={setHoveredIndex}
+              />
+            </section>
 
-              return (
-                <div
-                  key={`annotation-${index}`}
-                  className={cn(
-                    "absolute transition-all duration-300",
-                    hasSomeHover && !isHighlighted
-                      ? "opacity-20 scale-[0.97]"
-                      : "opacity-100 scale-100",
-                    isHighlighted && "z-10"
-                  )}
-                  style={{
-                    top: `${((index + 0.5) / ballot.ballotItems.length) * 100}%`,
-                    ...(isLeft
-                      ? { right: "calc(100% + 24px)", transform: `translateY(-50%) ${hasSomeHover && !isHighlighted ? "scale(0.97)" : "scale(1)"}` }
-                      : { left: "calc(100% + 24px)", transform: `translateY(-50%) ${hasSomeHover && !isHighlighted ? "scale(0.97)" : "scale(1)"}` }),
-                    width: "280px",
-                  }}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                >
-                  {/* Connector line */}
-                  <div
-                    className={cn(
-                      "absolute top-1/2 -translate-y-1/2 transition-opacity duration-300",
-                      hasSomeHover && !isHighlighted ? "opacity-20" : "opacity-100"
-                    )}
-                    style={
-                      isLeft
-                        ? { left: "100%", width: "24px" }
-                        : { right: "100%", width: "24px" }
-                    }
-                  >
-                    <div
-                      className="w-full h-px"
-                      style={{ backgroundColor: topicBorderColor(item.relatedTopics) + "80" }}
-                    />
-                    <div
-                      className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full ${
-                        isLeft ? "right-0" : "left-0"
-                      }`}
-                      style={{ backgroundColor: topicBorderColor(item.relatedTopics) }}
-                    />
-                  </div>
-                  <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} />
-                </div>
-              );
-            })}
+            {/* Mobile */}
+            <section className="mb-16 md:hidden">
+              <BallotMobileSection items={currentItems} />
+            </section>
           </div>
-        </section>
-
-        {/* Mobile: stacked with inline annotations */}
-        <section className="mb-16 md:hidden space-y-3">
-          {ballot.ballotItems.map((item, index) => (
-            <div key={item.id} className="space-y-0">
-              <button
-                className="w-full text-left px-4 py-3 bg-card border border-border rounded-t-lg"
-                onClick={() =>
-                  setHoveredIndex(hoveredIndex === index ? null : index)
-                }
-              >
-                <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 mt-0.5">
-                    <div
-                      className={`w-4 h-3 rounded-[50%] border-[1.5px] flex items-center justify-center transition-all ${
-                        hoveredIndex === index
-                          ? "border-foreground/70 bg-foreground/70"
-                          : "border-foreground/25"
-                      }`}
-                    >
-                      {hoveredIndex === index && (
-                        <svg className="w-2 h-1.5 text-card" viewBox="0 0 12 10" fill="none">
-                          <path d="M1 5L4 8L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-                      {item.category === "office" ? "Elected Office" : item.category}
-                    </p>
-                    <h3 className="font-display text-sm font-semibold text-foreground leading-snug">
-                      {item.title}
-                    </h3>
-                  </div>
-                </div>
-              </button>
-              {hoveredIndex === index && (
-                <div className="border border-t-0 border-border rounded-b-lg overflow-hidden animate-fade-in">
-                  <BallotAnnotation item={item} isActive={true} />
-                </div>
-              )}
-            </div>
-          ))}
-        </section>
+        </div>
 
         {/* Topic Education */}
         {ballot.topicExplanations.length > 0 && (

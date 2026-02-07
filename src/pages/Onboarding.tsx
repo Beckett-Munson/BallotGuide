@@ -162,24 +162,17 @@ export default function Onboarding() {
                 ];
                 return (
                   <>
-                    {/* Base fill so there's no gap */}
-                    <div
-                      className="absolute inset-0 transition-colors duration-700"
-                      style={{
-                        backgroundColor: hslAlpha(colors[0], 0.35),
-                      }}
-                    />
-                    {/* Individual drifting color blobs */}
+                    {/* Individual drifting color blobs — smaller & sharper for separation */}
                     {colors.map((c, i) => (
                       <div
                         key={i}
                         className="absolute rounded-full"
                         style={{
-                          width: '120%',
-                          height: '120%',
-                          background: `radial-gradient(circle, ${hslAlpha(c, 0.7)} 0%, ${hslAlpha(c, 0.2)} 50%, transparent 70%)`,
+                          width: '65%',
+                          height: '65%',
+                          background: `radial-gradient(circle, ${hsl(c)} 0%, ${hslAlpha(c, 0.6)} 40%, transparent 70%)`,
                           animation: `${blobAnimations[i % blobAnimations.length]} ${10 + i * 2}s ease-in-out infinite`,
-                          filter: 'blur(4px)',
+                          filter: 'blur(2px)',
                         }}
                       />
                     ))}

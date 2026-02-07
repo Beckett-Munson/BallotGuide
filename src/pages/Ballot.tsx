@@ -13,6 +13,7 @@ import RaceMobileList from "@/components/RaceMobileList";
 import { cn } from "@/lib/utils";
 import { TOPIC_COLORS, hsl, hslAlpha } from "@/lib/topicColors";
 import BudgetChart from "@/components/BudgetChart";
+import TownMap from "@/components/TownMap";
 
 export default function Ballot() {
   const navigate = useNavigate();
@@ -279,6 +280,7 @@ export default function Ballot() {
             Click any slice to learn more.
           </p>
           <BudgetChart />
+        </section>
         {/* Interactive Town Map */}
         <section className="mb-16 max-w-3xl mx-auto">
           <div className="flex items-center gap-2 mb-3">

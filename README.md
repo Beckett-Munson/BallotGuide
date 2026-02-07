@@ -1,6 +1,6 @@
 #  📥  BallotGuide
 
-## Why This Matters
+## Why We Built This
 Local elections have some of the lowest turnout, even though they shape the policies people feel every day.
 
 - In the 100 largest U.S. cities, average mayoral-election turnout was **20.2%**, and **73 of 100 cities were below 25%** turnout. [1]

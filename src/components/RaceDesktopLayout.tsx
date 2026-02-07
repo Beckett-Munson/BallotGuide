@@ -73,6 +73,7 @@ export default function RaceDesktopLayout({
                 userTopics={userTopics}
                 isActive={isHighlighted || !hasSomeHover}
                 collapsed={!isHighlighted}
+                animateText={isHighlighted}
               />
             </div>
 
@@ -113,6 +114,7 @@ export default function RaceDesktopLayout({
                 userTopics={userTopics}
                 isActive={isHighlighted || !hasSomeHover}
                 collapsed={!isHighlighted}
+                animateText={isHighlighted}
               />
             </div>
           </div>

@@ -74,7 +74,7 @@ export default function BallotDesktopAnnotations({
                 style={{ backgroundColor: topicBorderColor(item.relatedTopics) }}
               />
             </div>
-            <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} collapsed={!isHighlighted} />
+            <BallotAnnotation item={item} isActive={isHighlighted || !hasSomeHover} collapsed={!isHighlighted} animateText={isHighlighted} />
           </div>
         );
       })}

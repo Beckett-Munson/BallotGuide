@@ -262,13 +262,14 @@ You MUST always return at least one annotation. If none of the user's issues are
 Each annotation object must have this exact structure:
 {
   "issue": "the user issue this annotation connects to (must be one of the user's issues listed above)",
-  "annotation": "1-3 SHORT sentences in plain, everyday language (no legal jargon). Explain what this means for the user in relation to this issue. Be direct and conversational.",
+  "annotation": "1-3 SHORT sentences in plain, everyday language (no legal jargon). Explain what this means for the user in relation to this issue. Be direct and conversational. Where it feels natural, briefly mention something specific about the user (e.g. from their About section, location, or stated interests) so the annotation feels personalized—but keep the focus on the policy.",
   "sourceIndices": [1, 3]
 }
 
 RULES:
 - "issue" must exactly match one of the user's issues listed above.
 - "annotation" must be grounded in the provided context. No speculation or outside facts.
+- Personalize slightly: when relevant, weave in a brief reference to the user (their About text, zip/location, or interests) so it feels like it's written for them—just a touch, not a full bio.
 - Keep annotations SHORT and in plain language. Avoid legal terms like "supplemented", "amended", "Home Rule Charter" — instead say what it actually does in simple words. Write as if explaining to a friend.
 - "sourceIndices": a list of the [Source N] numbers from the retrieved context that support this annotation. Use ONLY the source numbers shown in the context. Do NOT fabricate any URLs or titles—just list the integer indices.
 - You MUST return at least one annotation object. NEVER return an empty array.

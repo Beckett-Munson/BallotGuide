@@ -82,7 +82,7 @@ YOUR OUTPUT must be exactly this structure:
 
 RULES:
 - tags: List of descriptive tags reflecting concrete impacts. Use as many as relevant.
-- howThisAffectsUser: 1-3 sentences. Reference user demographics if provided. Quote the policy where relevant. No speculation.
+- howThisAffectsUser: 1-3 sentences. When user demographics are provided, briefly mention something specific about them (e.g. location, occupation, interests) so the explanation feels personalized—then explain how the policy affects them. Quote the policy where relevant. No speculation.
 - links: take the exat link from the policy text and return it in the url field. Do not make anything up. 
 
 Return ONLY the JSON object.`;

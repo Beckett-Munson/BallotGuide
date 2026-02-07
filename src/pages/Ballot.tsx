@@ -350,7 +350,7 @@ export default function Ballot() {
         </section>
 
         {/* Interactive Town Map */}
-        <section className="mb-16 max-w-3xl mx-auto">
+        <section className="mb-16 max-w-4xl mx-auto">
           <div className="flex items-center gap-2 mb-3">
             <Map className="w-5 h-5 text-accent" />
             <h2 className="font-display text-2xl font-semibold text-foreground">
@@ -373,7 +373,7 @@ export default function Ballot() {
 
         {/* Topic Education */}
         {ballot.topicExplanations.length > 0 && (
-          <section className="mb-16 max-w-3xl mx-auto">
+          <section className="mb-16 max-w-4xl mx-auto">
             <div className="flex items-center gap-2 mb-6">
               <BookOpen className="w-5 h-5 text-accent" />
               <h2 className="font-display text-2xl font-semibold text-foreground">

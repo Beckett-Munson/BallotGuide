@@ -5,16 +5,16 @@ const CITYWEFT_PITTSBURGH_MODEL_URL =
 
 const CITATIONS = {
   ballotQuestions: {
-    title: "City of Pittsburgh Ballot Questions",
-    url: "https://pittsburghpa.gov/city-clerk/ballot-questions",
+    title: "2025 Ballot Questions for May 20, 2025 - Primary Election",
+    url: "https://www.lwvpgh.org/ballot",
   },
   cityBudget: {
-    title: "City of Pittsburgh Operating Budget",
-    url: "https://pittsburghpa.gov/finance/operating-budget",
+    title: "City of Pittsburgh Office of Management and Budget - Budgets and Reports",
+    url: "https://www.pittsburghpa.gov/City-Government/Finance-Budget/Management-Budget/Budgets-and-Reports",
   },
   countyBudget: {
-    title: "Allegheny County Budget and Finance",
-    url: "https://www.alleghenycounty.us/Government/Budget-and-Finance",
+    title: "Allegheny County Budget and Finance - County Budgets",
+    url: "https://www.alleghenycounty.us/Government/Department-Directory/Budget-and-Finance/County-Budgets",
   },
   prt: {
     title: "Pittsburgh Regional Transit Service and Planning",
@@ -22,19 +22,19 @@ const CITATIONS = {
   },
   pointPark: {
     title: "Point State Park Visitor and Stewardship Info",
-    url: "https://www.dcnr.pa.gov/StateParks/FindAPark/PointStatePark/Pages/default.aspx",
+    url: "https://www.pa.gov/agencies/dcnr/recreation/where-to-go/state-parks/find-a-park/point-state-park",
   },
   downtownPartnership: {
     title: "Pittsburgh Downtown Partnership",
     url: "https://downtownpittsburgh.com/",
   },
   housing: {
-    title: "City of Pittsburgh Housing Programs",
-    url: "https://pittsburghpa.gov/dcp/housing",
+    title: "Urban Redevelopment Authority of Pittsburgh - Housing",
+    url: "https://www.ura.org/pages/housing",
   },
   sheriff: {
-    title: "Allegheny County Sheriff Office",
-    url: "https://www.alleghenycounty.us/Government/Row-Offices/Sheriff",
+    title: "Allegheny County Sheriff's Office",
+    url: "https://sheriffalleghenycounty.com/",
   },
   pointParkUniversity: {
     title: "Point Park University",
@@ -46,7 +46,7 @@ const CITATIONS = {
   },
   cityCouncil: {
     title: "Pittsburgh City Council",
-    url: "https://pittsburghpa.gov/council/",
+    url: "https://www.pittsburghpa.gov/City-Government/City-Council",
   },
 };
 
@@ -249,11 +249,11 @@ export const PITTSBURGH_SCENARIO: CityScenario = {
       title: "International Commerce and Events Interface",
       markerLabel: "Foreign Policy",
       highlightedBuilding: "Convention Center and riverfront international-events edge",
-      mapPoint: [0.399, 0.8],
+      mapPoint: [-0.393, 0.339],
       text:
         "Downtown's global-facing venues make local governance choices visible to international partners. Questions 1 and 3 were both shaped by debates over where city authority meets global politics.",
       citations: [CITATIONS.ballotQuestions, CITATIONS.conventionCenter],
-      nodeNames: ["Simple  OSM buildings_180", "Simple  OSM buildings_181", "waterway_0"],
+      nodeNames: ["Simple  OSM buildings_126", "Simple  OSM buildings_132"],
     },
   ],
 };

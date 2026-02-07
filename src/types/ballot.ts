@@ -23,12 +23,17 @@ export interface AnnotationResponse { // maps each policy id to a list of its an
   [policyId: string]: Annotation[];
 }
 
+export interface CandidateTopicBlurb {
+  text: string;
+  citations: { title: string; url: string }[];
+}
+
 export interface Candidate {
   name: string;
   party: "D" | "R" | "I" | "L";
   isIncumbent?: boolean;
   bio: string;
-  topicBlurbs: Record<string, string>;
+  topicBlurbs: Record<string, CandidateTopicBlurb>;
 }
 
 export interface TopicAnnotation {

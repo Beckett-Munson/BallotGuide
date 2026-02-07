@@ -41,7 +41,7 @@ export default function Onboarding() {
 
   const keywordData = KeywordData as KeywordEntry[];
   const navigate = useNavigate();
-  const placeholder = useCyclingPlaceholder(5000);
+  const placeholder = useCyclingPlaceholder(3000);
   const [profile, setProfile] = useState<UserProfile>({
     age: 0,
     issues: {},
@@ -305,6 +305,45 @@ Fetch legislations related to the user.
               );
             })}
           </div>
+
+          <TopicColorBubble topicIds={issueIds} />
+        </section>
+
+        {/* Tell us about yourself */}
+        <section className="mb-10">
+          <h2 className="font-display text-2xl font-semibold text-foreground mb-2">
+            Tell us about yourself
+          </h2>
+          <p className="text-muted-foreground mb-4">
+            Answering this helps us tailor what you see. 
+            Share anything that helps us personalize your guide — your job,
+            family situation, concerns, or goals. (Optional)
+          </p>
+          <div className="relative">
+            <textarea
+              value={profile.aboutYou}
+              onChange={(e) =>
+                setProfile((prev) => ({ ...prev, aboutYou: e.target.value }))
+              }
+              placeholder=" "
+              rows={4}
+              maxLength={500}
+              className="w-full px-4 py-3 rounded-lg border-2 border-border bg-card text-foreground placeholder:text-transparent focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all text-sm font-body leading-relaxed resize-none"
+            />
+            {!profile.aboutYou && (
+              <div
+                className={cn(
+                  "absolute inset-0 px-4 py-3 pointer-events-none text-sm font-body leading-relaxed text-muted-foreground/40 transition-opacity duration-300",
+                  placeholder.visible ? "opacity-100" : "opacity-0"
+                )}
+              >
+                {placeholder.text}
+              </div>
+            )}
+          </div>
+          <p className="text-xs text-muted-foreground mt-2 text-right">
+            {profile.aboutYou.length}/500
+          </p>
         </section>
 
         {/* ZIP Code */}

@@ -1,7 +1,7 @@
 import { lazy, Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Vote, ArrowLeft, BookOpen, BarChart3, Map } from "lucide-react";
-import type { UserProfile, PersonalizedBallot } from "@/types/ballot";
+import { Vote, ArrowLeft, BookOpen, BarChart3, Map, ExternalLink } from "lucide-react";
+import type { UserProfile, PersonalizedBallot, BallotItem } from "@/types/ballot";
 import { generatePersonalizedBallot } from "@/data/mockBallotData";
 import BallotPaper from "@/components/BallotPaper";
 import TopicExplanation from "@/components/TopicExplanation";
@@ -16,6 +16,18 @@ import BudgetChart from "@/components/BudgetChart";
 import TownMap from "@/components/TownMap";
 import TopicColorBubble from "@/components/TopicColorBubble";
 import LoadingMessages from "@/components/LoadingMessages";
+import termAnnotations from "@/data/termAnnotations.json";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
+
+type TermAnnotation = {
+  tag: string;
+  blurb: string;
+  citations: { title: string; url: string; source?: string }[];
+};
+
+const TERM_PHRASE =
+  "Pittsburgh Home Rule Charter, Article One, Home Rule Powers - Definitions";
 
 export default function Ballot() {
   const navigate = useNavigate();
@@ -138,6 +150,72 @@ export default function Ballot() {
     return "";
   };
 
+  const renderOfficialText = (item: BallotItem) => {
+    const termData = (termAnnotations as Record<string, TermAnnotation>)[TERM_PHRASE];
+    if (!termData || !item.officialText.includes(TERM_PHRASE)) {
+      return item.officialText;
+    }
+
+    const parts = item.officialText.split(TERM_PHRASE);
+
+    return (
+      <span>
+        {parts.map((part, idx) => (
+          <span key={`${item.id}-part-${idx}`}>
+            {part}
+            {idx < parts.length - 1 && (
+              <Popover>
+                <PopoverTrigger asChild>
+                  <button
+                    type="button"
+                    className="underline decoration-dotted underline-offset-4 text-civic-blue hover:text-civic-blue/80 transition-colors"
+                    aria-label="Define Pittsburgh Home Rule Charter term"
+                  >
+                    {TERM_PHRASE}
+                  </button>
+                </PopoverTrigger>
+                <PopoverContent align="start" side="bottom" className="w-80">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary">{termData.tag}</Badge>
+                    <span className="text-xs text-muted-foreground">Click outside to close</span>
+                  </div>
+                  <p className="text-sm text-foreground leading-relaxed">{termData.blurb}</p>
+                  {termData.citations.length > 0 && (
+                    <div className="mt-3">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                        Source
+                      </p>
+                      <ul className="space-y-1">
+                        {termData.citations.map((cite, i) => (
+                          <li key={`term-cite-${i}`}>
+                            <a
+                              href={cite.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="flex items-center gap-2 text-xs text-civic-blue hover:underline"
+                            >
+                              <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                              <span>
+                                {cite.title}
+                                {cite.source && (
+                                  <span className="text-muted-foreground"> — {cite.source}</span>
+                                )}
+                              </span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </PopoverContent>
+              </Popover>
+            )}
+          </span>
+        ))}
+      </span>
+    );
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Floating Start over button */}
@@ -204,6 +282,7 @@ export default function Ballot() {
               onItemHover={setHoveredIndex}
               sectionTitle={sectionTitle}
               sectionSubtitle={sectionSubtitle}
+              renderOfficialText={renderOfficialText}
             />
 
             {isRaces ? (
@@ -283,12 +362,12 @@ export default function Ballot() {
           </p>
           <Suspense
             fallback={
-              <div className="h-[420px] rounded-xl border border-border bg-muted flex items-center justify-center">
+              <div className="h-[520px] rounded-xl border border-border bg-muted flex items-center justify-center">
                 <p className="text-sm text-muted-foreground animate-pulse">Loading 3D map…</p>
               </div>
             }
           >
-            <TownMap />
+            <TownMap interestTopics={userTopics} />
           </Suspense>
         </section>
 

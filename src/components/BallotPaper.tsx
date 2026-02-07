@@ -8,6 +8,7 @@ interface BallotPaperProps {
   onItemHover: (index: number | null) => void;
   sectionTitle?: string;
   sectionSubtitle?: string;
+  renderOfficialText?: (item: BallotItem) => React.ReactNode;
 }
 
 export default function BallotPaper({
@@ -17,8 +18,10 @@ export default function BallotPaper({
   onItemHover,
   sectionTitle = "Official Sample Ballot",
   sectionSubtitle = "City of Pittsburgh • Primary Election — May 20, 2025",
+  renderOfficialText,
 }: BallotPaperProps) {
   const hasHover = activeIndex !== null;
+  const renderText = renderOfficialText ?? ((item: BallotItem) => item.officialText);
 
   return (
     <div className="relative">
@@ -62,7 +65,7 @@ export default function BallotPaper({
             const isActive = activeIndex === index;
 
             return (
-              <button
+              <div
                 key={item.id}
                 data-ballot-item={index}
                 className={cn(
@@ -73,9 +76,17 @@ export default function BallotPaper({
                       ? "opacity-40"
                       : "hover:bg-muted/30"
                 )}
+                role="button"
+                tabIndex={0}
                 onClick={() => onItemClick(index)}
                 onMouseEnter={() => onItemHover(index)}
                 onMouseLeave={() => onItemHover(null)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    onItemClick(index);
+                  }
+                }}
               >
                 <div className="flex items-start gap-3">
                   {/* Ballot oval */}
@@ -106,11 +117,11 @@ export default function BallotPaper({
                       {item.title}
                     </h3>
                     <p className="text-[11px] text-muted-foreground mt-0.5 leading-relaxed">
-                      {item.officialText}
+                      {renderText(item)}
                     </p>
                   </div>
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>

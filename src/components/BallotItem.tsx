@@ -2,6 +2,9 @@ import { useState } from "react";
 import { ChevronDown, ExternalLink, FileText } from "lucide-react";
 import type { BallotItem as BallotItemType } from "@/types/ballot";
 import { cn } from "@/lib/utils";
+import termAnnotations from "@/data/termAnnotations.json";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
 
 interface BallotItemProps {
   item: BallotItemType;
@@ -15,6 +18,81 @@ const categoryLabels: Record<string, { label: string; className: string }> = {
   office: { label: "Elected Office", className: "bg-secondary text-foreground" },
   transit: { label: "Transit", className: "bg-civic-blue-light text-civic-blue" },
 };
+
+type TermAnnotation = {
+  tag: string;
+  blurb: string;
+  citations: { title: string; url: string; source?: string }[];
+};
+
+const TERM_PHRASE =
+  "Pittsburgh Home Rule Charter, Article One, Home Rule Powers - Definitions";
+
+function renderOfficialText(item: BallotItemType) {
+  const termData = (termAnnotations as Record<string, TermAnnotation>)[TERM_PHRASE];
+  if (!termData || !item.officialText.includes(TERM_PHRASE)) {
+    return item.officialText;
+  }
+
+  const parts = item.officialText.split(TERM_PHRASE);
+
+  return (
+    <span>
+      {parts.map((part, idx) => (
+        <span key={`${item.id}-part-${idx}`}>
+          {part}
+          {idx < parts.length - 1 && (
+            <Popover>
+              <PopoverTrigger asChild>
+                <button
+                  type="button"
+                  className="underline decoration-dotted underline-offset-4 text-civic-blue hover:text-civic-blue/80 transition-colors"
+                  aria-label="Define Pittsburgh Home Rule Charter term"
+                >
+                  {TERM_PHRASE}
+                </button>
+              </PopoverTrigger>
+              <PopoverContent align="start" side="bottom" className="w-80">
+                <div className="flex items-center gap-2 mb-2">
+                  <Badge variant="secondary">{termData.tag}</Badge>
+                  <span className="text-xs text-muted-foreground">Tap to close</span>
+                </div>
+                <p className="text-sm text-foreground leading-relaxed">{termData.blurb}</p>
+                {termData.citations.length > 0 && (
+                  <div className="mt-3">
+                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">
+                      Source
+                    </p>
+                    <ul className="space-y-1">
+                      {termData.citations.map((cite, i) => (
+                        <li key={`term-cite-${i}`}>
+                          <a
+                            href={cite.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 text-xs text-civic-blue hover:underline"
+                          >
+                            <ExternalLink className="w-3 h-3 flex-shrink-0" />
+                            <span>
+                              {cite.title}
+                              {cite.source && (
+                                <span className="text-muted-foreground"> — {cite.source}</span>
+                              )}
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </PopoverContent>
+            </Popover>
+          )}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export default function BallotItem({ item, index }: BallotItemProps) {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -53,7 +131,9 @@ export default function BallotItem({ item, index }: BallotItemProps) {
               Official Ballot Text
             </span>
           </div>
-          <p className="text-sm text-foreground leading-relaxed">{item.officialText}</p>
+          <p className="text-sm text-foreground leading-relaxed">
+            {renderOfficialText(item)}
+          </p>
         </div>
 
         {/* Annotation */}

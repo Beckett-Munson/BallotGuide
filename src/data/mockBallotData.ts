@@ -123,151 +123,240 @@ const ALL_RACE_ITEMS = [
     title: "Mayor of Pittsburgh",
     category: "office",
     officialText:
-      "Vote for one candidate for Mayor of the City of Pittsburgh. The mayor serves a four-year term and is the chief executive officer of the city, responsible for administering city operations, proposing the annual budget, and appointing department heads.",
+      "Vote for one candidate for Mayor of the City of Pittsburgh. The mayor serves a four-year term as the chief executive officer of the city.",
     annotations: {
-      default:
-        "The mayoral race features competitive primaries on both sides. Democrats Ed Gainey (incumbent) and Corey O'Connor, and Republicans Tony Moreno and Thomas West are running. The race reflects Pittsburgh at a crossroads — recovering from COVID-era disruptions while facing challenges in downtown real estate, public safety, and infrastructure.",
-      jobs:
-        "The next mayor will shape Pittsburgh's economic recovery. Downtown office vacancies have surged post-COVID, and the mayor's approach to attracting businesses, supporting small enterprises, and managing the city's workforce will directly impact local employment.",
-      housing:
-        "Housing affordability is a central campaign issue. The next mayor will influence zoning policy, development incentives, and tenant protections as Pittsburgh grapples with rising housing costs in popular neighborhoods.",
-      public_safety:
-        "Public safety has been a defining issue. Candidates have debated approaches to policing, gun violence reduction, and community safety programs. The mayor oversees the Bureau of Police and sets public safety priorities.",
-      taxes:
-        "The mayor proposes Pittsburgh's annual budget and influences tax policy. With changing downtown economics, the next mayor will need to address potential revenue shortfalls while maintaining city services.",
-      environment:
-        "Environmental policy is a key differentiator. The mayor shapes the city's climate action plan, controls infrastructure investment in flood mitigation, and influences sustainability initiatives across departments.",
-      transit:
-        "The mayor works with Port Authority and state officials on transit funding and planning. Transportation infrastructure investment and connections between neighborhoods are key issues in this race.",
-      government:
-        "This race will determine the executive leadership of Pittsburgh's government for the next four years. The mayor appoints department heads, proposes the budget, and sets the administration's policy priorities.",
+      default: "Democrat Corey O'Connor, who defeated incumbent Ed Gainey in the primary, faces Republican Tony Moreno. O'Connor holds a large advantage in fundraising and voter registration.",
+      jobs: "The next mayor will shape Pittsburgh's economic recovery as downtown office vacancies have surged post-COVID.",
+      housing: "Housing affordability is a central issue — the next mayor will influence zoning, development incentives, and tenant protections.",
+      public_safety: "Public safety has been a defining issue, with candidates debating policing approaches and gun violence reduction.",
+      taxes: "The mayor proposes Pittsburgh's annual budget and influences tax policy amid changing downtown economics.",
+      government: "This race determines the executive leadership of Pittsburgh for the next four years.",
+      transit: "The mayor works with Port Authority and state officials on transit funding and planning.",
+      environment: "The mayor shapes the city's climate action plan and controls infrastructure investment in flood mitigation.",
     },
+    candidates: [
+      {
+        name: "Corey O'Connor",
+        party: "D" as const,
+        bio: "Former City Council member and son of the late Mayor Bob O'Connor. Won the Democratic primary defeating incumbent Ed Gainey. Previously served as Allegheny County Controller.",
+        topicBlurbs: {
+          jobs: "O'Connor has prioritized downtown revitalization and attracting businesses to address post-COVID vacancies. He's proposed tax incentives for relocating companies and workforce development programs.",
+          housing: "Plans to streamline housing development approvals and increase affordable housing through public-private partnerships. Has supported inclusionary zoning policies.",
+          public_safety: "Emphasizes community policing and increased support for the Bureau of Police, while investing in violence prevention programs. Calls for more officers on the street.",
+          taxes: "Positions himself as fiscally moderate, promising to maintain services while being cautious about tax increases. Focused on growing the tax base through economic development.",
+          environment: "Supports continued investment in Pittsburgh's climate action plan and green infrastructure, including stormwater management and reducing combined sewer overflows.",
+          transit: "Advocates for better connections between neighborhoods and increased advocacy for Port Authority funding at the state level.",
+          government: "Brings council experience and emphasizes collaborative governance. Has pledged transparency and outlined plans for modernizing city operations.",
+          water: "Supports keeping water and sewer systems public and has backed investments in aging water infrastructure to reduce lead contamination and sewer overflows.",
+          civil_rights: "Has supported anti-discrimination protections and community engagement initiatives. Emphasizes equity in city hiring and contracting.",
+          education: "Pledges to work with Pittsburgh Public Schools on improving outcomes and supporting early childhood education programs.",
+        },
+      },
+      {
+        name: "Tony Moreno",
+        party: "R" as const,
+        bio: "Former Pittsburgh police officer and 2021 mayoral candidate. Won the Republican nomination without support from local GOP committees. Running on a law-and-order platform.",
+        topicBlurbs: {
+          jobs: "Focuses on reducing regulations and taxes to attract businesses. Proposes cutting red tape for small business owners and opposing what he sees as anti-business policies.",
+          housing: "Emphasizes property rights and opposes excessive development regulations. Supports market-based solutions to housing affordability.",
+          public_safety: "His law enforcement background is central to his campaign. Calls for expanded police presence, tougher enforcement of existing laws, and more resources for the Bureau of Police.",
+          taxes: "Proposes reducing city taxes and fees to make Pittsburgh more affordable and competitive with suburban communities. Promises to cut wasteful spending.",
+          environment: "Has expressed concern about regulations he views as burdensome to businesses and development, while supporting practical infrastructure improvements.",
+          transit: "Focuses on improving road infrastructure and reducing commute times. Less focused on public transit expansion.",
+          government: "Positions himself as an outsider who will challenge the political establishment. Promises to reduce bureaucracy and shake up city government.",
+          water: "Supports maintaining water system reliability but has been less vocal on the public vs. private ownership debate.",
+          civil_rights: "Focuses on equal application of existing laws and public safety as a civil rights priority for all communities.",
+          education: "Supports school choice initiatives and parental involvement in education. Critical of what he sees as declining school performance.",
+        },
+      },
+    ],
     expand: {
-      newsSummary:
-        "The Democratic primary features incumbent Ed Gainey facing challenger Corey O'Connor, a former City Council member and son of the late Mayor Bob O'Connor. The Republican primary has Tony Moreno and Thomas West competing. Key issues include downtown revitalization, public safety, infrastructure, and the city's financial health post-COVID.",
+      newsSummary: "Corey O'Connor, who narrowly defeated incumbent Ed Gainey in the Democratic primary, holds a large advantage in fundraising and party voter registration going into the general election. Republican Tony Moreno, a former cop who won his primary without local GOP support, is running as an outsider on a law-and-order platform.",
       citations: [
-        {
-          title: "Pittsburgh's 2025 Mayoral Primaries — Candidate Guide",
-          url: "https://www.publicsource.org/pittsburgh-mayoral-primary-2025-candidate-highlights-achievements-endorsements-democrat-republican/",
-          source: "PublicSource",
-        },
-        {
-          title: "Top Races on Today's Ballot in Pittsburgh and Allegheny County",
-          url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary",
-          source: "90.5 WESA",
-        },
+        { title: "Election Guide 2025 — Who's on the Ballot", url: "https://www.publicsource.org/election-guide-2025-whos-on-the-ballot-pittsburgh-allegheny-county/", source: "PublicSource / Pittsburgh City Paper" },
+        { title: "Top Races on Today's Ballot", url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary", source: "90.5 WESA" },
       ],
     },
   },
   {
-    id: "race-common-pleas",
-    title: "Allegheny County Court of Common Pleas (8 Seats)",
+    id: "race-superior-court",
+    title: "Pennsylvania Superior Court",
     category: "office",
     officialText:
-      "Vote for up to eight candidates for Judge of the Court of Common Pleas of Allegheny County. Judges serve a 10-year term and preside over civil and criminal cases in the county's trial court, including family, civil, criminal, and orphans' court divisions.",
+      "Vote for one candidate for Judge of the Superior Court of Pennsylvania. The Superior Court hears criminal appeals and family court cases involving private entities. Justices serve 10-year terms.",
     annotations: {
-      default:
-        "Eight seats are open on the county's main trial court due to a wave of retirements — 22 candidates are competing. Combined with a similar 2021 contest, over one-third of the county bench will have turned over in four years. These judges handle everything from criminal cases to family disputes.",
-      civil_rights:
-        "Judges on the Court of Common Pleas make critical decisions affecting civil rights — from criminal sentencing disparities to family court custody decisions. The composition of the bench directly impacts how justice is administered across communities.",
-      public_safety:
-        "These judges handle criminal cases in Allegheny County, setting bail, conducting trials, and imposing sentences. Their approach to criminal justice — whether emphasizing rehabilitation or punishment — affects public safety outcomes county-wide.",
-      government:
-        "This is an unusually consequential judicial election. With 8 of the court's seats open, voters will reshape over one-third of the bench in a single election cycle. Judicial elections rarely get much attention, but these judges make daily decisions that affect thousands of residents.",
-      jobs:
-        "The Court of Common Pleas handles business disputes, contract enforcement, and employment law cases. The judges elected here will influence the legal environment for businesses and workers throughout Allegheny County.",
+      default: "Democrat Brandon Neuman and Republican Maria Battista are vying for the seat vacated when Daniel McCaffery was elected to the state Supreme Court. The 15-member court is currently split 8-6 between Democrats and Republicans.",
+      civil_rights: "The Superior Court handles criminal appeals and family court cases that directly affect civil rights, sentencing fairness, and custody decisions across Pennsylvania.",
+      public_safety: "This court hears high-level criminal appeals, so the judge elected here will help shape how criminal justice is administered statewide.",
+      government: "Judicial elections shape the balance of Pennsylvania's courts. This vacancy shifts the current 8-6 Democratic majority on the 15-member bench.",
     },
-    expand: {
-      newsSummary:
-        "A total of 22 candidates are seeking 8 open seats, making this one of the largest judicial contests in recent county history. The wave of retirements creating these vacancies means voters have an unusual opportunity to reshape the bench. Candidates range from experienced attorneys to sitting magistrate judges, with backgrounds spanning criminal defense, prosecution, family law, and civil litigation.",
-      citations: [
-        {
-          title: "Election Results: Allegheny County Judicial Races",
-          url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary",
-          source: "90.5 WESA",
+    candidates: [
+      {
+        name: "Brandon Neuman",
+        party: "D" as const,
+        bio: "Washington County judge with experience on the Court of Common Pleas. Known for his progressive judicial philosophy and focus on criminal justice reform.",
+        topicBlurbs: {
+          civil_rights: "As a Common Pleas judge, Neuman has emphasized fair sentencing and rehabilitation-focused approaches. He's advocated for reducing disparities in the criminal justice system.",
+          public_safety: "Supports evidence-based criminal justice reform that balances accountability with rehabilitation. Favors drug court programs and alternative sentencing for non-violent offenders.",
+          government: "His election would maintain the court's current Democratic majority. Neuman has emphasized judicial independence and merit-based decision-making.",
+          jobs: "Has ruled on employment law cases and supports workers' rights in the judicial context. His judicial philosophy tends to favor employee protections.",
+          family: "Has extensive family court experience and supports expanded access to family services and fair custody determinations.",
         },
+      },
+      {
+        name: "Maria Battista",
+        party: "R" as const,
+        bio: "Legal consultant with a conservative judicial philosophy. Runs on a platform of strict constitutional interpretation and judicial restraint.",
+        topicBlurbs: {
+          civil_rights: "Battista emphasizes strict constitutional interpretation in civil rights cases. She's focused on protecting individual liberties through limited government intervention.",
+          public_safety: "Favors tougher sentences for violent crimes and less leniency in plea negotiations. Supports law enforcement and prosecutors in criminal appeals.",
+          government: "Her election would narrow the Democratic majority on the court. Battista emphasizes judicial restraint and opposes what she views as judicial activism.",
+          jobs: "Supports business-friendly judicial interpretations and emphasizes contract enforcement and reducing regulatory burden through the courts.",
+          family: "Emphasizes parental rights and traditional family structures in her judicial philosophy. Supports swift resolution of family court matters.",
+        },
+      },
+    ],
+    expand: {
+      newsSummary: "The Superior Court is currently split 8-6 between Democrats and Republicans, with this vacancy created when Democrat Daniel McCaffery was elected to the state Supreme Court. The race has statewide implications for criminal justice, family law, and the partisan balance of the bench.",
+      citations: [
+        { title: "Election Guide 2025 — Who's on the Ballot", url: "https://www.publicsource.org/election-guide-2025-whos-on-the-ballot-pittsburgh-allegheny-county/", source: "PublicSource / Pittsburgh City Paper" },
       ],
     },
   },
   {
-    id: "race-county-council-1",
-    title: "Allegheny County Council — District 1",
+    id: "race-commonwealth-court",
+    title: "Pennsylvania Commonwealth Court",
     category: "office",
     officialText:
-      "Vote for one candidate for Allegheny County Council, District 1. Council members serve a four-year term on the 15-member legislative body that passes the county budget, enacts ordinances, and provides oversight of county operations.",
+      "Vote for one candidate for Judge of the Commonwealth Court of Pennsylvania. The Commonwealth Court hears civil and regulatory appeals involving public entities. Judges serve 10-year terms.",
     annotations: {
-      default:
-        "District 1 has a contested Democratic primary between Kathleen Madonna-Emmerling and Carl Villella, replacing incumbent Jack Betkowski. Republican Mary Jo Wise is running unopposed on the GOP side. County Council controls the county budget and passes local ordinances.",
-      government:
-        "County Council is the legislative branch of Allegheny County government. Council members set policy, approve the budget, and provide oversight. This seat is being vacated by incumbent Jack Betkowski, creating an open-seat race.",
-      taxes:
-        "County Council approves the county budget and sets property tax rates. The person elected to this seat will vote on how county tax revenue is spent across departments and services.",
+      default: "Democrat Stella Tsai and Republican Matt Wolford are competing for the seat vacated by Ellen Ceisler's retirement. The court is currently 5-3 Republican and issues opinions on taxes, state agencies, zoning, and elections.",
+      government: "The Commonwealth Court shapes how state agencies operate and has ruled on major election cases. This race could begin to shift the court's current 5-3 Republican advantage.",
+      taxes: "This court handles appeals involving tax assessments and state revenue matters that directly affect Pennsylvania taxpayers.",
+      housing: "The Commonwealth Court rules on zoning and land use appeals that affect housing development across the state.",
+      environment: "Rules on environmental regulatory matters, including permits, enforcement actions, and challenges to state environmental policies.",
     },
-    expand: {
-      newsSummary:
-        "Democrats Kathleen Madonna-Emmerling and Carl Villella are competing to replace retiring incumbent Jack Betkowski. The winner of the Democratic primary will likely face Republican Mary Jo Wise, who is running unopposed, in the November general election.",
-      citations: [
-        {
-          title: "Allegheny County Council Races — 2025 Primary",
-          url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary",
-          source: "90.5 WESA",
+    candidates: [
+      {
+        name: "Stella Tsai",
+        party: "D" as const,
+        bio: "Sitting Common Pleas judge in Philadelphia with experience in elections and zoning cases. Known for her thorough, methodical judicial approach.",
+        topicBlurbs: {
+          government: "Tsai's election would narrow the Republican majority to 5-4. She's emphasized the importance of fair election administration and transparent government processes.",
+          taxes: "Has handled tax-related cases on the Common Pleas bench and supports clear, consistent application of tax law that protects taxpayers from arbitrary assessments.",
+          housing: "Has ruled on zoning cases and supports balanced approaches that consider both development needs and community impact.",
+          environment: "Supports thorough judicial review of environmental regulations to ensure agencies follow proper procedures in protecting public health.",
+          civil_rights: "Has a track record of protecting voting rights and equal access to government services. Emphasizes fair application of administrative law.",
         },
+      },
+      {
+        name: "Matt Wolford",
+        party: "R" as const,
+        bio: "Attorney with a focus on regulatory and business law. Running on a platform of limiting government overreach and protecting individual property rights.",
+        topicBlurbs: {
+          government: "Would maintain the court's Republican majority. Emphasizes judicial restraint and limiting the expansion of state agency authority beyond legislative intent.",
+          taxes: "Supports strict limits on government taxing authority and opposes what he views as overreach by tax agencies. Favors taxpayer-friendly interpretations of disputed tax provisions.",
+          housing: "Emphasizes property rights and opposes excessive zoning restrictions that limit property owners' ability to develop their land.",
+          environment: "Concerned about environmental regulations that he views as overreaching. Supports balancing environmental protection with economic development and property rights.",
+          civil_rights: "Focuses on protecting individual rights against government overreach, particularly in regulatory and administrative contexts.",
+        },
+      },
+    ],
+    expand: {
+      newsSummary: "The Commonwealth Court currently has a 5-3 Republican majority and has been at the center of major election disputes, including ruling in favor of Republicans seeking to delay ballot certification in 2020 (a decision the Supreme Court overturned). This vacancy was created by Democrat Ellen Ceisler's retirement.",
+      citations: [
+        { title: "Election Guide 2025 — Who's on the Ballot", url: "https://www.publicsource.org/election-guide-2025-whos-on-the-ballot-pittsburgh-allegheny-county/", source: "PublicSource / Pittsburgh City Paper" },
       ],
     },
   },
   {
-    id: "race-county-council-9",
-    title: "Allegheny County Council — District 9",
+    id: "race-sheriff",
+    title: "Allegheny County Sheriff",
     category: "office",
     officialText:
-      "Vote for one candidate for Allegheny County Council, District 9. Council members serve a four-year term on the 15-member legislative body that passes the county budget, enacts ordinances, and provides oversight of county operations.",
+      "Vote for one candidate for Sheriff of Allegheny County. The Sheriff handles warrants, fugitive pursuit, court security, prisoner transport, and sheriff's sales.",
     annotations: {
-      default:
-        "For the first time in nearly 20 years, District 9 will have new representation. Incumbent Bob Macey announced his retirement, and Democrats Aaron Adams, Dylan Altemara, and Kelliane Frketic are seeking to replace him.",
-      government:
-        "This is a rare open-seat race — Bob Macey has held this seat for nearly two decades. The new council member will represent District 9 on the 15-member body that governs Allegheny County.",
-      taxes:
-        "As with all County Council seats, the person elected here will vote on county budgets, tax rates, and spending priorities that affect all Allegheny County residents.",
+      default: "Incumbent Democrat Kevin Kraus faces Republican challenger Brian Weismantle. Both served for decades in the Pittsburgh Bureau of Police before entering this race.",
+      public_safety: "The Sheriff's Office handles warrants, fugitive pursuit, prisoner transport, and court security — central to Allegheny County's law enforcement ecosystem.",
+      government: "The Sheriff is one of Allegheny County's independently elected row officers, handling law enforcement tasks distinct from the county police.",
+      immigration: "In the current federal climate, the sheriff's approach to cooperating with federal immigration enforcement has become a significant local issue.",
     },
-    expand: {
-      newsSummary:
-        "Incumbent Democrat Bob Macey announced his retirement earlier this year, opening up the seat for the first time in nearly 20 years. Three Democrats — Aaron Adams, Dylan Altemara, and Kelliane Frketic — are competing in the primary.",
-      citations: [
-        {
-          title: "Allegheny County Council Races — 2025 Primary",
-          url: "https://www.wesa.fm/2025-05-20/pittsburgh-allegheny-county-2025-primary",
-          source: "90.5 WESA",
+    candidates: [
+      {
+        name: "Kevin Kraus",
+        party: "D" as const,
+        isIncumbent: true,
+        bio: "Incumbent sheriff since 2021. Served for decades in the Pittsburgh Bureau of Police before being elected. Has modernized the office's technology and procedures.",
+        topicBlurbs: {
+          public_safety: "Has focused on modernizing warrant enforcement, improving court security, and building community relationships. Emphasizes professional, accountable law enforcement.",
+          government: "Has worked to reform the Sheriff's Office operations, including updating technology and training protocols. Emphasizes transparency and cooperation with other agencies.",
+          immigration: "Has maintained the county's existing policies regarding cooperation with federal immigration enforcement, balancing public safety with community trust.",
+          civil_rights: "Emphasizes de-escalation training and equitable law enforcement practices. Has implemented reforms aimed at reducing bias in the office's operations.",
         },
+      },
+      {
+        name: "Brian Weismantle",
+        party: "R" as const,
+        bio: "Veteran of the Pittsburgh Bureau of Police with decades of law enforcement experience. Running on a traditional law-and-order platform.",
+        topicBlurbs: {
+          public_safety: "Calls for more aggressive warrant enforcement and faster fugitive apprehension. Promises to expand the office's capacity and responsiveness.",
+          government: "Criticizes what he sees as insufficient leadership in the current office. Promises to bring a more decisive management style.",
+          immigration: "Supports closer cooperation with federal law enforcement, including immigration authorities, to enhance public safety.",
+          civil_rights: "Focuses on protecting all residents' safety through vigorous law enforcement as the foundation of civil rights protections.",
+        },
+      },
+    ],
+    expand: {
+      newsSummary: "Both candidates are veterans of the Pittsburgh Bureau of Police, bringing decades of law enforcement experience. The race centers on differing approaches to managing the office, including warrant enforcement, court security, and cooperation with federal agencies.",
+      citations: [
+        { title: "Election Guide 2025 — Who's on the Ballot", url: "https://www.publicsource.org/election-guide-2025-whos-on-the-ballot-pittsburgh-allegheny-county/", source: "PublicSource / Pittsburgh City Paper" },
       ],
     },
   },
   {
-    id: "race-school-board",
-    title: "Pittsburgh Public Schools Board of Directors",
+    id: "race-council-at-large",
+    title: "Allegheny County Council — At Large",
     category: "office",
     officialText:
-      "Vote for candidates for the Board of Directors of Pittsburgh Public Schools. Board members serve four-year terms and are responsible for setting district policy, approving the school budget, and hiring the superintendent.",
+      "Vote for one candidate for Allegheny County Council At-Large seat. Council members serve four-year terms on the 15-member legislative body that passes the county budget and enacts ordinances.",
     annotations: {
-      default:
-        "The school board oversees Pittsburgh Public Schools, which serves approximately 20,000 students. Board members set educational policy, approve the district budget, and hire the superintendent. Several seats are contested in this primary.",
-      education:
-        "This is the most directly impactful education race on your ballot. School board members determine curriculum standards, school funding priorities, teacher contracts, and building maintenance for all Pittsburgh public schools.",
-      taxes:
-        "The school board sets the school district's property tax rate, which is a significant portion of Pittsburgh homeowners' total property tax bills. Board decisions on spending directly affect your tax burden.",
-      family:
-        "If you have children in Pittsburgh Public Schools, this race directly affects their education. Board members decide on school closures, program offerings, special education services, and safety policies.",
-      housing:
-        "School quality significantly influences property values and housing decisions. The school board's direction affects the desirability and affordability of Pittsburgh neighborhoods.",
+      default: "Appointed incumbent Republican Mike Embrescia faces independent challenger Alex Rose. Rose's candidacy survived a legal challenge that went to the PA Supreme Court.",
+      government: "This at-large seat represents all of Allegheny County. Rose's independent challenge to an appointed incumbent makes this one of the most unusual races on the ballot.",
+      taxes: "County Council approves the county budget and sets property tax rates. The at-large seat gives its holder a county-wide perspective on fiscal matters.",
+      housing: "County Council influences housing policy through zoning oversight, affordable housing programs, and community development funding.",
     },
-    expand: {
-      newsSummary:
-        "Pittsburgh Public Schools has faced ongoing challenges including declining enrollment, aging facilities, and debates over school closures and consolidation. The board will also need to navigate the post-pandemic academic recovery and decisions about how to allocate federal relief funds.",
-      citations: [
-        {
-          title: "Pittsburgh Public Schools Board Candidates",
-          url: "https://www.publicsource.org/live-election-results-pittsburgh-mayoral-primaries/",
-          source: "PublicSource",
+    candidates: [
+      {
+        name: "Mike Embrescia",
+        party: "R" as const,
+        isIncumbent: true,
+        bio: "Appointed to the at-large seat after a vacancy. Comes from a business background and emphasizes fiscal responsibility in county government.",
+        topicBlurbs: {
+          government: "Emphasizes efficient government operations and reducing unnecessary spending. Supports maintaining the current structure of county services.",
+          taxes: "Opposes property tax increases and supports finding efficiencies in county operations to keep costs down for taxpayers.",
+          housing: "Supports market-oriented approaches to housing and opposes regulations he views as discouraging development.",
+          jobs: "Emphasizes creating a business-friendly environment in Allegheny County through reduced regulations and competitive tax rates.",
+          public_safety: "Supports adequate funding for county law enforcement and emergency services while maintaining fiscal discipline.",
         },
+      },
+      {
+        name: "Alex Rose",
+        party: "I" as const,
+        bio: "Left-leaning independent candidate whose candidacy survived a legal challenge that went to the PA Supreme Court. Running on a progressive platform focused on community investment.",
+        topicBlurbs: {
+          government: "Advocates for greater transparency in county government and more community input in budget decisions. Challenges the traditional two-party structure of county politics.",
+          taxes: "Supports progressive approaches to taxation that ensure large corporations and wealthy property owners pay their fair share while protecting working families.",
+          housing: "Supports increased county investment in affordable housing programs and tenant protections, particularly in communities facing gentrification pressure.",
+          jobs: "Advocates for living wage policies, labor protections, and community-centered economic development that benefits existing residents.",
+          public_safety: "Supports community-based public safety approaches alongside traditional law enforcement, including mental health response teams.",
+          transit: "Advocates for expanded public transit access, particularly to underserved communities, and supports increased county advocacy for Port Authority funding.",
+        },
+      },
+    ],
+    expand: {
+      newsSummary: "This race features an unusual matchup — appointed Republican incumbent Mike Embrescia versus left-leaning independent Alex Rose. Embrescia challenged Rose's candidacy, but the challenge was rejected at the Pennsylvania Supreme Court, clearing Rose to run.",
+      citations: [
+        { title: "Election Guide 2025 — Who's on the Ballot", url: "https://www.publicsource.org/election-guide-2025-whos-on-the-ballot-pittsburgh-allegheny-county/", source: "PublicSource / Pittsburgh City Paper" },
       ],
     },
   },
@@ -445,6 +534,13 @@ interface RawBallotItem {
   category: string;
   officialText: string;
   annotations: Record<string, string>;
+  candidates?: {
+    name: string;
+    party: "D" | "R" | "I" | "L";
+    isIncumbent?: boolean;
+    bio: string;
+    topicBlurbs: Record<string, string>;
+  }[];
   expand: {
     newsSummary: string;
     citations: { title: string; url: string; source: string }[];
@@ -469,6 +565,7 @@ function buildItems(
       annotation: getAnnotation(item, profile.topics),
       category: item.category,
       relatedTopics: relatedTopics.length > 0 ? relatedTopics : [item.category],
+      candidates: item.candidates,
       expand: {
         newsSummary: item.expand.newsSummary,
         citations: item.expand.citations,

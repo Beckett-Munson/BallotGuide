@@ -8,7 +8,7 @@ interface BallotSectionTabsProps {
 }
 
 const TABS: { id: BallotSection; label: string; sublabel: string }[] = [
-  { id: "races", label: "Active Races", sublabel: "Candidates" },
+  { id: "races", label: "Active Races", sublabel: "General Election" },
   { id: "questions", label: "Special Election", sublabel: "Ballot Questions" },
 ];
 

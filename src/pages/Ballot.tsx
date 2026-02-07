@@ -48,8 +48,8 @@ export default function Ballot() {
       </nav>
 
       <main className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
-        {/* Greeting - compact */}
-        <header className="mb-8 md:mb-10 text-center max-w-3xl mx-auto">
+        {/* Greeting */}
+        <header className="mb-8 md:mb-12 text-center max-w-3xl mx-auto">
           <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-2 leading-tight">
             {ballot.greeting}
           </h1>
@@ -68,91 +68,100 @@ export default function Ballot() {
           </div>
         </header>
 
-        {/* Ballot + Annotations Layout */}
-        <section className="mb-16">
-          {/* Desktop: side-by-side */}
-          <div className="hidden md:grid md:grid-cols-[1fr,340px] lg:grid-cols-[1fr,400px] gap-6 items-start">
-            {/* Ballot paper */}
-            <div>
-              <BallotPaper
-                items={ballot.ballotItems}
-                activeIndex={activeIndex}
-                onItemHover={setActiveIndex}
-                onItemClick={setActiveIndex}
-              />
-            </div>
+        {/* Desktop: Centered ballot with alternating annotations */}
+        <section className="mb-16 hidden md:block">
+          <div className="relative max-w-[520px] mx-auto">
+            <BallotPaper
+              items={ballot.ballotItems}
+              activeIndex={activeIndex}
+              onItemClick={setActiveIndex}
+            />
 
-            {/* Annotation sidebar */}
-            <div className="sticky top-20">
-              <div className="space-y-3">
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground px-1 mb-2">
-                  Personalized Annotations
-                </h3>
-                {activeIndex !== null && ballot.ballotItems[activeIndex] && (
-                  <div className="animate-fade-in" key={activeIndex}>
-                    <BallotAnnotation
-                      item={ballot.ballotItems[activeIndex]}
-                      isActive={true}
+            {/* Annotations positioned alternating left/right */}
+            {ballot.ballotItems.map((item, index) => {
+              const isActive = activeIndex === index;
+              const isLeft = index % 2 === 0;
+
+              if (!isActive) return null;
+
+              return (
+                <div
+                  key={`annotation-${index}`}
+                  className="absolute animate-fade-in"
+                  style={{
+                    top: `${((index + 0.5) / ballot.ballotItems.length) * 100}%`,
+                    ...(isLeft
+                      ? { right: "calc(100% + 24px)", transform: "translateY(-50%)" }
+                      : { left: "calc(100% + 24px)", transform: "translateY(-50%)" }),
+                    width: "280px",
+                  }}
+                >
+                  {/* Connector line */}
+                  <div
+                    className="absolute top-1/2 -translate-y-1/2"
+                    style={
+                      isLeft
+                        ? { left: "100%", width: "24px" }
+                        : { right: "100%", width: "24px" }
+                    }
+                  >
+                    <div className="w-full h-px bg-accent/50" />
+                    <div
+                      className={`absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-accent ${
+                        isLeft ? "right-0" : "left-0"
+                      }`}
                     />
                   </div>
-                )}
-                {activeIndex === null && (
-                  <div className="p-4 border border-dashed border-border rounded-lg text-center">
-                    <p className="text-sm text-muted-foreground">
-                      Click or hover over a ballot item to see your personalized annotation
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
+                  <BallotAnnotation item={item} isActive={true} />
+                </div>
+              );
+            })}
           </div>
+        </section>
 
-          {/* Mobile: stacked with inline annotations */}
-          <div className="md:hidden space-y-3">
-            {ballot.ballotItems.map((item, index) => (
-              <div key={item.id} className="space-y-0">
-                {/* Mini ballot row */}
-                <button
-                  className="w-full text-left px-4 py-3 bg-card border border-border rounded-t-lg"
-                  onClick={() =>
-                    setActiveIndex(activeIndex === index ? null : index)
-                  }
-                >
-                  <div className="flex items-start gap-3">
-                    <div className="flex-shrink-0 mt-0.5">
-                      <div
-                        className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all ${
-                          activeIndex === index
-                            ? "border-accent bg-accent"
-                            : "border-foreground/25"
-                        }`}
-                      >
-                        {activeIndex === index && (
-                          <svg className="w-2.5 h-2.5 text-card" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6L5 9L10 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
-                        {item.category === "office" ? "Elected Office" : item.category}
-                      </p>
-                      <h3 className="font-display text-sm font-semibold text-foreground leading-snug">
-                        {item.title}
-                      </h3>
+        {/* Mobile: stacked with inline annotations */}
+        <section className="mb-16 md:hidden space-y-3">
+          {ballot.ballotItems.map((item, index) => (
+            <div key={item.id} className="space-y-0">
+              <button
+                className="w-full text-left px-4 py-3 bg-card border border-border rounded-t-lg"
+                onClick={() =>
+                  setActiveIndex(activeIndex === index ? null : index)
+                }
+              >
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 mt-0.5">
+                    <div
+                      className={`w-4 h-3 rounded-[50%] border-[1.5px] flex items-center justify-center transition-all ${
+                        activeIndex === index
+                          ? "border-foreground/70 bg-foreground/70"
+                          : "border-foreground/25"
+                      }`}
+                    >
+                      {activeIndex === index && (
+                        <svg className="w-2 h-1.5 text-card" viewBox="0 0 12 10" fill="none">
+                          <path d="M1 5L4 8L11 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
                     </div>
                   </div>
-                </button>
-                {/* Annotation below */}
-                {activeIndex === index && (
-                  <div className="border border-t-0 border-border rounded-b-lg overflow-hidden animate-fade-in">
-                    <BallotAnnotation item={item} isActive={true} />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">
+                      {item.category === "office" ? "Elected Office" : item.category}
+                    </p>
+                    <h3 className="font-display text-sm font-semibold text-foreground leading-snug">
+                      {item.title}
+                    </h3>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
+                </div>
+              </button>
+              {activeIndex === index && (
+                <div className="border border-t-0 border-border rounded-b-lg overflow-hidden animate-fade-in">
+                  <BallotAnnotation item={item} isActive={true} />
+                </div>
+              )}
+            </div>
+          ))}
         </section>
 
         {/* Topic Education */}
